@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Year Wrapped</title>
+    <style>
+        body {
+            font-family: Gotham, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1d183a;
+            overflow: hidden;
+        }
+
+        .button-container {
+            justify-content: center;
+            display: flex;
+        }
+
+        .progress-button {
+            background-color: rgba(255, 255, 255, 0.315);
+            width: 342px;
+            height: 13px;
+            color: #8f8f8fa4;
+            cursor: pointer;
+            position: relative;
+            border: none;
+        }
+
+        .progress-button-hitbox {
+            height: 49px;
+            width: 374px;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+        }
+
+        #text1 {
+            animation-duration: 5s;
+            margin-top: 375px;
+            transform: translateX(200vh);
+        }
+
+        #text2 {
+            animation-duration: 5s;
+            margin-top: 470px;
+            width: 750px;
+            opacity: 0%;
+        }
+
+        @keyframes text1 {
+            0%   {}
+            10%   {transform: translateX(0vh);}
+            24%   {transform: translateX(0vh);}
+            40%  {margin-top: 375px;}
+            50%  {margin-top: 335px;}
+            85% {transform: translateX(0vh);}
+            100% {transform: translateX(-200vh);
+                  margin-top: 335px;}
+        }
+
+        @keyframes text2 {
+            0%   {}
+            45%  {opacity: 0%;
+                  margin-top: 470px;}
+            55%  {opacity: 100%;
+                  margin-top: 450px;}
+            85% {transform: translateX(0vh);}
+            100% {transform: translateX(-200vh);
+                  margin-top: 450px;
+                  opacity: 100%;}
+        }
+
+        .bold-text {
+            position: absolute;
+            font-family: Gotham, sans-serif;
+            color: #ffffff;
+            font-size: 90px;
+            text-align: center;
+        }
+        
+        .thin-text {
+            position: absolute;
+            font-family: Century Gothic, sans-serif;
+            color: #ffffff;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        #content {
+            justify-content: center;
+            height: 857px;
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <div onclick="StartAnim1(), StartAnim2()" class="progress-button-hitbox"><button class="progress-button"></button></div>
+        <div onclick="StartAnim2()" class="progress-button-hitbox"><button class="progress-button"></button></div>
+        <div onclick="StartAnim3()" class="progress-button-hitbox"><button class="progress-button"></button></div>
+        <div onclick="StartAnim4()" class="progress-button-hitbox"><button class="progress-button"></button></div>
+        <div onclick="StartAnim5()" class="progress-button-hitbox"><button class="progress-button"></button></div>
+    </div>
+
+    <div id="content">
+        <div id="text1" class="bold-text">Szia, Bob!</div>
+        <div id="text2" class="thin-text">Eljött az év vége. Nézzük hogyan sikerült. Készen állsz?</div>
+        <div id="text1" class="bold-text">Rohan az idő</div>
+        <div id="text2" class="thin-text">Szerencsére jegyzeteltünk</div>
+    </div>
+
+    <script>
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+
+        function StartAnim1() {
+        text1.style.animationName = "text1";
+
+        setTimeout(() => {
+            text1.style.animationName = "none";
+        }, 5000);
+        }
+
+
+        function StartAnim2() {
+        text2.style.animationName = "text2";
+        
+        setTimeout(() => {
+            text2.style.animationName = "none";
+        }, 5000);
+        }
+
+
+    </script>
+</body>
+</html>
