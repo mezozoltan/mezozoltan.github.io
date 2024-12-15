@@ -50,6 +50,19 @@
             width: 750px;
             opacity: 0%;
         }
+        
+        #text3 {
+            animation-duration: 5s;
+            margin-top: 375px;
+            transform: translateX(200vh);
+        }
+
+        #text4 {
+            animation-duration: 5s;
+            margin-top: 470px;
+            width: 750px;
+            opacity: 0%;
+        }
 
         @keyframes text1 {
             0%   {}
@@ -100,7 +113,7 @@
 </head>
 <body>
     <div class="button-container">
-        <div onclick="StartAnim1(), StartAnim2()" class="progress-button-hitbox"><button class="progress-button"></button></div>
+        <div onclick="StartAnim1(), StartAnim2(), StartAnim3(), StartAnim4()" class="progress-button-hitbox"><button class="progress-button"></button></div>
         <div onclick="StartAnim2()" class="progress-button-hitbox"><button class="progress-button"></button></div>
         <div onclick="StartAnim3()" class="progress-button-hitbox"><button class="progress-button"></button></div>
         <div onclick="StartAnim4()" class="progress-button-hitbox"><button class="progress-button"></button></div>
@@ -110,8 +123,8 @@
     <div id="content">
         <div id="text1" class="bold-text">Szia, Bob!</div>
         <div id="text2" class="thin-text">Eljött az év vége. Nézzük hogyan sikerült. Készen állsz?</div>
-        <div id="text1" class="bold-text">Rohan az idő</div>
-        <div id="text2" class="thin-text">Szerencsére jegyzeteltünk</div>
+        <div id="text3" class="bold-text">Rohan az idő</div>
+        <div id="text4" class="thin-text">Szerencsére jegyzeteltünk</div>
     </div>
 
     <script>
@@ -133,6 +146,28 @@
         setTimeout(() => {
             text2.style.animationName = "none";
         }, 5000);
+        }
+
+
+        function StartAnim3() {
+        setTimeout(() => {
+            text3.style.animationName = "text1";
+        }, 5000);
+
+        setTimeout(() => {
+            text3.style.animationName = "none";
+        }, 10000);
+        }
+
+
+        function StartAnim4() {
+        setTimeout(() => {
+            text4.style.animationName = "text2";
+        }, 5000);
+        
+        setTimeout(() => {
+            text4.style.animationName = "none";
+        }, 10000);
         }
 
 
