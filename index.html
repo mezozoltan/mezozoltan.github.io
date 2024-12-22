@@ -7,10 +7,24 @@
     <style>
 
         @font-face {
-        font-family: "Gotham";
-        src: url('../fonts/Gotham Black.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
+            font-family: "Gotham";
+            src: url('../fonts/Gotham Black.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Century Gothic";
+            src: url('../fonts/Century Gothic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Century Gothic Bold";
+            src: url('../fonts/Century Gothic Bold.ttf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
         }
 
         body {
@@ -19,6 +33,18 @@
             padding: 0;
             background-color: #1d183a;
             overflow: hidden;
+            background-image: 
+                radial-gradient(circle at top right, rgba(121, 68, 154, 0.13), transparent),
+                radial-gradient(circle at 20% 80%, rgba(41, 196, 255, 0.13), transparent);
+            animation-duration: 2s;
+        }
+
+        canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            filter: blur(0px);
+            animation-duration: 2s;
         }
 
         .button-container {
@@ -284,6 +310,26 @@
             100% {width: 17.8125vw;}
         }
 
+        @keyframes background {
+            0%   {background-color: #1d183a;}
+            100% {background-color: #000000;}
+        }
+
+        @keyframes blur {
+            0%   {opacity: 100%;}
+            100% {opacity: 30%;}
+        }
+
+        @keyframes background2 {
+            0%   {background-color: #000000;}
+            100% {background-color: #1d183a;}
+        }
+
+        @keyframes blur2 {
+            0%   {opacity: 30%;}
+            100% {opacity: 100%;}
+        }
+
         .bold-text {
             position: absolute;
             font-family: "Gotham", sans-serif;
@@ -294,7 +340,7 @@
         
         .thin-text {
             position: absolute;
-            font-family: Century Gothic, sans-serif;
+            font-family: "Century Gothic", sans-serif;
             color: #ffffff;
             font-size: 40px;
             text-align: center;
@@ -400,33 +446,35 @@
             font-size: 80px;
         }
 
-        body {
-        background-color: #000;
-        background-image: radial-gradient(circle at top right, rgba(121, 68, 154, 0.13),       transparent),
-            radial-gradient(circle at 20% 80%, rgba(41, 196, 255, 0.13), transparent)
-        }
-        canvas {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        }
-
-        a {
-        position: absolute;
-        bottom: 2vmin;
-        right: 2vmin;
-        color: rgba(255,255,255,0.2);
-        text-decoration: none;
+        #image-viewer {
+            height: 97vh;
+            width: 100vw;
+            background-image: url(https://i.imgur.com/L3voL6z.jpg);
+            transform: translateY(-100vh);
+            position: relative;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: none;
         }
 
-        a:hover {
-        color: #fff;
+        #image-viewer-frost {
+            margin-top: 5vh;
+            height: 97vh;
+            width: 100vw;
+            background-image: url(https://i.imgur.com/L3voL6z.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: blur(50px);
+            position: absolute;
+            display: none;
         }
-
     </style>
 </head>
 <body>
     <canvas></canvas>
+    <div id="image-viewer-frost"></div>
 
     <div class="button-container">
         <div onclick="Button1()" class="progress-button-hitbox"><button class="progress-button"><div id="progress1"></div></button></div>
@@ -442,14 +490,14 @@
         <div id="text3" class="bold-text">Rohan az idő</div>
         <div id="text4" class="thin-text">Szerencsére jegyzeteltünk</div>
         <div id="text5" class="bold-text">Idén a lehetséges 365 napi képből X képet sikerült beküldened.</div>
-        <div id="text6" class="thin-text">Ezzel többet küldtél be mint kb. <div style="font-weight: 600; margin: 0 10px 0 10px;">8 193 188 600</div> ember. <div style="position: absolute; margin-top: 45px;">wow</div></div>
+        <div id="text6" class="thin-text">Ezzel többet küldtél be mint kb. <div style="font-family: Century Gothic Bold; margin: 0 10px 0 10px;">8 193 188 600</div> ember. <div style="position: absolute; margin-top: 45px;">wow</div></div>
         <div id="image1-container">
             <div style="position: absolute; background-color: red; height: 350px; aspect-ratio: 1 / 1;"></div>
             <img id="image1" src="https://i.imgur.com/raQw2CU.png">
             <div id="average-color" class="bold-text">#ff0000</div>
         </div>
         <div id="text7" class="bold-text">Ez volt a képeid átlagos színe.</div>
-        <div id="text8" class="thin-text"><div style="font-weight: 600; margin: 0 10px 0 0;">Szürke</div>... huh... Igazából erre számíthattunk volna.</div>
+        <div id="text8" class="thin-text"><div style="font-family: Century Gothic Bold; margin: 0 10px 0 0;">Szürke</div>... huh... Igazából erre számíthattunk volna.</div>
         <div id="image2-container">
             <div style="position: absolute; background-color: #00b7ff; height: 350px; aspect-ratio: 1 / 1;"></div>
             <img id="image1" src="https://i.imgur.com/raQw2CU.png">
@@ -470,181 +518,11 @@
         <div id="text16" class="thin-text">Erre vártunk egész évben.</div>
     </div>
 
+    <div id="image-viewer">
+
+    </div>
+
     <script>
-        const STAR_COLOR = '#fff';
-        const STAR_SIZE = 3;
-        const STAR_MIN_SCALE = 0.2;
-        const OVERFLOW_THRESHOLD = 50;
-        const STAR_COUNT = ( window.innerWidth + window.innerHeight ) / 8;
-
-        const canvas = document.querySelector( 'canvas' ),
-            context = canvas.getContext( '2d' );
-
-        let scale = 1, // device pixel ratio
-            width,
-            height;
-
-        let stars = [];
-
-
-        let velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
-
-        generate();
-        resize();
-        step();
-
-        window.onresize = resize;
-        function generate() {
-
-        for( let i = 0; i < STAR_COUNT; i++ ) {
-            stars.push({
-            x: 0,
-            y: 0,
-            z: STAR_MIN_SCALE + Math.random() * ( 1 - STAR_MIN_SCALE )
-            });
-        }
-
-        }
-
-        function placeStar( star ) {
-
-        star.x = Math.random() * width;
-        star.y = Math.random() * height;
-
-        }
-
-        function recycleStar( star ) {
-
-        let direction = 'z';
-
-        let vx = Math.abs( velocity.x ),
-                vy = Math.abs( velocity.y );
-
-        if( vx > 1 || vy > 1 ) {
-            let axis;
-
-            if( vx > vy ) {
-            axis = Math.random() < vx / ( vx + vy ) ? 'h' : 'v';
-            }
-            else {
-            axis = Math.random() < vy / ( vx + vy ) ? 'v' : 'h';
-            }
-
-            if( axis === 'h' ) {
-            direction = velocity.x > 0 ? 'l' : 'r';
-            }
-            else {
-            direction = velocity.y > 0 ? 't' : 'b';
-            }
-        }
-        
-        star.z = STAR_MIN_SCALE + Math.random() * ( 1 - STAR_MIN_SCALE );
-
-        if( direction === 'z' ) {
-            star.z = 0.1;
-            star.x = Math.random() * width;
-            star.y = Math.random() * height;
-        }
-        else if( direction === 'l' ) {
-            star.x = -OVERFLOW_THRESHOLD;
-            star.y = height * Math.random();
-        }
-        else if( direction === 'r' ) {
-            star.x = width + OVERFLOW_THRESHOLD;
-            star.y = height * Math.random();
-        }
-        else if( direction === 't' ) {
-            star.x = width * Math.random();
-            star.y = -OVERFLOW_THRESHOLD;
-        }
-        else if( direction === 'b' ) {
-            star.x = width * Math.random();
-            star.y = height + OVERFLOW_THRESHOLD;
-        }
-
-        }
-
-        function resize() {
-
-        scale = window.devicePixelRatio || 1;
-
-        width = window.innerWidth * scale;
-        height = window.innerHeight * scale;
-
-        canvas.width = width;
-        canvas.height = height;
-
-        stars.forEach( placeStar );
-
-        }
-
-        function step() {
-
-        context.clearRect( 0, 0, width, height );
-
-        update();
-        render();
-
-        requestAnimationFrame( step );
-
-        }
-
-        function update() {
-
-        velocity.tx *= 0.96;
-        velocity.ty *= 0.96;
-
-        velocity.x += ( velocity.tx - velocity.x ) * 0.8;
-        velocity.y += ( velocity.ty - velocity.y ) * 0.8;
-
-        stars.forEach( ( star ) => {
-
-            star.x += velocity.x * star.z;
-            star.y += velocity.y * star.z;
-
-            star.x += ( star.x - width/2 ) * velocity.z * star.z;
-            star.y += ( star.y - height/2 ) * velocity.z * star.z;
-            star.z += velocity.z;
-        
-            // recycle when out of bounds
-            if( star.x < -OVERFLOW_THRESHOLD || star.x > width + OVERFLOW_THRESHOLD || star.y < -OVERFLOW_THRESHOLD || star.y > height + OVERFLOW_THRESHOLD ) {
-            recycleStar( star );
-            }
-
-        } );
-
-        }
-
-        function render() {
-
-        stars.forEach( ( star ) => {
-
-            context.beginPath();
-            context.lineCap = 'round';
-            context.lineWidth = STAR_SIZE * star.z * scale;
-            context.globalAlpha = 0.5 + 0.5*Math.random();
-            context.strokeStyle = STAR_COLOR;
-
-            context.beginPath();
-            context.moveTo( star.x, star.y );
-
-            var tailX = velocity.x * 2,
-                tailY = velocity.y * 2;
-
-            // stroke() wont work on an invisible line
-            if( Math.abs( tailX ) < 0.1 ) tailX = 0.5;
-            if( Math.abs( tailY ) < 0.1 ) tailY = 0.5;
-
-            context.lineTo( star.x + tailX, star.y + tailY );
-
-            context.stroke();
-
-        } );
-
-        }
-
-
-
         let Button1Timer;
         let Button1Timer2;
         let Button2Timer;
@@ -653,6 +531,7 @@
         let Button3Timer2;
         let Button4Timer;
         let Button4Timer2;
+        let Button5Timer;
         const text1 = document.getElementById('text1');
         const text2 = document.getElementById('text2');
         const text3 = document.getElementById('text3');
@@ -677,14 +556,21 @@
         const progress3 = document.getElementById('progress3');
         const progress4 = document.getElementById('progress4');
         const progress5 = document.getElementById('progress5');
+        const body = document.body;
+        const Canvas = document.getElementById('canvas');
+        const ImageViewer = document.getElementById('image-viewer');
+        const ImageViewerFrost = document.getElementById('image-viewer-frost');
 
         function Button1() {
-            clearTimeout(Button2Timer)
-            clearTimeout(Button2Timer2)
-            clearTimeout(Button3Timer)
-            clearTimeout(Button3Timer2)
-            clearTimeout(Button4Timer)
-            clearTimeout(Button4Timer2)
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
+            clearTimeout(Button5Timer);
         progress2.style.animationName = "none";
         progress3.style.animationName = "none";
         progress4.style.animationName = "none";
@@ -709,6 +595,8 @@
         text14.style.display = "none";
         text15.style.display = "none";
         text16.style.display = "none";
+        ImageViewer.style.display = "none";
+        ImageViewerFrost.style.display = "none";
 
         progress1.style.animationName = "progress";
         text1.style.animationName = "text1";
@@ -737,12 +625,15 @@
         }
 
         function Button2() {
-            clearTimeout(Button1Timer)
-            clearTimeout(Button1Timer2)
-            clearTimeout(Button3Timer)
-            clearTimeout(Button3Timer2)
-            clearTimeout(Button4Timer)
-            clearTimeout(Button4Timer2)
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
+            clearTimeout(Button5Timer);
             progress1.style.animationName = "none";
             progress1.style.width = "17.8125vw";
         progress3.style.animationName = "none";
@@ -767,6 +658,8 @@
         text14.style.display = "none";
         text15.style.display = "none";
         text16.style.display = "none";
+        ImageViewer.style.display = "none";
+        ImageViewerFrost.style.display = "none";
 
         progress2.style.animationName = "progress";
         text5.style.animationName = "text3";
@@ -799,12 +692,15 @@
         }
 
         function Button3() {
-            clearTimeout(Button1Timer)
-            clearTimeout(Button1Timer2)
-            clearTimeout(Button2Timer)
-            clearTimeout(Button2Timer2)
-            clearTimeout(Button4Timer)
-            clearTimeout(Button4Timer2)
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
+            clearTimeout(Button5Timer);
             progress1.style.animationName = "none";
             progress1.style.width = "17.8125vw";
             progress2.style.animationName = "none";
@@ -828,6 +724,8 @@
         text14.style.display = "none";
         text15.style.display = "none";
         text16.style.display = "none";
+        ImageViewer.style.display = "none";
+        ImageViewerFrost.style.display = "none";
 
         progress3.style.animationName = "progress";
         image2container.style.animationName = "image1";
@@ -864,12 +762,15 @@
         }
 
         function Button4() {
-            clearTimeout(Button1Timer)
-            clearTimeout(Button1Timer2)
-            clearTimeout(Button2Timer)
-            clearTimeout(Button2Timer2)
-            clearTimeout(Button3Timer)
-            clearTimeout(Button3Timer2)
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button5Timer);
             progress1.style.animationName = "none";
             progress1.style.width = "17.8125vw";
             progress2.style.animationName = "none";
@@ -894,6 +795,8 @@
         text12.style.display = "none";
         text15.style.display = "none";
         text16.style.display = "none";
+        ImageViewer.style.display = "none";
+        ImageViewerFrost.style.display = "none";
 
         progress4.style.animationName = "progress";
         text13.style.animationName = "text7";
@@ -922,14 +825,14 @@
         }
 
         function Button5() {
-            clearTimeout(Button1Timer)
-            clearTimeout(Button1Timer2)
-            clearTimeout(Button2Timer)
-            clearTimeout(Button2Timer2)
-            clearTimeout(Button3Timer)
-            clearTimeout(Button3Timer2)
-            clearTimeout(Button4Timer)
-            clearTimeout(Button4Timer2)
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
             progress1.style.animationName = "none";
             progress1.style.width = "17.8125vw";
             progress2.style.animationName = "none";
@@ -938,6 +841,9 @@
             progress3.style.width = "17.8125vw";
             progress4.style.animationName = "none";
             progress4.style.width = "17.8125vw";
+        image1container.style.display = "none";
+        image2container.style.display = "none";
+        image3container.style.display = "none";
         text1.style.display = "none";
         text2.style.display = "none";
         text3.style.display = "none";
@@ -956,6 +862,213 @@
         text16.style.display = "none";
 
         progress5.style.width = "17.8125vw";
+        enableInteraction();
+        body.style.animationName = "background";
+        canvas.style.animationName = "blur";
+        ImageViewer.style.display = "block";
+        ImageViewerFrost.style.display = "block";
+
+        Button5Timer = setTimeout(() => {
+        body.style.backgroundColor = "#000000";
+        body.style.animationName = "none";
+        canvas.style.opacity = "30%";
+        canvas.style.animationName = "none";
+        }, 1900);
+        }
+
+        function BodyReset() {
+            const bodyBackgroundColor = window.getComputedStyle(body).backgroundColor;
+
+            if (bodyBackgroundColor === 'rgb(0, 0, 0)') {
+                body.style.animationName = 'background2';
+                canvas.style.animationName = 'blur2';
+
+                setTimeout(() => {
+                    body.style.backgroundColor = "#1d183a";
+                    body.style.animationName = "none";
+                    canvas.style.opacity = "100%";
+                    canvas.style.animationName = "none";
+                }, 1990);
+            }
+        }
+
+
+
+
+//////////STAR ANIMATION//////////
+
+        const STAR_COLOR = '#fff';
+        const STAR_SIZE = 3;
+        const STAR_MIN_SCALE = 0.2;
+        const OVERFLOW_THRESHOLD = 50;
+        const STAR_COUNT = (window.innerWidth + window.innerHeight) / 8;
+
+        const canvas = document.querySelector('canvas'),
+            context = canvas.getContext('2d');
+
+        let scale = 1, // device pixel ratio
+            width,
+            height;
+
+        let stars = [];
+
+        let pointerX,
+            pointerY;
+
+        let velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
+
+        let touchInput = false;
+        let interactionEnabled = false;
+
+        generate();
+        resize();
+        step();
+
+        window.onresize = resize;
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('touchmove', onTouchMove);
+        document.addEventListener('mouseleave', onMouseLeave);
+
+        function generate() {
+        for (let i = 0; i < STAR_COUNT; i++) {
+            stars.push({
+            x: 0,
+            y: 0,
+            z: STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE)
+            });
+        }
+        }
+
+        function placeStar(star) {
+        star.x = Math.random() * width;
+        star.y = Math.random() * height;
+        }
+
+        function recycleStar(star) {
+        let direction = 'z';
+        let vx = Math.abs(velocity.x),
+            vy = Math.abs(velocity.y);
+
+        if (vx > 1 || vy > 1) {
+            let axis = vx > vy ? (Math.random() < vx / (vx + vy) ? 'h' : 'v') : (Math.random() < vy / (vx + vy) ? 'v' : 'h');
+
+            if (axis === 'h') {
+            direction = velocity.x > 0 ? 'l' : 'r';
+            } else {
+            direction = velocity.y > 0 ? 't' : 'b';
+            }
+        }
+
+        star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE);
+
+        if (direction === 'z') {
+            star.z = 0.1;
+            star.x = Math.random() * width;
+            star.y = Math.random() * height;
+        } else if (direction === 'l') {
+            star.x = -OVERFLOW_THRESHOLD;
+            star.y = height * Math.random();
+        } else if (direction === 'r') {
+            star.x = width + OVERFLOW_THRESHOLD;
+            star.y = height * Math.random();
+        } else if (direction === 't') {
+            star.x = width * Math.random();
+            star.y = -OVERFLOW_THRESHOLD;
+        } else if (direction === 'b') {
+            star.x = width * Math.random();
+            star.y = height + OVERFLOW_THRESHOLD;
+        }
+        }
+
+        function resize() {
+        scale = window.devicePixelRatio || 1;
+        width = window.innerWidth * scale;
+        height = window.innerHeight * scale;
+        canvas.width = width;
+        canvas.height = height;
+        stars.forEach(placeStar);
+        }
+
+        function step() {
+        context.clearRect(0, 0, width, height);
+        update();
+        render();
+        requestAnimationFrame(step);
+        }
+
+        function update() {
+        velocity.tx *= 0.96;
+        velocity.ty *= 0.96;
+        velocity.x += (velocity.tx - velocity.x) * 0.8;
+        velocity.y += (velocity.ty - velocity.y) * 0.8;
+
+        stars.forEach((star) => {
+            star.x += velocity.x * star.z;
+            star.y += velocity.y * star.z;
+            star.x += (star.x - width / 2) * velocity.z * star.z;
+            star.y += (star.y - height / 2) * velocity.z * star.z;
+            star.z += velocity.z;
+
+            if (star.x < -OVERFLOW_THRESHOLD || star.x > width + OVERFLOW_THRESHOLD || star.y < -OVERFLOW_THRESHOLD || star.y > height + OVERFLOW_THRESHOLD) {
+            recycleStar(star);
+            }
+        });
+        }
+
+        function render() {
+        stars.forEach((star) => {
+            context.beginPath();
+            context.lineCap = 'round';
+            context.lineWidth = STAR_SIZE * star.z * scale;
+            context.globalAlpha = 0.5 + 0.5 * Math.random();
+            context.strokeStyle = STAR_COLOR;
+
+            context.moveTo(star.x, star.y);
+            let tailX = velocity.x * 2,
+                tailY = velocity.y * 2;
+
+            if (Math.abs(tailX) < 0.1) tailX = 0.5;
+            if (Math.abs(tailY) < 0.1) tailY = 0.5;
+
+            context.lineTo(star.x + tailX, star.y + tailY);
+            context.stroke();
+        });
+        }
+
+        function movePointer(x, y) {
+        if (!interactionEnabled) return;
+        if (typeof pointerX === 'number' && typeof pointerY === 'number') {
+            let ox = x - pointerX,
+                oy = y - pointerY;
+            velocity.tx += (ox / 8 * scale) * (touchInput ? 1 : -1);
+            velocity.ty += (oy / 8 * scale) * (touchInput ? 1 : -1);
+        }
+        pointerX = x;
+        pointerY = y;
+        }
+
+        function onMouseMove(event) {
+        touchInput = false;
+        movePointer(event.clientX, event.clientY);
+        }
+
+        function onTouchMove(event) {
+        touchInput = true;
+        movePointer(event.touches[0].clientX, event.touches[0].clientY);
+        event.preventDefault();
+        }
+
+        function onMouseLeave() {
+        pointerX = null;
+        pointerY = null;
+        }
+
+        function enableInteraction() {
+        interactionEnabled = true;
+        }
+
+        function disableInteraction() {
+        interactionEnabled = false;
         }
     </script>
 </body>
