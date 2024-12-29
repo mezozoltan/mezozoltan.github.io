@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Year Wrapped</title>
+    <style>
+
+        @font-face {
+            font-family: "Gotham";
+            src: url('../fonts/Gotham Black.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Century Gothic";
+            src: url('../fonts/Century Gothic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "GG Sans";
+            src: url('../fonts/GG Sans.TTF') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "GG Sans";
+            src: url('../fonts/GG Sans Medium.TTF') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "Century Gothic";
+            src: url('../fonts/Century Gothic Bold.TTF') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "Gotham", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1d183a;
+            overflow: hidden;
+            background-image: 
+                radial-gradient(circle at top right, rgba(121, 68, 154, 0.13), transparent),
+                radial-gradient(circle at 20% 85%, rgba(41, 196, 255, 0.13), transparent);
+            animation-duration: 2s;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            filter: blur(0px);
+            animation-duration: 2s;
+        }
+
+        .button-container {
+            justify-content: center;
+            display: flex;
+        }
+
+        .progress-button {
+            background-color: rgba(255, 255, 255, 0.315);
+            width: 17.8125vw;
+            height: 0.577vw;
+            color: #8f8f8fa4;
+            cursor: pointer;
+            position: relative;
+            border: none;
+            padding: 0;
+            display: none;
+        }
+
+        .progress-button-hitbox {
+            height: 2.552vw;
+            width: 19.479vw;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+        }
+
+        #text1 {
+            animation-duration: 5s;
+            margin-top: 39.3vh;
+            transform: translateX(200vw);
+            display: none;
+        }
+
+        #text2 {
+            animation-duration: 5s;
+            margin-top: 49.2vh;
+            width: 39vw;
+            opacity: 0%;
+            display: none;
+        }
+        
+        #text3 {
+            animation-duration: 5s;
+            margin-top: 39.3vh;
+            transform: translateX(200vw);
+            display: none;
+        }
+
+        #text4 {
+            animation-duration: 5s;
+            margin-top: 49.2vh;
+            width: 39vw;
+            opacity: 0%;
+            display: none;
+        }
+
+        #text5 {
+            animation-duration: 7s;
+            margin-top: 30.3vh;
+            transform: translateX(200vw);
+            width: 72.9vw;
+            display: none;
+        }
+
+        #text6 {
+            animation-duration: 7s;
+            margin-top: 59.2vh;
+            opacity: 0%;
+            display: none;
+            justify-content: center;
+        }
+
+        #text7 {
+            animation-duration: 7s;
+            margin-top: 72.2vh;
+            width: 72.9vw;
+            display: none;
+            opacity: 0%;
+            font-size: 80px;
+        }
+
+        #text8 {
+            animation-duration: 7s;
+            margin-top: 72.2vh;
+            opacity: 100%;
+            display: flex;
+            justify-content: center;
+            display: none;
+            opacity: 0%;
+        }
+
+        #text9 {
+            animation-duration: 7s;
+            margin-top: 72.2vh;
+            width: 72.9vw;
+            display: none;
+            opacity: 0%;
+            font-size: 80px;
+        }
+
+        #text10 {
+            animation-duration: 7s;
+            margin-top: 72.2vh;
+            opacity: 100%;
+            display: flex;
+            justify-content: center;
+            display: none;
+            opacity: 0%;
+        }
+
+        #text11 {
+            animation-duration: 7s;
+            margin-top: 72.2vh;
+            width: 72.9vw;
+            display: none;
+            opacity: 0%;
+            font-size: 80px;
+        }
+
+        #text12 {
+            animation-duration: 7s;
+            margin-top: 72.2vh;
+            opacity: 100%;
+            display: flex;
+            justify-content: center;
+            display: none;
+            opacity: 0%;
+        }
+
+        #text13 {
+            animation-duration: 5s;
+            margin-top: 36.3vh;
+            width: 74vw;
+            transform: translateX(200vw);
+            display: none;
+        }
+
+        #text14 {
+            animation-duration: 5s;
+            margin-top: 56.2vh;
+            opacity: 0%;
+            display: none;
+        }
+
+        #text15 {
+            animation-duration: 5s;
+            margin-top: 39.3vh;
+            transform: translateX(200vw);
+            display: none;
+        }
+
+        #text16 {
+            animation-duration: 5s;
+            margin-top: 49.2vh;
+            opacity: 0%;
+            display: none;
+        }
+
+        @keyframes text1 {
+            0%   {}
+            10%   {transform: translateX(0px);}
+            40%  {margin-top: 39.3vh;}
+            50%  {margin-top: 35vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 35vh;}
+        }
+
+        @keyframes text2 {
+            0%   {}
+            45%  {opacity: 0%;
+                  margin-top: 49.2vh;}
+            55%  {opacity: 100%;
+                  margin-top: 47.1vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 47.1vh;
+                  opacity: 100%;}
+        }
+
+        @keyframes text3 {
+            0%   {}
+            10%   {transform: translateX(0px);}
+            40%  {margin-top: 30.3vh;}
+            50%  {margin-top: 210px;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 210px;}
+        }
+
+        @keyframes text4 {
+            0%   {}
+            45%  {opacity: 0%;
+                  margin-top: 59.2vh;}
+            55%  {opacity: 100%;
+                  margin-top: 57vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 57vh;
+                  opacity: 100%;}
+        }
+
+        @keyframes image1 {
+            0%   {}
+            10%   {transform: translateX(0px);}
+            20%  {margin-top: calc(50vh - 250px);}
+            30%  {margin-top: calc(35vh - 250px);}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: calc(35vh - 250px);}
+        }
+
+        @keyframes text5 {
+            0%   {}
+            20%  {opacity: 0%;
+                  margin-top: 72.2vh;}
+            30%  {opacity: 100%;
+                  margin-top: 61.2vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 61.2vh;
+                  opacity: 100%;}
+        }
+
+        @keyframes text6 {
+            0%   {}
+            40%  {opacity: 0%;
+                  margin-top: 82.2vh;}
+            45%  {opacity: 100%;
+                  margin-top: 72.2vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 72.2vh;
+                  opacity: 100%;}
+        }
+
+        @keyframes text7 {
+            0%   {}
+            10%   {transform: translateX(0px);}
+            40%  {margin-top: 36.3vh;}
+            50%  {margin-top: 28.3vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 28.3vh;}
+        }
+
+        @keyframes text8 {
+            0%   {}
+            45%  {opacity: 0%;
+                  margin-top: 56.2vh;}
+            55%  {opacity: 100%;
+                  margin-top: 51.2vh;}
+            85% {transform: translateX(0px);}
+            100% {transform: translateX(-200vw);
+                  margin-top: 51.2vh;
+                  opacity: 100%;}
+        }
+
+        @keyframes progress {
+            0%   {width: 0px;}
+            100% {width: 17.8125vw;}
+        }
+
+        @keyframes background {
+            0%   {background-color: #1d183a;}
+            100% {background-color: #000000;}
+        }
+
+        @keyframes blur {
+            0%   {opacity: 100%;}
+            100% {opacity: 30%;}
+        }
+
+        @keyframes background2 {
+            0%   {background-color: #000000;}
+            100% {background-color: #1d183a;}
+        }
+
+        @keyframes blur2 {
+            0%   {opacity: 30%;}
+            100% {opacity: 100%;}
+        }
+
+        .bold-text {
+            position: absolute;
+            font-family: "Gotham", sans-serif;
+            color: #ffffff;
+            font-size: 90px;
+            text-align: center;
+        }
+        
+        .thin-text {
+            position: absolute;
+            font-family: "Century Gothic", sans-serif;
+            color: #ffffff;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        #content {
+            justify-content: center;
+            height: 95vh;
+            margin-top: 5vh;
+            width: 100vw;
+            display: flex;
+            position: absolute;
+        }
+
+        #progress1 {
+            background-color: #ffffff;
+            height: 0.577vw;
+            width: 0px;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+        }
+
+        #progress2 {
+            background-color: #ffffff;
+            height: 0.577vw;
+            width: 0px;
+            animation-duration: 14s;
+            animation-timing-function: linear;
+        }
+
+        #progress3 {
+            background-color: #ffffff;
+            height: 0.577vw;
+            width: 0px;
+            animation-duration: 14s;
+            animation-timing-function: linear;
+        }
+
+        #progress4 {
+            background-color: #ffffff;
+            height: 0.577vw;
+            width: 0px;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+        }
+
+        #progress5 {
+            background-color: #ffffff;
+            height: 0.577vw;
+            width: 0px;
+        }
+
+        #image1 {
+            height: 400px;
+            aspect-ratio: 1 / 1;
+        }
+
+        #image1-container {
+            margin-top: calc(50vh - 250px);
+            height: 400px;
+            aspect-ratio: 1 / 1;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            transform: translateX(200vw);
+            animation-duration: 7s;
+        }
+
+        #image2-container {
+            margin-top: calc(50vh - 250px);
+            height: 400px;
+            aspect-ratio: 1 / 1;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            transform: translateX(200vw);
+            animation-duration: 7s;
+        }
+
+        #image3-container {
+            margin-top: calc(50vh - 250px);
+            height: 400px;
+            aspect-ratio: 1 / 1;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            transform: translateX(200vw);
+            animation-duration: 7s;
+        }
+
+        #average-color {
+            color: #ff0000;
+            margin-top: 500px;
+            font-size: 80px;
+        }
+
+        #most-used-color {
+            color: #00b7ff;
+            margin-top: 500px;
+            font-size: 80px;
+        }
+
+        #least-used-color {
+            color: #d9ff00;
+            margin-top: 500px;
+            font-size: 80px;
+        }
+
+        #image-viewer {
+            height: 97vh;
+            width: 100vw;
+            background-image: url(https://i.imgur.com/L3voL6z.jpg);
+            transform: translateY(-100vh);
+            position: relative;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: none;
+        }
+
+        #image-viewer-frost {
+            margin-top: 5vh;
+            height: 97vh;
+            width: 100vw;
+            background-image: url(https://i.imgur.com/L3voL6z.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: blur(50px);
+            position: absolute;
+            display: none;
+        }
+
+        #press-start-to-begin {
+            background-color: hsla(0, 0%, 100%, 0.631);
+            font-family: "Gotham", sans-serif;
+            color: black;
+            font-size: 4vw; 
+            margin: 0 auto;
+            padding: 1vh;
+            width: 20%;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .image-viewer-container {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #image-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .image {
+            position: absolute;
+            width: 100vw;
+            height: 95vh;
+            margin-top: 5vh;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .frosted {
+            position: absolute;
+            filter: blur(5.4vh);
+            z-index: -1;
+            width: 100vw;
+            height: 95vh;
+            margin-top: 5vh;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .nav-buttons {
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .nav-button {
+            pointer-events: auto;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            mix-blend-mode: difference;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+            z-index: 2;
+        }
+
+        .nav-button:disabled {
+            display: none;
+        }
+
+        .nav-button.up {
+            right: 10px;
+            transform: translateY(-140%);
+        }
+
+        .nav-button.down {
+            right: 10px;
+            transform: translateY(40%);
+        }
+
+        .image-index-box {
+            position: absolute;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            background-color: none;
+        }
+        
+        .image-index-box input {
+            width: 50px;
+            background-color: rgba(255, 255, 255, 0.7);
+            mix-blend-mode: difference;
+            font-family: "Century Gothic", sans-serif;
+            text-align: center;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            padding: 0;
+            border-radius: 5px;
+        }
+
+        .image-index-box input:focus {
+            outline: none;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #pfp {
+            height: 40px;
+            width: 40px;
+            top: 13px;
+            left: 8px;
+            position: absolute;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        #name {
+            top: 12px;
+            left: 64px;
+            position: absolute;
+            color: #ffffff;
+            mix-blend-mode: difference;
+            font-weight: 500;
+        }
+
+        .text-box {
+            background-color: rgba(255, 255, 255, 0.178);
+            border-radius: 15px;
+            padding: 35px 15px 15px 65px;
+            width: 389px;
+            font-size: 16px;
+            color: #ffffff;
+            mix-blend-mode: difference;
+        }
+        
+        #message {
+            position: absolute;
+            top: 59px;
+            left: 34px;
+            display: none;
+            font-family: "GG Sans", sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    
+    <div id="content">
+        <div id="text1" class="bold-text">Szia, Bob!</div>
+        <div id="text2" class="thin-text">Eljött az év vége. Nézzük hogyan sikerült. Készen állsz?</div>
+        <div id="text3" class="bold-text">Rohan az idő</div>
+        <div id="text4" class="thin-text">Szerencsére jegyzeteltünk</div>
+        <div id="text5" class="bold-text">Idén a lehetséges 365 napi képből X képet sikerült beküldened.</div>
+        <div id="text6" class="thin-text">Ezzel többet küldtél be mint kb. <div style="font-family: Century Gothic; font-weight: 500; margin: 0 10px 0 10px;">8 193 188 600</div> ember. <div style="position: absolute; margin-top: 45px;">wow</div></div>
+        <div id="image1-container">
+            <div style="position: absolute; background-color: red; height: 350px; aspect-ratio: 1 / 1;"></div>
+            <img id="image1" src="https://i.imgur.com/raQw2CU.png">
+            <div id="average-color" class="bold-text">#ff0000</div>
+        </div>
+        <div id="text7" class="bold-text">Ez volt a képeid átlagos színe.</div>
+        <div id="text8" class="thin-text"><div style="font-family: Century Gothic; font-weight: 500; margin: 0 10px 0 0;">Szürke</div>... huh... Igazából erre számíthattunk volna.</div>
+        <div id="image2-container">
+            <div style="position: absolute; background-color: #00b7ff; height: 350px; aspect-ratio: 1 / 1;"></div>
+            <img id="image1" src="https://i.imgur.com/raQw2CU.png">
+            <div id="most-used-color" class="bold-text">#00b7ff</div>
+        </div>
+        <div id="text9" class="bold-text">A leghasználtabb színed</div>
+        <div id="text10" class="thin-text">Megértem miért tetszik ennyire.</div>
+        <div id="image3-container">
+            <div style="position: absolute; background-color: #d9ff00; height: 350px; aspect-ratio: 1 / 1;"></div>
+            <img id="image1" src="https://i.imgur.com/raQw2CU.png">
+            <div id="least-used-color" class="bold-text">#d9ff00</div>
+        </div>
+        <div id="text11" class="bold-text">A legkevésbé használt szined</div>
+        <div id="text12" class="thin-text">Szép szín, nem értem miért nem szereted.</div>
+        <div id="text13" class="bold-text">A képeid közül X képernyőkép és X fotó</div>
+        <div id="text14" class="thin-text">Ez egy csodálatos arány</div>
+        <div id="text15" class="bold-text">Tekintsük meg a képeket!</div>
+        <div id="text16" class="thin-text">Erre vártunk egész évben.</div>
+    </div>
+    
+    <div class="image-viewer-container">
+        <div class="nav-buttons">
+            <button class="nav-button up" id="prev-btn" onclick="moveCarousel(-1)">⮝</button>
+            <button class="nav-button down" id="next-btn" onclick="moveCarousel(1)">⮟</button>
+        </div>
+        <div class="frosted" id="frosted-bg"></div>
+        <div id="image-carousel"></div>
+        <div class="image-index-box">
+            <input type="number" id="image-index" min="1" max="365" value="1" onchange="goToImage(this.value)" />
+        </div>
+        <div id="message">
+            <img  id="pfp" src="../YT Csatorna/Icons;Stuff/Ch6 S1.png">
+            <div id="name">kennedy</div>
+            <div class="text-box" id="text-box"></div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <div onclick="Button1()" class="progress-button-hitbox"><button class="progress-button"><div id="progress1"></div></button></div>
+        <div onclick="Button2()" class="progress-button-hitbox"><button class="progress-button"><div id="progress2"></div></button></div>
+        <div onclick="Button3()" class="progress-button-hitbox"><button class="progress-button"><div id="progress3"></div></button></div>
+        <div onclick="Button4()" class="progress-button-hitbox"><button class="progress-button"><div id="progress4"></div></button></div>
+        <div onclick="Button5()" class="progress-button-hitbox"><button class="progress-button"><div id="progress5"></div></button></div>
+    </div>
+
+    <div id="press-start-to-begin" onclick="Start()">INDULÁS</div>
+
+    <script>
+        let Button1Timer;
+        let Button1Timer2;
+        let Button2Timer;
+        let Button2Timer2;
+        let Button3Timer;
+        let Button3Timer2;
+        let Button4Timer;
+        let Button4Timer2;
+        let Button5Timer;
+        const StartButton = document.getElementById('press-start-to-begin');
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+        const text3 = document.getElementById('text3');
+        const text4 = document.getElementById('text4');
+        const text5 = document.getElementById('text5');
+        const text6 = document.getElementById('text6');
+        const text7 = document.getElementById('text7');
+        const text8 = document.getElementById('text8');
+        const text9 = document.getElementById('text9');
+        const text10 = document.getElementById('text10');
+        const text11 = document.getElementById('text11');
+        const text12 = document.getElementById('text12');
+        const text13 = document.getElementById('text13');
+        const text14 = document.getElementById('text14');
+        const text15 = document.getElementById('text15');
+        const text16 = document.getElementById('text16');
+        const image1container = document.getElementById('image1-container');
+        const image2container = document.getElementById('image2-container');
+        const image3container = document.getElementById('image3-container');
+        const progress1 = document.getElementById('progress1');
+        const progress2 = document.getElementById('progress2');
+        const progress3 = document.getElementById('progress3');
+        const progress4 = document.getElementById('progress4');
+        const progress5 = document.getElementById('progress5');
+        const body = document.body;
+        const Canvas = document.getElementById('canvas');
+        const ImageViewerItems = document.querySelectorAll('.image-viewer-container');
+
+        function Start() {
+            StartButton.style.display = "none";
+            const Buttons = document.querySelectorAll('.progress-button');
+
+            Buttons.forEach(Button => {
+                Button.style.display = 'block';
+            });
+            Button1();
+        }
+
+        function Button1() {
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
+            clearTimeout(Button5Timer);
+        progress2.style.animationName = "none";
+        progress3.style.animationName = "none";
+        progress4.style.animationName = "none";
+        progress2.style.width = "0";
+        progress3.style.width = "0";
+        progress4.style.width = "0";
+        progress5.style.width = "0";
+        image1container.style.display = "none";
+        image2container.style.display = "none";
+        image3container.style.display = "none";
+        text3.style.display = "none";
+        text4.style.display = "none";
+        text5.style.display = "none";
+        text6.style.display = "none";
+        text7.style.display = "none";
+        text8.style.display = "none";
+        text9.style.display = "none";
+        text10.style.display = "none";
+        text11.style.display = "none";
+        text12.style.display = "none";
+        text13.style.display = "none";
+        text14.style.display = "none";
+        text15.style.display = "none";
+        text16.style.display = "none";
+        ImageViewerItems.forEach(ImageViewerItem => {
+            ImageViewerItem.style.display = 'none';
+        });
+
+        progress1.style.animationName = "progress";
+        text1.style.animationName = "text1";
+        text1.style.display = "block";
+        text2.style.animationName = "text2";
+        text2.style.display = "block";
+        
+        Button1Timer = setTimeout(() => {
+            text1.style.animationName = "none";
+            text1.style.display = "none";
+            text2.style.animationName = "none";
+            text2.style.display = "none";
+            text3.style.animationName = "text1";
+            text3.style.display = "block";
+            text4.style.animationName = "text2";
+            text4.style.display = "block";
+        }, 5000);
+
+        Button1Timer2 = setTimeout(() => {
+            text3.style.animationName = "none";
+            text3.style.display = "none";
+            text4.style.animationName = "none";
+            text4.style.display = "none";
+            Button2();
+        }, 10000);
+        }
+
+        function Button2() {
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
+            clearTimeout(Button5Timer);
+            progress1.style.animationName = "none";
+            progress1.style.width = "17.8125vw";
+        progress3.style.animationName = "none";
+        progress4.style.animationName = "none";
+        progress3.style.width = "0";
+        progress4.style.width = "0";
+        progress5.style.width = "0";
+        image1container.style.display = "none";
+        image2container.style.display = "none";
+        image3container.style.display = "none";
+        text1.style.display = "none";
+        text2.style.display = "none";
+        text3.style.display = "none";
+        text4.style.display = "none";
+        text7.style.display = "none";
+        text8.style.display = "none";
+        text9.style.display = "none";
+        text10.style.display = "none";
+        text11.style.display = "none";
+        text12.style.display = "none";
+        text13.style.display = "none";
+        text14.style.display = "none";
+        text15.style.display = "none";
+        text16.style.display = "none";
+        ImageViewerItems.forEach(ImageViewerItem => {
+            ImageViewerItem.style.display = 'none';
+        });
+
+        progress2.style.animationName = "progress";
+        text5.style.animationName = "text3";
+        text5.style.display = "block";
+        text6.style.animationName = "text4";
+        text6.style.display = "flex";
+        
+        Button2Timer = setTimeout(() => {
+            text5.style.animationName = "none";
+            text5.style.display = "none";
+            text6.style.animationName = "none";
+            text6.style.display = "none";
+            text7.style.animationName = "text5";
+            text7.style.display = "block";
+            text8.style.animationName = "text6";
+            text8.style.display = "flex";
+            image1container.style.animationName = "image1";
+            image1container.style.display = "flex";
+        }, 7000);
+
+        Button2Timer2 = setTimeout(() => {
+            text7.style.animationName = "none";
+            text7.style.display = "none";
+            text8.style.animationName = "none";
+            text8.style.display = "none";
+            image1container.style.animationName = "none";
+            image1container.style.display = "none";
+            Button3();
+        }, 14000);
+        }
+
+        function Button3() {
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
+            clearTimeout(Button5Timer);
+            progress1.style.animationName = "none";
+            progress1.style.width = "17.8125vw";
+            progress2.style.animationName = "none";
+            progress2.style.width = "17.8125vw";
+        progress4.style.animationName = "none";
+        progress4.style.width = "0";
+        progress5.style.width = "0";
+        image1container.style.display = "none";
+        image3container.style.display = "none";
+        text1.style.display = "none";
+        text2.style.display = "none";
+        text3.style.display = "none";
+        text4.style.display = "none";
+        text5.style.display = "none";
+        text6.style.display = "none";
+        text7.style.display = "none";
+        text8.style.display = "none";
+        text11.style.display = "none";
+        text12.style.display = "none";
+        text13.style.display = "none";
+        text14.style.display = "none";
+        text15.style.display = "none";
+        text16.style.display = "none";
+        ImageViewerItems.forEach(ImageViewerItem => {
+            ImageViewerItem.style.display = 'none';
+        });
+
+        progress3.style.animationName = "progress";
+        image2container.style.animationName = "image1";
+        image2container.style.display = "flex";
+        text9.style.animationName = "text5";
+        text9.style.display = "block";
+        text10.style.animationName = "text6";
+        text10.style.display = "block";
+        
+        Button3Timer = setTimeout(() => {
+            image2container.style.animationName = "none";
+            image2container.style.display = "none";
+            text9.style.animationName = "none";
+            text9.style.display = "none";
+            text10.style.animationName = "none";
+            text10.style.display = "none";
+            image3container.style.animationName = "image1";
+            image3container.style.display = "flex";
+            text11.style.animationName = "text5";
+            text11.style.display = "block";
+            text12.style.animationName = "text6";
+            text12.style.display = "flex";
+        }, 7000);
+
+        Button3Timer2 = setTimeout(() => {
+            image3container.style.animationName = "none";
+            image3container.style.display = "none";
+            text11.style.animationName = "none";
+            text11.style.display = "none";
+            text12.style.animationName = "none";
+            text12.style.display = "none";
+            Button4();
+        }, 14000);
+        }
+
+        function Button4() {
+            BodyReset();
+            disableInteraction();
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button5Timer);
+            progress1.style.animationName = "none";
+            progress1.style.width = "17.8125vw";
+            progress2.style.animationName = "none";
+            progress2.style.width = "17.8125vw";
+            progress3.style.animationName = "none";
+            progress3.style.width = "17.8125vw";
+        progress5.style.width = "0";
+        image1container.style.display = "none";
+        image2container.style.display = "none";
+        image3container.style.display = "none";
+        text1.style.display = "none";
+        text2.style.display = "none";
+        text3.style.display = "none";
+        text4.style.display = "none";
+        text5.style.display = "none";
+        text6.style.display = "none";
+        text7.style.display = "none";
+        text8.style.display = "none";
+        text9.style.display = "none";
+        text10.style.display = "none";
+        text11.style.display = "none";
+        text12.style.display = "none";
+        text15.style.display = "none";
+        text16.style.display = "none";
+        ImageViewerItems.forEach(ImageViewerItem => {
+            ImageViewerItem.style.display = 'none';
+        });
+
+        progress4.style.animationName = "progress";
+        text13.style.animationName = "text7";
+        text13.style.display = "block";
+        text14.style.animationName = "text8";
+        text14.style.display = "block";
+        
+        Button4Timer = setTimeout(() => {
+            text13.style.animationName = "none";
+            text13.style.display = "none";
+            text14.style.animationName = "none";
+            text14.style.display = "none";
+            text15.style.animationName = "text1";
+            text15.style.display = "block";
+            text16.style.animationName = "text2";
+            text16.style.display = "flex";
+        }, 5000);
+
+        Button4Timer2 = setTimeout(() => {
+            text15.style.animationName = "none";
+            text15.style.display = "none";
+            text16.style.animationName = "none";
+            text16.style.display = "none";
+            Button5();
+        }, 10000);
+        }
+
+        function Button5() {
+            clearTimeout(Button1Timer);
+            clearTimeout(Button1Timer2);
+            clearTimeout(Button2Timer);
+            clearTimeout(Button2Timer2);
+            clearTimeout(Button3Timer);
+            clearTimeout(Button3Timer2);
+            clearTimeout(Button4Timer);
+            clearTimeout(Button4Timer2);
+            progress1.style.animationName = "none";
+            progress1.style.width = "17.8125vw";
+            progress2.style.animationName = "none";
+            progress2.style.width = "17.8125vw";
+            progress3.style.animationName = "none";
+            progress3.style.width = "17.8125vw";
+            progress4.style.animationName = "none";
+            progress4.style.width = "17.8125vw";
+        image1container.style.display = "none";
+        image2container.style.display = "none";
+        image3container.style.display = "none";
+        text1.style.display = "none";
+        text2.style.display = "none";
+        text3.style.display = "none";
+        text4.style.display = "none";
+        text5.style.display = "none";
+        text6.style.display = "none";
+        text7.style.display = "none";
+        text8.style.display = "none";
+        text9.style.display = "none";
+        text10.style.display = "none";
+        text11.style.display = "none";
+        text12.style.display = "none";
+        text13.style.display = "none";
+        text14.style.display = "none";
+        text15.style.display = "none";
+        text16.style.display = "none";
+
+        ImageViewerItems.forEach(ImageViewerItem => {
+            ImageViewerItem.style.display = 'flex';
+        });
+        progress5.style.width = "17.8125vw";
+        enableInteraction();
+        body.style.animationName = "background";
+        canvas.style.animationName = "blur";
+
+        Button5Timer = setTimeout(() => {
+        body.style.backgroundColor = "#000000";
+        body.style.animationName = "none";
+        canvas.style.opacity = "30%";
+        canvas.style.animationName = "none";
+        }, 1900);
+        }
+
+        function BodyReset() {
+            const bodyBackgroundColor = window.getComputedStyle(body).backgroundColor;
+
+            if (bodyBackgroundColor === 'rgb(0, 0, 0)') {
+                body.style.animationName = 'background2';
+                canvas.style.animationName = 'blur2';
+
+                setTimeout(() => {
+                    body.style.backgroundColor = "#1d183a";
+                    body.style.animationName = "none";
+                    canvas.style.opacity = "100%";
+                    canvas.style.animationName = "none";
+                }, 1900);
+            }
+        }
+
+//////////STAR ANIMATION//////////
+
+        const STAR_COLOR = '#fff';
+        const STAR_SIZE = 3;
+        const STAR_MIN_SCALE = 0.2;
+        const OVERFLOW_THRESHOLD = 50;
+        const STAR_COUNT = (window.innerWidth + window.innerHeight) / 8;
+
+        const canvas = document.querySelector('canvas'),
+            context = canvas.getContext('2d');
+
+        let scale = 1, // device pixel ratio
+            width,
+            height;
+
+        let stars = [];
+
+        let pointerX,
+            pointerY;
+
+        let velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
+
+        let touchInput = false;
+        let interactionEnabled = false;
+
+        generate();
+        resize();
+        step();
+
+        window.onresize = resize;
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('touchmove', onTouchMove);
+        document.addEventListener('mouseleave', onMouseLeave);
+
+        function generate() {
+        for (let i = 0; i < STAR_COUNT; i++) {
+            stars.push({
+            x: 0,
+            y: 0,
+            z: STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE)
+            });
+        }
+        }
+
+        function placeStar(star) {
+        star.x = Math.random() * width;
+        star.y = Math.random() * height;
+        }
+
+        function recycleStar(star) {
+        let direction = 'z';
+        let vx = Math.abs(velocity.x),
+            vy = Math.abs(velocity.y);
+
+        if (vx > 1 || vy > 1) {
+            let axis = vx > vy ? (Math.random() < vx / (vx + vy) ? 'h' : 'v') : (Math.random() < vy / (vx + vy) ? 'v' : 'h');
+
+            if (axis === 'h') {
+            direction = velocity.x > 0 ? 'l' : 'r';
+            } else {
+            direction = velocity.y > 0 ? 't' : 'b';
+            }
+        }
+
+        star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE);
+
+        if (direction === 'z') {
+            star.z = 0.1;
+            star.x = Math.random() * width;
+            star.y = Math.random() * height;
+        } else if (direction === 'l') {
+            star.x = -OVERFLOW_THRESHOLD;
+            star.y = height * Math.random();
+        } else if (direction === 'r') {
+            star.x = width + OVERFLOW_THRESHOLD;
+            star.y = height * Math.random();
+        } else if (direction === 't') {
+            star.x = width * Math.random();
+            star.y = -OVERFLOW_THRESHOLD;
+        } else if (direction === 'b') {
+            star.x = width * Math.random();
+            star.y = height + OVERFLOW_THRESHOLD;
+        }
+        }
+
+        function resize() {
+        scale = window.devicePixelRatio || 1;
+        width = window.innerWidth * scale;
+        height = window.innerHeight * scale;
+        canvas.width = width;
+        canvas.height = height;
+        stars.forEach(placeStar);
+        }
+
+        function step() {
+        context.clearRect(0, 0, width, height);
+        update();
+        render();
+        requestAnimationFrame(step);
+        }
+
+        function update() {
+        velocity.tx *= 0.96;
+        velocity.ty *= 0.96;
+        velocity.x += (velocity.tx - velocity.x) * 0.8;
+        velocity.y += (velocity.ty - velocity.y) * 0.8;
+
+        stars.forEach((star) => {
+            star.x += velocity.x * star.z;
+            star.y += velocity.y * star.z;
+            star.x += (star.x - width / 2) * velocity.z * star.z;
+            star.y += (star.y - height / 2) * velocity.z * star.z;
+            star.z += velocity.z;
+
+            if (star.x < -OVERFLOW_THRESHOLD || star.x > width + OVERFLOW_THRESHOLD || star.y < -OVERFLOW_THRESHOLD || star.y > height + OVERFLOW_THRESHOLD) {
+            recycleStar(star);
+            }
+        });
+        }
+
+        function render() {
+        stars.forEach((star) => {
+            context.beginPath();
+            context.lineCap = 'round';
+            context.lineWidth = STAR_SIZE * star.z * scale;
+            context.globalAlpha = 0.5 + 0.5 * Math.random();
+            context.strokeStyle = STAR_COLOR;
+
+            context.moveTo(star.x, star.y);
+            let tailX = velocity.x * 2,
+                tailY = velocity.y * 2;
+
+            if (Math.abs(tailX) < 0.1) tailX = 0.5;
+            if (Math.abs(tailY) < 0.1) tailY = 0.5;
+
+            context.lineTo(star.x + tailX, star.y + tailY);
+            context.stroke();
+        });
+        }
+
+        function movePointer(x, y) {
+        if (!interactionEnabled) return;
+        if (typeof pointerX === 'number' && typeof pointerY === 'number') {
+            let ox = x - pointerX,
+                oy = y - pointerY;
+            velocity.tx += (ox / 8 * scale) * (touchInput ? 1 : -1);
+            velocity.ty += (oy / 8 * scale) * (touchInput ? 1 : -1);
+        }
+        pointerX = x;
+        pointerY = y;
+        }
+
+        function onMouseMove(event) {
+        touchInput = false;
+        movePointer(event.clientX, event.clientY);
+        }
+
+        function onTouchMove(event) {
+        touchInput = true;
+        movePointer(event.touches[0].clientX, event.touches[0].clientY);
+        event.preventDefault();
+        }
+
+        function onMouseLeave() {
+        pointerX = null;
+        pointerY = null;
+        }
+
+        function enableInteraction() {
+        interactionEnabled = true;
+        }
+
+        function disableInteraction() {
+        interactionEnabled = false;
+        }
+
+//////////IMAGE VIEWER//////////
+
+        const images = [
+                    "https://i.imgur.com/L3voL6z.jpg",
+                    "https://i.imgur.com/t0PM91a.jpg",
+                    "https://i.imgur.com/raKr0OD.jpg",
+                    "https://i.imgur.com/WHAJb6T.png",
+                    "https://i.imgur.com/7sxp0QP.png",
+                    "https://i.imgur.com/Fkn7zAK.png",
+                    "https://i.imgur.com/ZdHbhRU.png",
+                    "https://i.imgur.com/o4TZ6Mu.png",
+                    "https://i.imgur.com/QgPtTZJ.png",
+                    "https://i.imgur.com/4jaRA9P.png",
+                    "https://i.imgur.com/7sxp0QP.png",
+                ];
+
+                const texts = [
+                    "I am happy today!",
+                    "",
+                    "Image 3: The beauty of nature!",
+                    "Check out this amazing view!",
+                    "Here's another stunning image!",
+                    "Image 6 is a piece of art!",
+                    "Soothing and calm - image 7!",
+                    "A masterpiece for image 8!",
+                    "Get inspired by image 9!",
+                    "Image 10 is fantastic!",
+                    "Another great moment captured!"
+                ];
+
+                const carousel = document.getElementById('image-carousel');
+                const nextBtn = document.getElementById('next-btn');
+                const prevBtn = document.getElementById('prev-btn');
+                const imageIndexInput = document.getElementById('image-index');
+                const textBox = document.getElementById('text-box');
+                const message = document.getElementById('message');
+
+                let currentIndex = 0; 
+                const bufferSize = 10; 
+                const imageElements = []; 
+                const frostedElements = []; 
+                let isAnimating = false; 
+
+                function initCarousel() {
+                    for (let i = 0; i < bufferSize; i++) {
+                        const image = document.createElement('div');
+                        image.classList.add('image');
+                        image.style.transform = `translateY(${(i - Math.floor(bufferSize / 2)) * 200}vh)`;
+                        carousel.appendChild(image);
+                        imageElements.push(image);
+
+                        const frosted = document.createElement('div');
+                        frosted.classList.add('frosted');
+                        frosted.style.transform = `translateY(${(i - Math.floor(bufferSize / 2)) * 200}vh)`;
+                        carousel.appendChild(frosted);
+                        frostedElements.push(frosted);
+                    }
+                    updateCarousel();
+                }
+
+                function updateCarousel() {
+                    imageElements.forEach((img, idx) => {
+                        const relativeIndex = currentIndex + idx - Math.floor(bufferSize / 2);
+                        const validIndex = (relativeIndex + images.length) % images.length;
+                        img.style.backgroundImage = `url(${images[validIndex]})`;
+
+                        if (!isAnimating) {
+                            img.style.transform = `translateY(${(idx - Math.floor(bufferSize / 2)) * 200}vh)`;
+                        }
+                    });
+
+                    frostedElements.forEach((frosted, idx) => {
+                        const relativeIndex = currentIndex + idx - Math.floor(bufferSize / 2);
+                        const validIndex = (relativeIndex + images.length) % images.length;
+                        frosted.style.backgroundImage = `url(${images[validIndex]})`;
+
+                        if (!isAnimating) {
+                            frosted.style.transform = `translateY(${(idx - Math.floor(bufferSize / 2)) * 200}vh)`;
+                        }
+                    });
+
+                    prevBtn.disabled = currentIndex === 0;
+                    nextBtn.disabled = currentIndex === images.length - 1;
+                    imageIndexInput.value = currentIndex + 1;
+                    updateTextBox();
+                }
+
+                function updateTextBox() {
+                    const currentText = texts[currentIndex] || "";
+                    if (currentText.trim() === "") {
+                        message.style.display = "none";
+                    } else {
+                        message.style.display = "block";
+                        textBox.innerHTML = currentText;
+                    }
+                }
+
+                function moveCarousel(direction) {
+                    if (isAnimating) return; 
+                    isAnimating = true;
+
+                    const offset = direction === 1 ? -200 : 200;
+
+                    imageElements.forEach((img, idx) => {
+                        img.style.transition = 'transform 0.5s ease';
+                        img.style.transform = `translateY(${(idx - Math.floor(bufferSize / 2)) * 200 + offset}vh)`;
+                    });
+
+                    frostedElements.forEach((frosted, idx) => {
+                        frosted.style.transition = 'transform 0.5s ease';
+                        frosted.style.transform = `translateY(${(idx - Math.floor(bufferSize / 2)) * 200 + offset}vh)`;
+                    });
+
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + direction + images.length) % images.length;
+
+                        imageElements.forEach((img, idx) => {
+                            img.style.transition = 'none';
+                        });
+
+                        frostedElements.forEach((frosted, idx) => {
+                            frosted.style.transition = 'none';
+                        });
+
+                        isAnimating = false;
+                        updateCarousel();
+                    }, 500); 
+                }
+
+                function goToImage(index) {
+                    const targetIndex = Math.max(1, Math.min(images.length, index)) - 1;
+                    currentIndex = targetIndex;
+                    updateCarousel();
+                }
+
+                initCarousel();
+    </script>
+</body>
+</html>
