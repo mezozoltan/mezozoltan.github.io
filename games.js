@@ -721,18 +721,6 @@ const games = [
     ]
   },
   {
-    name: "Totally Accurate Battle Simulator",
-    logoUrl: "https://mezozoltan.github.io/Game-Images/tabs-logo.webp",
-    description: "Be the leader of wobblers from ancient lands, spooky places, and fantasy worlds. Watch them fight in simulations made with the wobbliest physics system ever created, make your own wobblers in the unit creator and send your army off to fight your friends in multiplayer.",
-    backgroundUrl: "https://mezozoltan.github.io/Game-Images/tabs.webp",
-    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/tabs-exp.webp",
-    link: "https://store.steampowered.com/app/508440/Totally_Accurate_Battle_Simulator/",
-    store: "steam",
-    tags: [
-      { name: "Simulator", rank: 7 },
-    ]
-  },
-  {
     name: "Life is Strange",
     logoUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-logo.webp",
     description: "Life is Strange is an episodic adventure game that allows the player to rewind time and affect the past, present and future.",
