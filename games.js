@@ -9,6 +9,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Survival-horror", rank: 1 },
+      { name: "Story", rank: 10 },
     ]
   },
   {
@@ -21,6 +22,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Survival-horror", rank: 3 },
+      { name: "Story", rank: 19 },
     ]
   },
   {
@@ -33,6 +35,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Survival-horror", rank: 2 },
+      { name: "Story", rank: 9 },
     ]
   },
   {
@@ -81,6 +84,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Action", rank: 4 },
+      { name: "Story", rank: 7 },
     ]
   },
   {
@@ -153,6 +157,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Action", rank: 10 },
+      { name: "Story", rank: 5 },
     ]
   },
   {
@@ -165,6 +170,7 @@ const games = [
     store: "epic",
     tags: [
       { name: "Action", rank: 11 },
+      { name: "Story", rank: 28 },
     ]
   },
   {
@@ -189,6 +195,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Horror", rank: 1 },
+      { name: "Story", rank: 8 },
     ]
   },
   {
@@ -213,6 +220,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Horror", rank: 3 },
+      { name: "Story", rank: 14 },
     ]
   },
   {
@@ -225,6 +233,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Horror", rank: 4 },
+      { name: "Story", rank: 4 },
     ]
   },
   {
@@ -237,6 +246,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Horror", rank: 5 },
+      { name: "Story", rank: 16 },
     ]
   },
   {
@@ -249,6 +259,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Horror", rank: 6 },
+      { name: "Story", rank: 12 },
     ]
   },
   {
@@ -262,6 +273,7 @@ const games = [
     tags: [
       { name: "Horror", rank: 7 },
       { name: "Puzzle", rank: 3 },
+      { name: "Story", rank: 17 },
     ]
   },
   {
@@ -299,6 +311,7 @@ const games = [
     tags: [
       { name: "Horror", rank: 10 },
       { name: "Puzzle", rank: 6 },
+      { name: "Story", rank: 27 },
     ]
   },
   {
@@ -335,6 +348,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Horror", rank: 13 },
+      { name: "Story", rank: 6 },
     ]
   },
   {
@@ -406,7 +420,7 @@ const games = [
     link: "https://store.steampowered.com/app/967050/Pacify/",
     store: "steam",
     tags: [
-      { name: "Horror", rank: 19 },
+      { name: "Horror", rank: 20 },
     ]
   },
   {
@@ -418,7 +432,8 @@ const games = [
     link: "https://store.steampowered.com/app/1846170/Iron_Lung/",
     store: "steam",
     tags: [
-      { name: "Horror", rank: 20 },
+      { name: "Horror", rank: 21 },
+      { name: "Story", rank: 24 },
     ]
   },
   {
@@ -431,6 +446,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Puzzle", rank: 1 },
+      { name: "Story", rank: 1 },
     ]
   },
   {
@@ -443,6 +459,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Puzzle", rank: 2 },
+      { name: "Story", rank: 11 },
     ]
   },
   {
@@ -455,6 +472,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Puzzle", rank: 4 },
+      { name: "Story", rank: 18 },
     ]
   },
   {
@@ -467,6 +485,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Puzzle", rank: 5 },
+      { name: "Story", rank: 20 },
     ]
   },
   {
@@ -478,7 +497,7 @@ const games = [
     link: "https://store.steampowered.com/app/359100/QUBE_2/",
     store: "steam",
     tags: [
-      { name: "Puzzle", rank: 7 },
+      { name: "Puzzle", rank: 8 },
     ]
   },
   {
@@ -490,7 +509,287 @@ const games = [
     link: "https://store.steampowered.com/app/1564220/QUBE_10th_Anniversary/",
     store: "steam",
     tags: [
-      { name: "Puzzle", rank: 8 },
+      { name: "Puzzle", rank: 9 },
+    ]
+  },
+  {
+    name: "KLETKA",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/kletka-logo.webp",
+    description: "KLETKA is a co-op (up to 6 players) horror game about going down in an elevator that is trying to eat you. Feed the elevator, explore deadly floors and descend deeper.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/kletka.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/kletka-exp.webp",
+    link: "https://store.steampowered.com/app/1699480/KLETKA/",
+    store: "steam",
+    tags: [
+      { name: "Horror", rank: 19 },
+    ]
+  },
+  {
+    name: "Killer Frequency",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/killer-frequency-logo.webp",
+    description: "Killer Frequency is a first-person horror puzzle game set in 1987, that puts you in the role of a late-night radio talk show host in small town America whose callers are being stalked by a mysterious killer.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/killer-frequency.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/killer-frequency-exp.webp",
+    link: "https://store.steampowered.com/app/1903620/Killer_Frequency/",
+    store: "steam",
+    tags: [
+      { name: "Puzzle", rank: 7 },
+      { name: "Story", rank: 21 },
+    ]
+  },
+  {
+    name: "Limbo",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/limbo-logo.webp",
+    description: "LIMBO is a dark, puzzle-platformer world filled with deadly traps and haunting creatures. Navigate eerie forests, crumbling ruins, and shadowy depths to figure out your sisters fate.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/limbo.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/limbo-exp.webp",
+    link: "https://store.steampowered.com/app/48000/LIMBO/",
+    store: "steam",
+    tags: [
+      { name: "Puzzle", rank: 10 },
+    ]
+  },
+  {
+    name: "The Spectrum Retreat",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/the-spectrum-retreat-logo.webp",
+    description: "Check-in to The Spectrum Retreat for a stay you won't forget. Manipulate your way to the truth in this captivating narrative-driven puzzler.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/the-spectrum-retreat.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/the-spectrum-retreat-exp.webp",
+    link: "https://store.steampowered.com/app/763250/The_Spectrum_Retreat/",
+    store: "steam",
+    tags: [
+      { name: "Puzzle", rank: 11 },
+    ]
+  },
+  {
+    name: "The Silent Age",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/the-silent-age-logo.webp",
+    description: "Embark on an adventure through time with Joe, a simple janitor tasked with saving humanity from extinction. With the help of a mysterious time travel device, explore the present of 1972 and the post-apocalyptic future of 2012, uncovering the truth behind mankind's demise.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/the-silent-age.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/the-silent-age-exp.webp",
+    link: "https://store.steampowered.com/app/352520/The_Silent_Age/",
+    store: "steam",
+    tags: [
+      { name: "Puzzle", rank: 12 },
+      { name: "Story", rank: 25 },
+    ]
+  },
+  {
+    name: "Thimbleweed Park",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/thimbleweed-park-logo.webp",
+    description: "In Thimbleweed Park, a dead body is the least of your problems. Switch between five playable characters to uncover the surreal secrets of this strange town in a modern mystery adventure game.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/thimbleweed-park.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/thimbleweed-park-exp.webp",
+    link: "https://store.steampowered.com/app/569860/Thimbleweed_Park/",
+    store: "steam",
+    tags: [
+      { name: "Puzzle", rank: 13 },
+      { name: "Story", rank: 22 },
+    ]
+  },
+  {
+    name: "HUE",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/hue-logo.webp",
+    description: "Hue is a vibrant, puzzle-adventure, where you alter the world by changing its background colour.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/hue.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/hue-exp.webp",
+    link: "https://store.steampowered.com/app/383270/Hue/",
+    store: "steam",
+    tags: [
+      { name: "Puzzle", rank: 14 },
+    ]
+  },
+  {
+    name: "The Forest Quartet",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/the-forest-quartet-logo.webp",
+    description: "The Forest Quartet is a puzzle adventure about a gone, but not forgotten, lead singer. Play her spirit and travel through 3 acts unique to the members of her band for a final farewell concert.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/the-forest-quartet.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/the-forest-quartet-exp.webp",
+    link: "https://store.steampowered.com/app/1620720/The_Forest_Quartet/",
+    store: "steam",
+    tags: [
+      { name: "Puzzle", rank: 15 },
+      { name: "Story", rank: 26 },
+    ]
+  },
+  {
+    name: "Getting Over It with Bennett Foddy",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/getting-over-it-logo.webp",
+    description: "A game I made for a certain kind of person. To hurt them.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/getting-over-it.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/getting-over-it-exp.webp",
+    link: "https://store.steampowered.com/app/240720/Getting_Over_It_with_Bennett_Foddy/",
+    store: "steam",
+    tags: [
+      { name: "Rage", rank: 1 },
+    ]
+  },
+  {
+    name: "Fortnite",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/fortnite-logo.webp",
+    description: "Create, play, and battle with friends in Fortnite. But you know what Fortnite is.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/fortnite.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/fortnite-exp.webp",
+    link: "https://store.epicgames.com/hu/p/fortnite",
+    store: "epic",
+    tags: [
+      { name: "Shooter", rank: 1 },
+    ]
+  },
+  {
+    name: "Embr",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/embr-logo.webp",
+    description: "Fight fires for fun and profit in this unpredictable and frantic multiplayer game. Team up with friends, take on daily challenges and climb to the top of the corporate firefighting ladder.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/embr.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/embr-exp.webp",
+    link: "https://store.steampowered.com/app/1062830/Embr/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 1 },
+    ]
+  },
+  {
+    name: "Slime Rancher 2",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/slime-rancher-2-logo.webp",
+    description: "Continue the adventures of Beatrix LeBeau as she journeys across the Slime Sea to Rainbow Island, a land brimming with ancient mysteries, and bursting with wiggly, new slimes.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/slime-rancher-2.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/slime-rancher-2-exp.webp",
+    link: "https://store.steampowered.com/app/1657630/Slime_Rancher_2/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 2 },
+    ]
+  },
+  {
+    name: "Slime Rancher",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/slime-rancher-logo.webp",
+    description: "Slime Rancher is the tale of Beatrix LeBeau, a plucky, young rancher who sets out for a life a thousand light years away from Earth on the 'Far, Far Range' where she tries her hand at making a living wrangling slimes.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/slime-rancher.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/slime-rancher-exp.webp",
+    link: "https://store.steampowered.com/app/433340/Slime_Rancher/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 3 },
+    ]
+  },
+  {
+    name: "Teardown",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/teardown-logo.webp",
+    description: "Prepare the perfect heist in this simulated and fully destructible voxel world. Tear down walls with vehicles or explosives to create shortcuts. Stack objects to reach higher. Use the environment to your advantage in the most creative way you can think of.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/teardown.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/teardown-exp.webp",
+    link: "https://store.steampowered.com/app/1167630/Teardown/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 4 },
+    ]
+  },
+  {
+    name: "Powerwash Simulator",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/powerwash-simulator-logo.webp",
+    description: "Release the Pressure with PowerWash Simulator! Wash away your worries with the soothing sounds of high-pressure water. Fire up your power washer and blast away every speck of dirt and grime you can find, all with the simple satisfaction of power-washing to a sparkling finish.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/powerwash-simulator.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/powerwash-simulator-exp.webp",
+    link: "https://store.steampowered.com/app/1290000/PowerWash_Simulator/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 5 },
+    ]
+  },
+  {
+    name: "Crime Scene Cleaner",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/crime-scene-cleaner-logo.webp",
+    description: "Once you get tangled with the mob, you will forever be a part of the mob. At least they pay a decent salary and all you have to do is clean up after their dirty work, but you know what you're doing. So clean crime scenes, earn as much money as you can, and get ready for the next mission.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/crime-scene-cleaner.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/crime-scene-cleaner-exp.webp",
+    link: "https://store.steampowered.com/app/1040200/Crime_Scene_Cleaner/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 6 },
+    ]
+  },
+  {
+    name: "Totally Accurate Battle Simulator",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/tabs-logo.webp",
+    description: "Be the leader of wobblers from ancient lands, spooky places, and fantasy worlds. Watch them fight in simulations made with the wobbliest physics system ever created, make your own wobblers in the unit creator and send your army off to fight your friends in multiplayer.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/tabs.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/tabs-exp.webp",
+    link: "https://store.steampowered.com/app/508440/Totally_Accurate_Battle_Simulator/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 7 },
+    ]
+  },
+  {
+    name: "Totally Accurate Battle Simulator",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/tabs-logo.webp",
+    description: "Be the leader of wobblers from ancient lands, spooky places, and fantasy worlds. Watch them fight in simulations made with the wobbliest physics system ever created, make your own wobblers in the unit creator and send your army off to fight your friends in multiplayer.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/tabs.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/tabs-exp.webp",
+    link: "https://store.steampowered.com/app/508440/Totally_Accurate_Battle_Simulator/",
+    store: "steam",
+    tags: [
+      { name: "Simulator", rank: 7 },
+    ]
+  },
+  {
+    name: "Life is Strange",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-logo.webp",
+    description: "Life is Strange is an episodic adventure game that allows the player to rewind time and affect the past, present and future.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-exp.webp",
+    link: "https://store.steampowered.com/app/1265920/Life_is_Strange_Remastered/",
+    store: "steam",
+    tags: [
+      { name: "Story", rank: 2 },
+    ]
+  },
+  {
+    name: "What Remains of Edith Finch",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/what-remains-of-edith-finch-logo.webp",
+    description: "What Remains of Edith Finch is a collection of strange tales about a family in Washington state. As Edith, you'll explore the colossal Finch house, searching for stories as she explores her family history and tries to figure out why she's the last one in her family left alive.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/what-remains-of-edith-finch.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/what-remains-of-edith-finch-exp.webp",
+    link: "https://store.steampowered.com/app/501300/What_Remains_of_Edith_Finch/",
+    store: "steam",
+    tags: [
+      { name: "Story", rank: 3 },
+    ]
+  },
+  {
+    name: "Pacific Drive",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/pacific-drive-logo.webp",
+    description: "Face the supernatural dangers of the Olympic Exclusion Zone with a car as your only lifeline in this driving survival adventure! Scavenge resources, load up your trusty station wagon, and drive like hell to make it through alive.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/pacific-drive.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/pacific-drive-exp.webp",
+    link: "https://store.steampowered.com/app/1458140/Pacific_Drive/",
+    store: "steam",
+    tags: [
+      { name: "Story", rank: 13 },
+    ]
+  },
+  {
+    name: "Resident Evil Village",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/resident-evil-8-logo.webp",
+    description: "Ethan Winters is attacked and dragged to a remote, snowbound village, where he must fight 7 powerful members of a monster family and their mutated creatures to save his daughter.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/resident-evil-8.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/resident-evil-8-exp.webp",
+    link: "https://store.steampowered.com/app/1196590/Resident_Evil_Village/",
+    store: "steam",
+    tags: [
+      { name: "Story", rank: 15 },
+    ]
+  },
+  {
+    name: "Life is Strange 2",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-2-logo.webp",
+    description: "After a tragic incident, brothers Sean and Daniel Diaz run away from home. Fearing the police, and dealing with Daniel's newly manifested telekinetic power the boys decide to travel to their father's hometown of Puerto Lobos in Mexico for safety.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-2.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-2-exp.webp",
+    link: "https://store.steampowered.com/bundle/16140/Life_is_Strange_2_Complete_Season/",
+    store: "steam",
+    tags: [
+      { name: "Story", rank: 23 },
     ]
   },
 ];
