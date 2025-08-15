@@ -21,7 +21,7 @@ const games = [
     link: "https://store.steampowered.com/app/952060/Resident_Evil_3/",
     store: "steam",
     tags: [
-      { name: "Survival-horror", rank: 3 },
+      { name: "Survival-horror", rank: 4 },
       { name: "Story", rank: 19 },
     ]
   },
@@ -260,6 +260,7 @@ const games = [
     tags: [
       { name: "Horror", rank: 6 },
       { name: "Story", rank: 12 },
+      { name: "Survival", rank: 4 },
     ]
   },
   {
@@ -754,6 +755,7 @@ const games = [
     store: "steam",
     tags: [
       { name: "Story", rank: 13 },
+      { name: "Survival", rank: 3 },
     ]
   },
   {
@@ -766,18 +768,55 @@ const games = [
     store: "steam",
     tags: [
       { name: "Story", rank: 15 },
+      { name: "Survival-horror", rank: 3 },
     ]
   },
   {
-    name: "Life is Strange 2",
-    logoUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-2-logo.webp",
-    description: "After a tragic incident, brothers Sean and Daniel Diaz run away from home. Fearing the police, and dealing with Daniel's newly manifested telekinetic power the boys decide to travel to their father's hometown of Puerto Lobos in Mexico for safety.",
-    backgroundUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-2.webp",
-    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/life-is-strange-2-exp.webp",
-    link: "https://store.steampowered.com/bundle/16140/Life_is_Strange_2_Complete_Season/",
+    name: "Minecraft",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/minecraft-logo.webp",
+    description: "A sandbox game where everything is made of blocks. Play alone, with friends or even on large servers.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/minecraft.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/minecraft-exp.webp",
+    link: "https://www.minecraft.net",
+    store: "nonstore",
+    tags: [
+      { name: "Survival", rank: 1 },
+    ]
+  },
+  {
+    name: "Terraria",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/terraria-logo.webp",
+    description: "Dig, Fight, Explore, Build: The very world is at your fingertips as you fight for survival, fortune, and glory. Terraria is a unique gaming experience where both the journey and the destination are completely in the player's control.",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/terraria.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/terraria-exp.webp",
+    link: "https://store.steampowered.com/app/105600/Terraria/",
     store: "steam",
     tags: [
-      { name: "Story", rank: 23 },
+      { name: "Survival", rank: 2 },
+    ]
+  },
+  {
+    name: "Scrap Mechanic",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/scrap-mechanic-logo.webp",
+    description: "Enter the creative paradise of Scrap Mechanic! Build fantastic machines, go on adventures with your friends and defend against waves of evil Farmbots in this imaginative multiplayer survival sandbox. With Scrap Mechanic's powerful creation tools you can engineer your own adventures!",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/scrap-mechanic.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/scrap-mechanic-exp.webp",
+    link: "https://store.steampowered.com/app/387990/Scrap_Mechanic/",
+    store: "steam",
+    tags: [
+      { name: "Survival", rank: 5 },
+    ]
+  },
+  {
+    name: "Unturned",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/unturned-logo.webp",
+    description: "Enter the creative paradise of Scrap Mechanic! Build fantastic machines, go on adventures with your friends and defend against waves of evil Farmbots in this imaginative multiplayer survival sandbox. With Scrap Mechanic's powerful creation tools you can engineer your own adventures!",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/unturned.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/unturned-exp.webp",
+    link: "You're a survivor in the zombie infested ruins of society, and must work with your friends and forge alliances to remain among the living.",
+    store: "steam",
+    tags: [
+      { name: "Survival", rank: 6 },
     ]
   },
 ];
