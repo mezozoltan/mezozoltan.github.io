@@ -136,7 +136,7 @@
             top: 100%;
             margin: 50px 0 0 0;
             box-sizing: border-box;
-            overflow: scroll;
+            overflow: hidden;
             scrollbar-width: none;
         }
 
@@ -337,6 +337,11 @@
 
 
     <script>
+
+    window.addEventListener('scroll', () => {
+        const reachedPoint = window.scrollY >= 1000;
+        document.getElementById('list').style.overflow = reachedPoint ? 'auto' : 'hidden';
+    });
 
     /* ---------- Startup helpers ---------- */
     window.addEventListener('DOMContentLoaded', () => {
@@ -560,5 +565,4 @@
 
     </script>
 </body>
-
 </html>
