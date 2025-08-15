@@ -169,7 +169,7 @@ const games = [
     link: "https://store.epicgames.com/en-US/p/genshin-impact",
     store: "epic",
     tags: [
-      { name: "Action", rank: 11 },
+      { name: "Action", rank: 12 },
       { name: "Story", rank: 28 },
     ]
   },
@@ -182,7 +182,7 @@ const games = [
     link: "https://store.steampowered.com/app/870780/Control_Ultimate_Edition/",
     store: "steam",
     tags: [
-      { name: "Action", rank: 12 },
+      { name: "Action", rank: 11 },
     ]
   },
   {
@@ -813,10 +813,22 @@ const games = [
     description: "Enter the creative paradise of Scrap Mechanic! Build fantastic machines, go on adventures with your friends and defend against waves of evil Farmbots in this imaginative multiplayer survival sandbox. With Scrap Mechanic's powerful creation tools you can engineer your own adventures!",
     backgroundUrl: "https://mezozoltan.github.io/Game-Images/unturned.webp",
     expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/unturned-exp.webp",
-    link: "You're a survivor in the zombie infested ruins of society, and must work with your friends and forge alliances to remain among the living.",
+    link: "https://store.steampowered.com/app/304930/Unturned/",
     store: "steam",
     tags: [
       { name: "Survival", rank: 6 },
+    ]
+  },
+  {
+    name: "PickCrafter",
+    logoUrl: "https://mezozoltan.github.io/Game-Images/pickcrafter-logo.webp",
+    description: "Break blocks, forge equipment, and collect powerful Pickaxes. Prestige to legendary tiers with the new Ascension Skill Tree. Discover biomes and battle epic bosses. Make meaningful choices and invent complex builds in this addictive endless adventure!",
+    backgroundUrl: "https://mezozoltan.github.io/Game-Images/pickcrafter.webp",
+    expandedBackgroundUrl: "https://mezozoltan.github.io/Game-Images/pickcrafter-exp.webp",
+    link: "https://store.steampowered.com/app/734750/PickCrafter/",
+    store: "steam",
+    tags: [
+      { name: "Clicker", rank: 1 },
     ]
   },
 ];
