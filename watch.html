@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./pictures/design/social favicons/youtube.png">
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/iVyVVGw.png">
+    <title>Unus Annus - Youtube</title>
+    <style>
+        body {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 16px;
+            margin: 0px;
+            padding: 0px;
+            background-color: #0F0F0F;
+            overflow-x: hidden;
+        }
+
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #202020fc;
+            height: 56px;
+            padding: 0 16px 0 16px;
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+        }
+ 
+        #sidebar {
+            top: 56px;
+            width: 240px;
+            height: calc(100vh - 56px);
+            background-color: #202020;
+            position: fixed;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            translate: 0px;
+            translate: -240px;
+            z-index: 4;
+            transition: translate 0.2s ease-out;
+        }
+        
+        #sidebar:hover {
+            overflow-y: auto;
+        }
+
+        #content {
+            position: absolute;
+            top: 56px;
+            left: 0px;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .square-button {
+            position: fixed;
+            width: 24px;
+            height: 24px;
+            background-color: transparent;
+            border: none;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 0px;
+            margin-top: 8px;
+            z-index: 3;
+        }
+
+        #notification-button {
+            position: fixed;
+            right: 85px;
+            top: 0px;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+        }
+
+        #notification-settings-button {
+            right: 13px;
+            top: 5px;
+            position: absolute;
+        }
+
+        .ripple {
+            position: fixed;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.4s linear;
+            background-color: #696969;
+            transform: scale(0.9);
+            opacity: 80;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .ripple-panel {
+            position: fixed;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.4s linear;
+            background-color: #ffffff49;
+            transform: scale(0.9);
+            opacity: 80;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        /* Ripple animation */
+        @keyframes ripple-animation {
+            0% {
+                opacity: 100;
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+
+        #logo {
+            z-index: 2;
+            position: fixed;
+            width: 80px;
+            margin-left: 72px;
+            border: none;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 0px;
+            background-color: transparent;
+        }
+
+        .search-bar {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            transform: translateX(-49px);
+        }
+
+        ::placeholder {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            color: #828282;
+            opacity: 1;
+        }
+
+        .search-input {
+            width: 576px;
+            height: 32px;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: inherit;
+            color: #E2E2E2;
+            padding: 13px;
+            background-color: #121212;
+            border-radius: 2px;
+            border: 1px solid #313131;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        @media (max-width: 1050px) {
+            .search-input {
+                width: 538px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .search-input {
+                width: 481px;
+            }
+        }
+
+        @media (max-width: 950px) {
+            .search-input {
+                width: 460px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .search-input {
+                width: 393px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .search-input {
+                width: 361px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .search-input {
+                width: 331px;
+            }
+        }
+
+        @media (max-width: 770px) {
+            .search-input {
+                width: 305px;
+            }
+        }
+
+        @media (max-width: 750px) {
+            .search-input {
+                width: 276px;
+            }
+        }
+
+        @media (max-width: 710px) {
+            .search-input {
+                width: 239px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .search-input {
+                width: 212px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .search-bar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 840px) {
+            #subscribe-button {
+                display: none !important;
+            }
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #1C62B9;
+        }
+
+        #search-button {
+            justify-content: center;
+            display: flex;
+            height: 32px;
+            width: 64px;
+            align-items: center;
+            padding: 1px 4px 1px 4px;
+            border: 1px solid #313131;
+            background-color: #313131;
+            border-radius: 2px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            cursor: pointer;
+        }
+
+        .search-icon{
+            fill: #6F6F6F;
+            height: 20px;
+            width: 20px;
+        }
+
+        .search-icon:hover{
+            fill: #989898;
+        }
+        #profile-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            position: fixed;
+            height: 32px;
+            width: 32px;
+            margin: 12px 31px 0 0px;
+            float: right;
+            border: none;
+            background-color: transparent;
+        }
+
+        .profile-picture {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .profile-picture:active {
+            border: 1px solid #3EA6FF;
+        }
+
+        .panel {
+            z-index: 4;
+            position: fixed;
+            display: none;
+            background-color: #202020;
+            border: 1px solid #383838;
+            border-top: none;
+        }
+        
+        #profile-panel {
+            height: 720px;
+            width: 298px;
+            top: 46px;
+            right: 16px;
+        }
+        
+        #panel-profile-picture {
+            margin: 16px 0 0 16px;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        #panel-name-text {
+            margin-left: 71px;
+            margin-top: -40px;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        #panel-email-text {
+            margin-left: 71px;
+            margin-top: 4px;
+            font-size: 14px;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            color: #ffffff; 
+        }
+
+        #panel-google-account-link {
+            position: relative;
+            top: 12px;
+            text-decoration: none;
+            margin-left: 71px;
+            font-size: 14px;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            color: #3EA6FF; 
+        }
+
+        .panel-button {
+            cursor: pointer;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            height: 40px;
+            width: 298px;
+            border: none;
+            background-color: transparent;
+            padding: 11px;
+            color: #ffffff;
+            font-size: 14px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .panel-button:hover {
+            background-color: #373737;
+        }
+
+        .panel-button:active {
+            background-color: #4f4f4f;
+        }
+
+        .panel-button-top {
+            margin-top: 8px;
+        }
+
+        .panel-button-bottom {
+            margin-bottom: 8px;
+        }
+
+        #notification-panel {
+            height: 643px;
+            width: 480px;
+            top: 46px;
+            right: 84px;
+        }
+
+        #notification-text {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            color: #E2E2E2;
+            margin: 15px 0 15px 16px;
+        }
+
+        #notification-tag {
+            font-size: 13px;
+            position: fixed;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 10px 8px 9px 7px;
+            background-color: #575757e3;
+            color: #ffffff;
+            z-index: 3;
+            border-radius: 2px;
+            right: 60px;
+            top: 64px;
+            pointer-events: none;
+        }
+
+        #yt-app-tag {
+            font-size: 13px;
+            position: fixed;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 10px 8px 9px 7px;
+            background-color: #575757e3;
+            color: #ffffff;
+            z-index: 3;
+            border-radius: 2px;
+            right: 100px;
+            top: 64px;
+            pointer-events: none;
+        }
+
+        #upload-tag {
+            font-size: 13px;
+            position: fixed;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 10px 8px 9px 8px;
+            background-color: #575757e3;
+            color: #ffffff;
+            z-index: 3;
+            border-radius: 2px;
+            right: 172px;
+            top: 64px;
+            pointer-events: none;
+        }
+
+        #search-tag {
+            font-size: 13px;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 10px 8px 9px 8px;
+            background-color: #575757e3;
+            color: #ffffff;
+            z-index: 3;
+            border-radius: 2px;
+            top: 64px;
+            transform: translateX(239px);
+            pointer-events: none;
+        }
+
+        #channel-name-tag {
+            font-size: 13px;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 10px 8px 9px 8px;
+            background-color: #575757e3;
+            color: #ffffff;
+            z-index: 3;
+            border-radius: 2px;
+            top: 64px;
+            transform: translateX(253px);
+            pointer-events: none;
+            margin-top: -81px;
+        }
+
+        .notification-video {
+            background-color: #202020;
+            width: 480px;
+            padding: 16px 26px 28px 16px;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .notification-video:hover {
+            background-color: #373737;
+        }
+
+        #notification-profile-picture {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+        }
+
+        .notification-video-index {
+            height: 48px;
+            width: 86px;
+            left: 330px;
+            position: absolute;
+        }
+
+        .notification-video-text {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            color: #ffffff;
+            margin: 0 28px 15px 16px;
+            text-align: left;
+            text-overflow: hidden;
+            max-width: 235px;
+            
+        }
+
+        .notification-video-settings-button {
+            display: none;
+            overflow: hidden;
+            background-color: transparent;
+            border: none;
+            left: 432px;
+            margin-top: -76px;
+            padding: 0;
+            height: 24px;
+            width: 24px;
+            position: absolute;
+        }
+
+        #notification-video-one:hover + #video-one-button {
+            display: block;
+        }
+
+        #notification-video-two:hover + #video-two-button {
+            display: block;
+        }
+        
+        #notification-video-three:hover + #video-three-button {
+            display: block;
+        }
+
+        #notification-video-four:hover + #video-four-button {
+            display: block;
+        }
+
+        #notification-video-five:hover + #video-five-button {
+            display: block;
+        }
+
+        #notification-video-six:hover + #video-six-button {
+            display: block;
+        }
+
+        #notification-video-seven:hover + #video-seven-button {
+            display: block;
+        }
+
+        #notification-video-eight:hover + #video-eight-button {
+            display: block;
+        }
+
+        #notification-video-nine:hover + #video-nine-button {
+            display: block;
+        }
+
+        #notification-video-ten:hover + #video-ten-button {
+            display: block;
+        }
+
+        #notification-video-eleven:hover + #video-eleven-button {
+            display: block;
+        }
+
+        #notification-video-twelve:hover + #video-twelve-button {
+            display: block;
+        }
+
+        .notification-video-list {
+            height: 593px;
+            overflow-y: hidden; 
+            overflow-x: hidden;
+            position: relative;
+            scrollbar-width: thin;
+        }
+
+        .notification-video-list:hover {
+            overflow-y: scroll;
+        }
+
+        .notification-video-date {
+            color: #AAAAAA;
+            font-size: 12px;
+            position: absolute;
+            left: 80px;
+            margin-top: 50px;
+            font-family: 'Roboto', 'Noto', sans-serif;
+        }
+
+        #yt-apps-button {
+            position: fixed;
+            right: 132px;
+            top: 0px;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+        }
+
+        #yt-apps-panel {
+            top: 48px;
+            right: 0px;
+            width: 216px;
+            height: 250px;
+            border-right: none;
+            z-index: 5;
+        }
+
+        .yt-app {
+            height: 40px;
+            width: 216px;
+            color: #ffffff;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0px;
+            text-decoration: none;
+        }
+
+        .yt-app:hover {
+            background-color: #373737;
+        }
+
+        .yt-app:active {
+            background-color: #4F4F4F;
+        }
+
+        .yt-app-top {
+            margin-top: 8px;
+        }
+
+        .yt-app-bottom {
+            margin-bottom: 8px;
+        }
+
+        #upload-button {
+            position: fixed;
+            right: 179px;
+            top: 0px;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+        }
+
+        #upload-panel {
+            top: 48px;
+            right: 39px;
+            width: 178px;
+            height: 96px;
+            z-index: 6;
+        }
+
+        #upload-panel-button {
+            height: 40px;
+            width: 178px;
+            color: #ffffff;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0px;
+            text-decoration: none;
+        }
+
+        #upload-panel-button:hover {
+            background-color: #373737;
+        }
+
+        #upload-panel-button:active {
+            background-color: #4F4F4F;
+        }
+
+        .sidebar-button {
+            height: 40px;
+            width: 240px;
+            color: #ffffff;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0px;
+            text-decoration: none; 
+        }
+
+        .sidebar-button:hover {
+            background-color: #373737;
+        }
+
+        .sidebar-button:active {
+            background-color: #4F4F4F;
+        }
+
+        .sidebar-button-top {
+            margin-top: 8px;
+        }
+
+        .sidebar-button-bottom {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-text {
+            height: 32px;
+            width: 240px;
+            color: #AAAAAA;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            padding: 8px 0 7px 24px;
+            font-weight: 500;
+        }
+
+        #copyright-text {
+            height: 32px;
+            width: 240px;
+            color: #717171;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            padding: 8px 0 7px 24px;
+        }
+
+        #subscribed-profile-picture {
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            margin: 0 26px 0 26px;
+        }
+
+        .sidebar-channel-picture {
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            margin: 0 24px 0 24px;
+        }
+
+        #sidebar-link-group-one {
+            padding: 16px 24px 0 24px;
+            line-height: 17px;
+        }
+
+        .sidebar-link-group {
+            color: #AAAAAA;
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 13px;
+            margin: 0 4px 0 0;
+            padding: 0px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        #sidebar-link-group-two {
+            padding: 12px 24px 0 24px;
+            line-height: 17px;
+            margin-bottom: 16px;
+        }
+
+        .sidebar.hovered #sidebar-link-group-one {
+            padding-right: 7%;
+        }
+
+
+        .anim {
+            opacity: 1;
+            animation: touch 1.3s ease-out;
+        }
+
+        @keyframes touch {
+            0% {
+                opacity: 1;
+            }
+            70% {
+                opacity: 0;
+            }
+            100% { 
+                width: 800px;
+                height: 800px;
+                opacity: 0;
+                margin: -400px;
+            }
+        }
+
+        #sidebar-top {
+            height: 56px;
+            width: 240px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #202020;
+            z-index: 5;
+            translate: 0px;
+            border-bottom: #383838 solid 0.05vw;
+            translate: -240px;
+            transition: translate 0.2s ease-out;
+        }
+
+        #darkness {
+            height: 100vh;
+            width: 100vw;
+            z-index: 4;
+            background-color: #00000062;
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="darkness"></div>
+    <div id="desc"></div>
+
+    <div id="header">
+    <!-- Search Bar -->
+    <form class="search-bar">
+        <input class="search-input" type="search"
+        placeholder="Search" aria-label="Search" />
+        <button type="submit" id="search-button">
+            <svg class="search-icon" viewBox="0 0 24 24" style="pointer-events: none; display: block;">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99
+                -5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" >
+                </path>
+            </svg>
+        </button>
+    </form>
+    <div id="search-tag">
+        Search
+    </div>
+    </div>
+
+    <!-- Menu Button -->
+    <div style="padding: 8px;">
+        <button id="sidebar-toggle-button-original" style="margin-left: 16px;" class="square-button" onclick="createRipple(event)">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="#fff"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Youtube Logo -->
+    <a id="logo" href="website.html" alt="YouTube Homepage" title="YouTube Home">
+        <svg viewBox="0 0 200 60" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+            <path fill="#FF0000" d="M63,14.87c-0.72-2.7-2.85-4.83-5.56-5.56C52.54,8,32.88,8,32.88,8S13.23,8,8.32,9.31
+                c-2.7,0.72-4.83,2.85-5.56,5.56C1.45,19.77,1.45,30,1.45,30s0,10.23,1.31,15.13c0.72,2.7,2.85,4.83,5.56,5.56
+                C13.23,52,32.88,52,32.88,52s19.66,0,24.56-1.31c2.7-0.72,4.83-2.85,5.56-5.56C64.31,40.23,64.31,30,64.31,30
+                S64.31,19.77,63,14.87z">
+            </path>
+            <polygon fill="#FFFFFF" points="26.6,39.43 42.93,30 26.6,20.57"></polygon>
+            <path fill="#fff" d="M92.69,48.03c-1.24-0.84-2.13-2.14-2.65-3.91c-0.52-1.77-0.79-4.12-0.79-7.06v-4
+                c0-2.97,0.3-5.35,0.9-7.15c0.6-1.8,1.54-3.11,2.81-3.93c1.27-0.82,2.94-1.24,5.01-1.24c2.04,0,3.67,0.42,4.9,1.26
+                c1.23,0.84,2.13,2.15,2.7,3.93c0.57,1.78,0.85,4.16,0.85,7.12v4c0,2.94-0.28,5.3-0.83,7.08c-0.55,1.78-1.45,3.09-2.7,3.91
+                c-1.24,0.82-2.93,1.24-5.06,1.24C95.65,49.29,93.93,48.87,92.69,48.03z M99.66,43.71c0.34-0.9,0.52-2.37,0.52-4.4v-8.59
+                c0-1.98-0.17-3.42-0.52-4.34c-0.34-0.91-0.95-1.37-1.82-1.37c-0.84,0-1.43,0.46-1.78,1.37c-0.34,0.91-0.52,2.36-0.52,4.34v8.59
+                c0,2.04,0.16,3.51,0.49,4.4c0.33,0.9,0.93,1.35,1.8,1.35C98.71,45.06,99.31,44.61,99.66,43.71z">
+            </path>
+            <path fill="#fff" d="M188.16,37.13v1.39c0,1.77,0.05,3.09,0.16,3.98c0.1,0.88,0.32,1.53,0.65,1.93
+                c0.33,0.4,0.84,0.61,1.53,0.61c0.93,0,1.57-0.36,1.91-1.08c0.34-0.72,0.53-1.92,0.56-3.6l5.35,0.31
+                c0.03,0.24,0.04,0.57,0.04,0.99c0,2.55-0.7,4.45-2.09,5.71c-1.39,1.26-3.36,1.89-5.91,1.89c-3.06,0-5.2-0.96-6.43-2.88
+                c-1.23-1.92-1.84-4.88-1.84-8.9v-4.81c0-4.14,0.64-7.15,1.91-9.06c1.27-1.9,3.45-2.85,6.54-2.85c2.13,0,3.76,0.39,4.9,1.17
+                c1.14,0.78,1.94,1.99,2.41,3.64c0.46,1.65,0.7,3.93,0.7,6.83v4.72H188.16z M188.95,25.53c-0.31,0.39-0.52,1.03-0.63,1.91
+                c-0.11,0.88-0.16,2.23-0.16,4.02v1.98h4.54v-1.98c0-1.77-0.06-3.11-0.18-4.02c-0.12-0.91-0.34-1.56-0.65-1.93
+                c-0.31-0.37-0.8-0.56-1.46-0.56C189.75,24.94,189.26,25.14,188.95,25.53z">
+            </path>
+            <path fill="#fff" d="M77.59,36.61l-7.06-25.49h6.16l2.47,11.55c0.63,2.85,1.09,5.27,1.39,7.28h0.18
+                c0.21-1.44,0.67-3.85,1.39-7.24l2.56-11.6h6.16L83.7,36.61v12.23h-6.11V36.61z">
+            </path>
+            <path fill="#fff" d="M126.45,21.28v27.55h-4.85l-0.54-3.37h-0.13c-1.32,2.55-3.3,3.82-5.93,3.82c-1.83,0-3.18-0.6-4.05-1.8
+                c-0.87-1.2-1.3-3.07-1.3-5.62V21.28h6.2v20.23c0,1.23,0.13,2.11,0.4,2.63c0.27,0.52,0.72,0.79,1.35,0.79
+                c0.54,0,1.06-0.16,1.55-0.49c0.49-0.33,0.86-0.75,1.1-1.26V21.28H126.45z">
+            </path>
+            <path fill="#fff" d="M158.27,21.28v27.55h-4.85l-0.54-3.37h-0.13c-1.32,2.55-3.3,3.82-5.93,3.82c-1.83,0-3.18-0.6-4.05-1.8
+                c-0.87-1.2-1.3-3.07-1.3-5.62V21.28h6.2v20.23c0,1.23,0.13,2.11,0.4,2.63c0.27,0.52,0.72,0.79,1.35,0.79
+                c0.54,0,1.06-0.16,1.55-0.49c0.49-0.33,0.86-0.75,1.1-1.26V21.28H158.27z">
+            </path>
+            <path fill="#fff" d="M143.31,16.11h-6.16v32.72h-6.07V16.11h-6.16v-4.99h18.38V16.11z"></path>
+            <path fill="#fff" d="M178.8,25.69c-0.38-1.74-0.98-3-1.82-3.78c-0.84-0.78-1.99-1.17-3.46-1.17c-1.14,0-2.2,0.32-3.19,0.97
+                c-0.99,0.64-1.75,1.49-2.29,2.54h-0.05l0-14.52h-5.98v39.11h5.12l0.63-2.61h0.13c0.48,0.93,1.2,1.66,2.16,2.2
+                c0.96,0.54,2.02,0.81,3.19,0.81c2.1,0,3.64-0.97,4.63-2.9c0.99-1.93,1.48-4.95,1.48-9.06v-4.36
+                C179.36,29.84,179.17,27.43,178.8,25.69z M173.11,36.93c0,2.01-0.08,3.58-0.25,4.72c-0.16,1.14-0.44,1.95-0.83,2.43
+                c-0.39,0.48-0.91,0.72-1.57,0.72c-0.51,0-0.98-0.12-1.42-0.36c-0.43-0.24-0.79-0.6-1.06-1.08V27.71
+                c0.21-0.75,0.57-1.36,1.08-1.84c0.51-0.48,1.06-0.72,1.66-0.72c0.63,0,1.12,0.25,1.46,0.74c0.34,0.49,0.58,1.33,0.72,2.49
+                c0.13,1.17,0.2,2.83,0.2,4.99V36.93z">
+            </path>
+        </svg>
+    </a>
+
+    <!-- Profile Picture -->
+    <button id="profile-button">
+        <img class="profile-picture" src="../YT Csatorna/Icons;Stuff/Ch5 S4.png" onerror="this.src='https://i.imgur.com/ZWj4b3i.png'" alt="Profile Picture">
+    </button>
+
+    <!-- Profile Panel -->
+    <div class="panel" id="profile-panel">
+        <img id="panel-profile-picture" src="../YT Csatorna/Icons;Stuff/Ch5 S4.png" onerror="this.src='https://i.imgur.com/ZWj4b3i.png'" alt="Profile Picture">
+        <div id="panel-name-text">mezozoltan</div>
+        <div id="panel-email-text">mezeizoltanpeter@gmail.com</div>
+        <a id="panel-google-account-link" href="https://myaccount.google.com">Manage your Google Account</a>
+        <!-------------> <div style="padding: 1px 299px 0 0; background-color: #383838; margin-top: 30px;"></div>
+        <button class="panel-button panel-button-top"> 
+            <svg viewBox="0 0 512 512" style="pointer-events: none; display: block; width: 100%; height: 100%; transform: translateX(-79px);">
+                <path fill-rule="evenodd" fill="#858585" d="M57 0h398a57 57 0 0 1 57 57v398a57 57 0 0 1-57 57H57a57 57 0 0 1-57-57V57A57 57 0 0 1 57 0Zm199.5 85a85.5 85.5 0 1 1-85.5 85.5A85.5 85.5 0 0 1 256.5 
+                    85ZM427 427s.117-9.1 0-27c-.439-43.2-63.992-81.6-171-90-111.611 8.038-170.559 49.508-171 90-.011 17.884 0 27 0 27h342Z"/>
+            </svg>
+            <div style="transform: translateX(-148px);">Your channel</div>
+        </button>
+        <button class="panel-button"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 
+                    16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 
+                    3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+            </svg>
+            <div style="transform: translateX(22px);">Purchases and memberships</div>
+        </button>
+        <button class="panel-button"> 
+            <svg viewBox="8 0.5 24 24" fill="#858585" style="pointer-events: none; display: block; width: 26px; height: 26px; transform: translateX(8px);" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 17.256 3.238 C 13.352 3.238 10.183 6.405 10.183 10.31 C 10.183 14.215 13.352 17.382 17.256 17.382 C 21.161 17.382 24.328 14.215 24.328 10.31 
+                C 24.328 6.405 21.161 3.238 17.256 3.238 Z M 15.488 13.493 L 15.488 7.127 L 20.438 10.31 L 15.488 13.493 Z" style="pointer-events: auto;"/>
+                <path d="M 24.354 11.258 C 24.394 10.958 24.414 10.648 24.414 10.318 C 24.414 9.998 24.394 9.678 24.344 9.378 
+                L 26.374 7.798 C 26.554 7.658 26.604 7.388 26.494 7.188 L 24.574 3.868 C 24.454 3.648 24.204 3.578 23.984 3.648 L 21.594 4.608 C 21.094 4.228 20.564 
+                3.908 19.974 3.668 L 19.614 1.128 C 19.574 0.888 19.374 0.718 19.134 0.718 L 15.294 0.718 C 15.054 0.718 14.864 0.888 14.824 1.128 L 14.464 3.668 C 
+                13.874 3.908 13.334 4.238 12.844 4.608 L 10.454 3.648 C 10.234 3.568 9.984 3.648 9.864 3.868 L 7.954 7.188 C 7.834 7.398 7.874 7.658 8.074 7.798 L 
+                10.104 9.378 C 10.054 9.678 10.014 10.008 10.014 10.318 C 10.014 10.628 10.034 10.958 10.084 11.258 L 8.054 12.838 C 7.874 12.978 7.824 13.248 7.934 
+                13.448 L 9.854 16.768 C 9.974 16.988 10.224 17.058 10.444 16.988 L 12.834 16.028 C 13.334 16.408 13.864 16.728 14.454 16.968 L 14.814 19.508 C 14.864 
+                19.748 15.054 19.918 15.294 19.918 L 19.134 19.918 C 19.374 19.918 19.574 19.748 19.604 19.508 L 19.964 16.968 C 20.554 16.728 21.094 16.408 21.584 
+                16.028 L 23.974 16.988 C 24.194 17.068 24.444 16.988 24.564 16.768 L 26.484 13.448 C 26.604 13.228 26.554 12.978 26.364 12.838 L 24.354 11.258 Z M 
+                17.214 13.918 C 15.234 13.918 13.614 12.298 13.614 10.318 C 13.614 8.338 15.234 6.718 17.214 6.718 C 19.194 6.718 20.814 8.338 20.814 10.318 C 20.814 
+                12.298 19.194 13.918 17.214 13.918 Z"/>
+              </svg>
+            <div style="transform: translateX(23px);">YouTube Studio</div>
+        </button>
+        <button class="panel-button"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 2c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 
+                3-3zm6 12H8v-1.5c0-1.99 4-3 6-3s6 1.01 6 3V16z"/>
+            </svg>
+            <div style="transform: translateX(23px);">Switch account</div>
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(126px);">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </button>
+        <button class="panel-button panel-button-bottom"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 
+                2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+            </svg>
+            <div style=" transform: translateX(23px);">Sign out</div>
+        </button>
+        <!-------------> <div style="padding: 1px 299px 0 0; background-color: #383838;"></div>
+        <button class="panel-button panel-button-top"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 
+                8.69zM12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6z"/>
+            </svg>
+            <div style="transform: translateX(23px);">Appearance: Dark</div>
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(112px);">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </button>
+        <button class="panel-button"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 
+                10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+            </svg>
+            <div style="transform: translateX(22px);">Language: English</div>
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(108px);">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </button>
+        <button class="panel-button"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 
+                3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 
+                0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 
+                8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 
+                0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 
+                1.31.26 2s-.1 1.36-.26 2h-3.38z"/>
+            </svg>
+            <div style="transform: translateX(22px);">Location: Hungary</div>
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(108px);">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </button>
+        <button class="panel-button"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 26px; height: 26px; transform: translateX(5px);">
+                <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 
+                l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 
+                h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 
+                C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 
+                c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 
+                c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z 
+                M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            </svg>
+            <div style=" transform: translateX(21px);">Settings</div>
+        </button>
+        <button class="panel-button"> 
+            <svg viewBox="-1 2 16 20" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#858585" d="M 15 5 L 15 11.09 C 15 16.14 11.59 20.85 7 22 C 2.41 20.85 -1 16.14 -1 11.09 L -1 5 L 7 2 Z M 7 5.863 C 3.611 5.863 0.863 8.611 0.863 12 C 0.863 15.389 3.611 
+                18.137 7 18.137 C 10.389 18.137 13.137 15.389 13.137 12 C 13.137 8.611 10.389 5.863 7 5.863 Z" transform="matrix(1, 0, 0, 1, -8.881784197001252e-16, 0)"/>
+                <path fill="#858585" d="M 11.878 12 C 11.878 13.178 11.46 14.258 10.765 15.101 C 9.711 14.333 8.409 13.874 7 
+                13.874 C 5.591 13.874 4.289 14.333 3.235 15.101 C 2.54 14.258 2.122 13.178 2.122 12 C 2.122 9.307 4.307 7.122 7 7.122 C 9.693 7.122 11.878 9.307 11.878 12 Z M 
+                4.754 10.343 C 4.754 11.582 5.762 12.589 7 12.589 C 8.238 12.589 9.246 11.582 9.246 10.343 C 9.246 9.103 8.238 8.096 7 8.096 C 5.762 8.096 4.754 9.103 4.754 10.343 Z" 
+                style="fill-rule: nonzero; paint-order: stroke;" transform="matrix(1, 0, 0, 1, -8.881784197001252e-16, 0)"/>
+              </svg>
+            <div style=" transform: translateX(21px);">Your data in YouTube</div>
+        </button>
+        <button class="panel-button"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 
+                15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+            </svg>
+            <div style="transform: translateX(22px);">Help</div>
+        </button>
+        <button class="panel-button"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 9h-2V5h2v6zm0 4h-2v-2h2v2z"/>
+            </svg>
+            <div style="transform: translateX(23px);">Send feedback</div>
+        </button>
+        <button class="panel-button panel-button-bottom"> 
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(6px);">
+                <path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 
+                7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z"/>
+            </svg>
+            <div style="transform: translateX(22px);">Keyboard shortcuts</div>
+        </button>
+        <!-------------> <div style="padding: 1px 299px 0 0; background-color: #383838;"></div>
+        <button class="panel-button panel-button-top panel-button-bottom" id="restricted-mode"> 
+            <div style="transform: translateX(5px);" id="restricted-mode-text">Restricted Mode: Off</div>
+            <svg fill="#858585" viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 24px; height: 24px; transform: translateX(118px);">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Notification panel -->
+    <div class="panel" id="notification-panel">
+        <div id="notification-text">Notifications</div>
+        <button class="square-button" id="notification-settings-button" onclick="createRipplePanel(event)">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <path fill="#fff" d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 
+                l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 
+                h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 
+                C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 
+                c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 
+                c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z 
+                M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            </svg>
+        </button>
+        <!-------------> <div style="padding: 1px 0 0 0; background-color: #383838;"></div>
+        <div class="notification-video-list">
+            <button style="padding: 16px 26px 16px 16px;" class="notification-video" id="notification-video-one">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus is live: Goodbye.
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/Goodbye.png" onerror="this.src='https://i.imgur.com/IXYSovc.png'" alt="Video Index">
+                <div style="margin-top: 30px;" class="notification-video-date-1 notification-video-date"></div>
+                <button style="margin-top: -69px;" id="video-one-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-two">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: The Unus Annus Annual Sleepover
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/Sleepover.png" onerror="this.src='https://i.imgur.com/YWoMt50.png'" alt="Video Index">
+                <div class="notification-video-date-2 notification-video-date"></div>
+                <button id="video-two-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-three">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: 7 Minutes in Heaven | 7 Minutes in Hell
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/HeavenHell.png" onerror="this.src='https://i.imgur.com/Jr5JRzj.png'" alt="Video Index" id="restricted-1">
+                <div class="notification-video-date-3 notification-video-date"></div>
+                <button id="video-three-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-four">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: Everything's Legal If You're Dead
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/LegalDead.png" onerror="this.src='https://i.imgur.com/luAEdm4.png'" alt="Video Index" id="restricted-2">
+                <div class="notification-video-date-4 notification-video-date"></div>
+                <button id="video-four-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-five">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: Saying Goodbye to All Our Guests
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/GoodbyeGuests.png" onerror="this.src='https://i.imgur.com/XV9O88o.png'" alt="Video Index">
+                <div class="notification-video-date-5 notification-video-date"></div>
+                <button id="video-five-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-six">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: God's Fitness Test
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/GodsFitness.png" onerror="this.src='https://i.imgur.com/bfprEoF.png'" alt="Video Index">
+                <div class="notification-video-date-6 notification-video-date"></div>
+                <button id="video-six-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-seven">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: The 1st Annual Unus Annus Roast
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/Roast.png" onerror="this.src='https://i.imgur.com/91AisGs.png'" alt="Video Index">
+                <div class="notification-video-date-7 notification-video-date"></div>
+                <button id="video-seven-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-eight">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: Who's Cutting Onions in Here???
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/OnionCutting.png" onerror="this.src='https://i.imgur.com/WHAJb6T.png'" alt="Video Index">
+                <div class="notification-video-date-8 notification-video-date"></div>
+                <button id="video-eight-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-nine">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: All Our Video Ideas That Never Happened
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/IdeasNeverHappened.png" onerror="this.src='https://i.imgur.com/Fkn7zAK.png'" alt="Video Index">
+                <div class="notification-video-date-9 notification-video-date"></div>
+                <button id="video-nine-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-ten">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: Recreating Every Single Unus Annus Video
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/RecreatingVideos.png" onerror="this.src='https://i.imgur.com/7sxp0QP.png'" alt="Video Index">
+                <div class="notification-video-date-10 notification-video-date"></div>
+                <button id="video-ten-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-eleven">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: Being Brutally Honest with Each Other
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/BrutallyHonest.png" onerror="this.src='https://i.imgur.com/ZdHbhRU.png'" alt="Video Index">
+                <div class="notification-video-date-11 notification-video-date"></div>
+                <button id="video-eleven-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+            <button class="notification-video" id="notification-video-twelve">
+                <img id="notification-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+                <div class="notification-video-text">
+                    Unus Annus uploaded: The Unus Annus Last Supper
+                </div>
+                <img class="notification-video-index" src="pictures/notifications/LastSupper.png" onerror="this.src='https://i.imgur.com/KNs29ie.png'" alt="Video Index">
+                <div class="notification-video-date-12 notification-video-date"></div>
+                <button id="video-twelve-button" class="notification-video-settings-button" onclick="createRipplePanel(event)">
+                    <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                        <path fill="#fff" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                </button>
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Notification button -->
+    <button style="padding: 8px;" class="square-button" id="notification-button" onclick="createRipple(event)">
+        <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+            <path fill="#fff" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+        </svg>
+    </button>
+
+    <!-- Youtube Apps button-->
+    <button style="padding: 8px;" class="square-button" id="yt-apps-button" onclick="createRipple(event)">
+        <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+            <path fill="#fff" d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/>
+        </svg>
+    </button>
+
+    <!-- Upload button-->
+    <button style="padding: 8px;" class="square-button" id="upload-button" onclick="createRipple(event)">
+        <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+            <path fill="#fff" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"/>
+        </svg>
+    </button>
+
+    <div id="notification-tag">
+        Notifications
+    </div>
+
+    <div id="yt-app-tag">
+        YouTube apps
+    </div>
+
+    <div id="upload-tag">
+        Create
+    </div>
+
+    <div class="panel" id="yt-apps-panel">
+        <a class="yt-app yt-app-top yt-app-bottom" href="https://tv.youtube.com/welcome">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 16px 0 16px;">
+                <path fill="#F00" d="M23.8,17.1c0,0.9-0.7,1.6-1.6,1.6H1.9c-0.9,0-1.6-0.7-1.6-1.6V4.8c0-0.9,0.7-1.6,1.6-1.6 h20.3c0.9,0,1.6,0.7,1.6,1.6V17.1z"/>
+                <path fill="#F00" d="M17.3,20.8H6.7c-0.3,0-0.5-0.2-0.5-0.5v0c0-0.3,0.2-0.5,0.5-0.5h10.7 c0.3,0,0.5,0.2,0.5,0.5v0C17.9,20.6,17.6,20.8,17.3,20.8z"/>
+                <polygon fill="#FFFFFF" points="9.6,14.4 15.7,10.9 9.6,7.5">
+                <path d="M12,2L4,5v6.09c0,5.05,3.41,9.76,8,10.91c4.59-1.15,8-5.86,8-10.91V5L12,2z M13,16h-2v-2h2V16z M13,12h-2V7h2V12z"/>
+            </svg>
+            YouTube TV
+        </a>
+        <!-------------> <div style="padding: 1px 0 0 0; background-color: #383838;"></div>
+        <a class="yt-app yt-app-top" href="https://music.youtube.com/">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 16px 0 16px;">
+                <g fill-rule="nonzero" fill="none">
+                <circle fill="red" cx="12" cy="12" r="12"/>
+                <path d="M12 6.278A5.728 5.728 0 0 1 17.722 12 5.728 5.728 0 0 1 12 17.722 5.728 5.728 0 0 1 6.278 12 5.728 5.728 0 0 1 12 6.278zm0-.55A6.272 6.272 0 0 
+                0 5.727 12 6.272 6.272 0 0 0 12 18.273 6.272 6.272 0 0 0 18.273 12 6.272 6.272 0 0 0 12 5.727z" fill="#FFF"/>
+                <path fill="#FFF" d="M9.818 15.136l5.318-3.272-5.318-3z"/></g>
+            </svg>
+            YouTube Music
+        </a>
+        <a class="yt-app yt-app-bottom" href="https://youtubekids.com">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 16px 0 16px;">
+                <path fill="#282828" d="M16.38 10.69c-.04-.02-.09-.03-.13-.05-1.35-.65-5.69-2.07-6.55-2.32-.15-.05-.59-.18-.76-.05-.16.12-.06.63-.04.78.07.5.7 
+                5.03.77 5.5l.01.09c.06.4.16 1.21.39 1.33.23.12.82-.27 1.13-.52 0 0 3.68-2.6 4.31-3.05l.82-.58.1-.07c.19-.12.42-.26.41-.57 
+                0-.31-.27-.42-.46-.49zm-5.88 4.44c-.23-.83-.89-5.11-.95-6.12.97.12 5.1 1.58 6.34 2.25-.24.17-4.76 3.52-5.39 3.87z"/>
+                <path fill="#F00" d="M23.29 13.89c-.04-1.1-.36-5.29-.43-5.8-.13-.93-.37-1.8-.69-2.6-.21-.52-.52-1.05-1.31-1.61-1.01-.72-1.82-.84-2.85-.84-.72 
+                0-1.21.04-1.53.06-2.59.18-4.95.46-7.22.86-2.01.36-3.53.76-4.92 1.3-1.04.41-1.85.92-2.48 1.57C.83 7.88.56 8.85.79 10.01c.3 1.58.8 5.23.82 5.43.11.97.28 2.1.67 
+                3.2.44 1.21 1.25 1.94 2.48 2.23.79.19 1.61.13 2.68-.12 1.44-.34 2.87-.67 4.33-.93 2.47-.45 4.78-.58 5.78-.64.45-.03 1.52-.12 1.61-.13.24-.03.56-.09.88-.15.82-.18 
+                1.43-.61 1.99-1.15.27-.26.61-.69.82-1.11.44-.93.47-1.91.44-2.75zm-6.85-2.14c-.04.02-.07.04-.1.07-.28.19-.55.38-.82.58-.63.45-4.31 3.05-4.31 
+                3.05-.31.25-.9.63-1.13.52-.23-.12-.33-.93-.39-1.33l-.01-.09c-.08-.48-.7-5.01-.77-5.5-.03-.15-.13-.66.03-.78.17-.13.61 0 .76.05.87.25 5.2 1.67 6.56 
+                2.32.04.02.08.04.13.05.19.08.46.18.47.5 0 .3-.23.45-.42.56z"/>
+                <path fill="#FFF" d="M15.9 11.26c-.25.17-4.77 3.52-5.4 3.87-.23-.83-.89-5.11-.95-6.12.98.12 5.1 1.58 6.35 2.25z"/>
+                <path fill="#FF8983" d="M.76 9.91c.23-1.61 1.07-2.16 1.67-2.6 1.01-.75 1.88-1.16 3.3-1.55C9.75 4.65 12.16 4.33 16.3 4.2c1.11-.03 2.89-.12 3.92.37.83.39 
+                1.5.86 2.3 1.92-.1-.34-.21-.67-.34-.99-.21-.52-.52-1.05-1.31-1.61-1.01-.72-1.82-.84-2.85-.84-.66 0-1.12.03-1.44.06-.03 0-.06.01-.09.01-2.59.18-4.95.46-7.22.86-2.01.36-3.53.76-4.92 
+                1.3-1.05.39-1.86.9-2.49 1.55-.09.1-.18.19-.26.29C.81 8.03.59 8.9.76 9.91z"/>
+                <path fill="#282828" d="M23.98 13.48c-.02-.58-.27-4.7-.37-5.37-.17-1.1-.37-2.16-.85-3.14-.48-.97-.91-1.52-1.63-1.92-1.33-.73-2.15-.84-4.09-.77-.96.04-6.6.72-7.83.93-2.06.35-3.7.78-5.17 
+                1.36-1.01.4-1.82.89-2.46 1.49C.23 7.32-.24 8.7.11 10.38c.26 1.29.69 4.81.75 5.26.13.98.31 2.13.73 3.26.57 1.54 1.63 2.44 3.25 2.75.29.06.58.08.89.08.47.01 1.26-.12 
+                1.88-.27.32-.08 1.34-.32 3.28-.73 3.2-.68 7.04-.88 7.77-.94.11-.01 1-.07 1.34-.13 1.35-.25 2.17-1.03 2.96-1.85.47-.49.9-1.36.99-2.25.07-.76.05-1.43.03-2.08zm-1.14 
+                3.15c-.21.43-.55.85-.82 1.11-.57.54-1.17.96-1.99 1.15-.31.07-.63.13-.88.15-.09.01-1.17.1-1.61.13-1 
+                .06-3.31.18-5.78.64-1.46.27-2.89.6-4.33.93-1.06.25-1.88.31-2.68.12-1.23-.3-2.04-1.03-2.48-2.23-.4-1.09-.56-2.23-.67-3.2-.02-.2-.51-3.85-.82-5.43-.22-1.15.05-2.12 1.08-3.17.63-.65 
+                1.44-1.16 2.48-1.57 1.39-.54 2.91-.94 4.92-1.3 2.27-.4 4.63-.69 7.22-.86.32-.02.81-.06 1.53-.06 1.03 0 1.85.12 2.85.84.79.57 1.1 1.09 1.31 1.61.32.8.56 1.67.69 2.6.07.51.39 4.7.43 
+                5.8.03.84 0 1.82-.45 2.74z"/>
+            </svg>
+            YouTube Kids
+        </a>
+        <!-------------> <div style="padding: 1px 0 0 0; background-color: #383838;"></div>
+        <a class="yt-app yt-app-top" href="https://www.youtube.com/channel/UCkRfArvrzheW2E7b6SVT7vQ">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 16px 0 16px;">
+                <radialGradient cx="5.4%" cy="7.11%" r="107.93%" fx="5.4%" fy="7.11%" gradientTransform="matrix(.70653 0 0 1 .016 0)">
+                <stop offset="0%" stop-color="#FFF"/>
+                <stop offset="100%" stop-color="#FFF" stop-opacity="0"/></radialGradient>
+                <g fill="none" fill-rule="evenodd"><path d="M1 1h21.77v22H1z"/>
+                <g fill-rule="nonzero" class="style-scope yt-icon"><path fill="#F00" d="M22.54 
+                7.6s-.2-1.5-.86-2.17c-.83-.87-1.75-.88-2.18-.93-3.04-.22-7.6-.2-7.6-.2s-4.56-.02-7.6.2c-.43.05-1.35.06-2.18.93-.65.67-.86 2.18-.86 2.18S1.04 9.4 1 11.18v1.66c.04 
+                1.78.26 3.55.26 3.55s.2 1.5.86 2.18c.83.87 1.9.84 2.4.94 1.7.15 7.2.2 7.38.2 0 0 4.57 0 7.6-.22.43-.05 1.35-.06 
+                2.18-.93.65-.67.86-2.18.86-2.18s.22-1.77.24-3.55v-1.66c-.02-1.78-.24-3.55-.24-3.55z"/>
+                <path fill="#FAFAFA" d="M9.68 8.9v6.18l5.84-3.1"/>
+                <path fill="#000" fill-opacity=".12" d="M9.68 8.88l5.13 3.48.73-.38"/>
+                <path fill="#FFF" fill-opacity=".2" d="M22.54 7.6s-.2-1.5-.86-2.17c-.83-.87-1.75-.88-2.18-.93-3.04-.22-7.6-.2-7.6-.2s-4.56-.02-7.6.2c-.43.05-1.35.06-2.18.93-.65.67-.86 
+                2.18-.86 2.18S1.04 9.4 1 11.18v.1c.04-1.76.26-3.54.26-3.54s.2-1.5.86-2.17c.83-.88 1.75-.88 2.18-.93 3.04-.22 7.6-.2 7.6-.2s4.56-.02 7.6.2c.43.05 1.35.05 2.18.93.65.66.86 
+                2.17.86 2.17s.22 1.78.23 3.55v-.1c0-1.8-.23-3.56-.23-3.56z"/>
+                <path fill="#3E2723" fill-opacity=".2" d="M22.54 16.4s-.2 1.5-.86 
+                2.17c-.83.87-1.75.88-2.18.93-3.04.22-7.6.2-7.6.2s-4.56.02-7.6-.2c-.43-.05-1.35-.06-2.18-.93-.65-.67-.86-2.18-.86-2.18s-.22-1.8-.26-3.57v-.1c.04 1.76.26 3.54.26 3.54s.2 1.5.86 
+                2.17c.83.88 1.75.88 2.18.93 3.04.22 7.6.2 7.6.2s4.56.02 7.6-.2c.43-.05 1.35-.05 2.18-.93.65-.66.86-2.17.86-2.17s.22-1.78.23-3.55v.1c0 1.8-.23 3.56-.23 3.56z"/>
+                <path fill="#FFF" fill-opacity=".2" d="M9.68 15.08v.1l5.84-3.08v-.12"/>
+                <path fill="#3E2723" fill-opacity=".2" d="M9.68 8.9v-.13l5.84 3.1v.1"/>
+                <path fill="url(#youtube_round-a)" fill-opacity=".1" d="M21.54 3.4s-.2-1.5-.86-2.18C19.85.35 18.93.35 18.5.3 15.46.07 10.9.1 10.9.1S6.34.07 3.3.3c-.43.05-1.35.05-2.18.92C.47 1.9.26 3.4.26 
+                3.4S.04 5.17 0 6.95V8.6c.04 1.8.26 3.56.26 3.56s.2 1.52.86 2.18c.83.87 1.9.85 2.4.94 1.7.16 7.2.2 7.38.2 0 0 4.57 0 7.6-.2.43-.06 1.35-.07 
+                2.18-.94.65-.66.86-2.18.86-2.18s.22-1.77.24-3.55V6.97c-.02-1.78-.24-3.55-.24-3.55z" transform="translate(1 4.208)"/></g></g>
+            </svg>
+            Creator Academy
+        </a>
+        <a class="yt-app yt-app-bottom" href="https://artists.youtube/">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 16px 0 16px;">
+                <radialGradient cx="5.4%" cy="7.11%" r="107.93%" fx="5.4%" fy="7.11%" gradientTransform="matrix(.70653 0 0 1 .016 0)">
+                <stop offset="0%" stop-color="#FFF"/>
+                <stop offset="100%" stop-color="#FFF" stop-opacity="0"/></radialGradient>
+                <g fill="none" fill-rule="evenodd"><path d="M1 1h21.77v22H1z"/>
+                <g fill-rule="nonzero" class="style-scope yt-icon"><path fill="#F00" d="M22.54 
+                7.6s-.2-1.5-.86-2.17c-.83-.87-1.75-.88-2.18-.93-3.04-.22-7.6-.2-7.6-.2s-4.56-.02-7.6.2c-.43.05-1.35.06-2.18.93-.65.67-.86 2.18-.86 2.18S1.04 9.4 1 11.18v1.66c.04 
+                1.78.26 3.55.26 3.55s.2 1.5.86 2.18c.83.87 1.9.84 2.4.94 1.7.15 7.2.2 7.38.2 0 0 4.57 0 7.6-.22.43-.05 1.35-.06 
+                2.18-.93.65-.67.86-2.18.86-2.18s.22-1.77.24-3.55v-1.66c-.02-1.78-.24-3.55-.24-3.55z"/>
+                <path fill="#FAFAFA" d="M9.68 8.9v6.18l5.84-3.1"/>
+                <path fill="#000" fill-opacity=".12" d="M9.68 8.88l5.13 3.48.73-.38"/>
+                <path fill="#FFF" fill-opacity=".2" d="M22.54 7.6s-.2-1.5-.86-2.17c-.83-.87-1.75-.88-2.18-.93-3.04-.22-7.6-.2-7.6-.2s-4.56-.02-7.6.2c-.43.05-1.35.06-2.18.93-.65.67-.86 
+                2.18-.86 2.18S1.04 9.4 1 11.18v.1c.04-1.76.26-3.54.26-3.54s.2-1.5.86-2.17c.83-.88 1.75-.88 2.18-.93 3.04-.22 7.6-.2 7.6-.2s4.56-.02 7.6.2c.43.05 1.35.05 2.18.93.65.66.86 
+                2.17.86 2.17s.22 1.78.23 3.55v-.1c0-1.8-.23-3.56-.23-3.56z"/>
+                <path fill="#3E2723" fill-opacity=".2" d="M22.54 16.4s-.2 1.5-.86 
+                2.17c-.83.87-1.75.88-2.18.93-3.04.22-7.6.2-7.6.2s-4.56.02-7.6-.2c-.43-.05-1.35-.06-2.18-.93-.65-.67-.86-2.18-.86-2.18s-.22-1.8-.26-3.57v-.1c.04 1.76.26 3.54.26 3.54s.2 1.5.86 
+                2.17c.83.88 1.75.88 2.18.93 3.04.22 7.6.2 7.6.2s4.56.02 7.6-.2c.43-.05 1.35-.05 2.18-.93.65-.66.86-2.17.86-2.17s.22-1.78.23-3.55v.1c0 1.8-.23 3.56-.23 3.56z"/>
+                <path fill="#FFF" fill-opacity=".2" d="M9.68 15.08v.1l5.84-3.08v-.12"/>
+                <path fill="#3E2723" fill-opacity=".2" d="M9.68 8.9v-.13l5.84 3.1v.1"/>
+                <path fill="url(#youtube_round-a)" fill-opacity=".1" d="M21.54 3.4s-.2-1.5-.86-2.18C19.85.35 18.93.35 18.5.3 15.46.07 10.9.1 10.9.1S6.34.07 3.3.3c-.43.05-1.35.05-2.18.92C.47 1.9.26 3.4.26 
+                3.4S.04 5.17 0 6.95V8.6c.04 1.8.26 3.56.26 3.56s.2 1.52.86 2.18c.83.87 1.9.85 2.4.94 1.7.16 7.2.2 7.38.2 0 0 4.57 0 7.6-.2.43-.06 1.35-.07 
+                2.18-.94.65-.66.86-2.18.86-2.18s.22-1.77.24-3.55V6.97c-.02-1.78-.24-3.55-.24-3.55z" transform="translate(1 4.208)"/></g></g>
+            </svg>
+            Creator for Artists
+        </a>
+    </div>
+
+    <div class="panel" id="upload-panel">
+        <a style="margin-top: 8px;" id="upload-panel-button">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 16px 0 16px;">
+                <path d="M19,4H5A2.15,2.15,0,0,0,3,6V18a2.15,2.15,0,0,0,2,2H19a2.15,2.15,0,0,0,2-2V6A2.15,2.15,0,0,0,19,4ZM5,18H19V6H5Z" fill="#6f6f6f" fill-rule="evenodd"/>
+                <path d="M15,12,10,8v8Z" fill="#f80000" fill-rule="evenodd"/>
+            </svg>
+            Upload video
+        </a>
+        <a style="margin-bottom: 8px;" id="upload-panel-button">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 16px 0 16px;">
+                <path d="M23,12a11,11,0,0,1-3.22,7.78l-1.41-1.41a9,9,0,0,0,0-12.73l1.41-1.41A11,11,0,0,1,23,12ZM5.64,5.64,4.22,4.22a11,11,0,0,0,0,15.56l1.41-1.41a9,9,0,0,1,0-12.73ZM16.95,7.05,15.54,8.46a5,5,0,0,1,0,7.07l1.41,1.41a7,7,0,0,0,0-9.9Zm-9.9,0a7,7,0,0,0,0,9.9l1.41-1.41a5,5,0,0,1,0-7.07Z" fill="#6f6f6f" fill-rule="evenodd"/>
+                <path d="M12,9a3,3,0,1,1-3,3,3,3,0,0,1,3-3" fill="#f80000" fill-rule="evenodd"/>
+            </svg>
+            Go live
+        </a>
+    </div>
+
+
+    <div id="dates" style="display: none;">
+        <span>2020/11/12</span>
+        <span>2020/11/13</span>
+        <span>2020/11/14</span>
+        <span>2020/11/15</span>
+        <span>2020/11/16</span>
+        <span>2020/11/17</span>
+        <span>2020/11/18</span>
+        <span>2020/11/19</span>
+        <span>2020/11/20</span>
+        <span>2020/11/21</span>
+        <span>2020/11/22</span>
+        <span>2020/11/23</span>
+    </div>
+
+    <div id="sidebar-top">
+        <button style="margin: 16px 0 0 24px;" id="sidebar-toggle-button" class="square-button" onclick="createRipple(event)">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="#fff"></path>
+            </svg>
+        </button>
+        <a id="logo" style="margin: 16px 0 0 72px;" href="website.html" alt="YouTube Homepage" title="YouTube Home">
+            <svg viewBox="0 0 200 60" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                <path fill="#FF0000" d="M63,14.87c-0.72-2.7-2.85-4.83-5.56-5.56C52.54,8,32.88,8,32.88,8S13.23,8,8.32,9.31
+                    c-2.7,0.72-4.83,2.85-5.56,5.56C1.45,19.77,1.45,30,1.45,30s0,10.23,1.31,15.13c0.72,2.7,2.85,4.83,5.56,5.56
+                    C13.23,52,32.88,52,32.88,52s19.66,0,24.56-1.31c2.7-0.72,4.83-2.85,5.56-5.56C64.31,40.23,64.31,30,64.31,30
+                    S64.31,19.77,63,14.87z">
+                </path>
+                <polygon fill="#FFFFFF" points="26.6,39.43 42.93,30 26.6,20.57"></polygon>
+                <path fill="#fff" d="M92.69,48.03c-1.24-0.84-2.13-2.14-2.65-3.91c-0.52-1.77-0.79-4.12-0.79-7.06v-4
+                    c0-2.97,0.3-5.35,0.9-7.15c0.6-1.8,1.54-3.11,2.81-3.93c1.27-0.82,2.94-1.24,5.01-1.24c2.04,0,3.67,0.42,4.9,1.26
+                    c1.23,0.84,2.13,2.15,2.7,3.93c0.57,1.78,0.85,4.16,0.85,7.12v4c0,2.94-0.28,5.3-0.83,7.08c-0.55,1.78-1.45,3.09-2.7,3.91
+                    c-1.24,0.82-2.93,1.24-5.06,1.24C95.65,49.29,93.93,48.87,92.69,48.03z M99.66,43.71c0.34-0.9,0.52-2.37,0.52-4.4v-8.59
+                    c0-1.98-0.17-3.42-0.52-4.34c-0.34-0.91-0.95-1.37-1.82-1.37c-0.84,0-1.43,0.46-1.78,1.37c-0.34,0.91-0.52,2.36-0.52,4.34v8.59
+                    c0,2.04,0.16,3.51,0.49,4.4c0.33,0.9,0.93,1.35,1.8,1.35C98.71,45.06,99.31,44.61,99.66,43.71z">
+                </path>
+                <path fill="#fff" d="M188.16,37.13v1.39c0,1.77,0.05,3.09,0.16,3.98c0.1,0.88,0.32,1.53,0.65,1.93
+                    c0.33,0.4,0.84,0.61,1.53,0.61c0.93,0,1.57-0.36,1.91-1.08c0.34-0.72,0.53-1.92,0.56-3.6l5.35,0.31
+                    c0.03,0.24,0.04,0.57,0.04,0.99c0,2.55-0.7,4.45-2.09,5.71c-1.39,1.26-3.36,1.89-5.91,1.89c-3.06,0-5.2-0.96-6.43-2.88
+                    c-1.23-1.92-1.84-4.88-1.84-8.9v-4.81c0-4.14,0.64-7.15,1.91-9.06c1.27-1.9,3.45-2.85,6.54-2.85c2.13,0,3.76,0.39,4.9,1.17
+                    c1.14,0.78,1.94,1.99,2.41,3.64c0.46,1.65,0.7,3.93,0.7,6.83v4.72H188.16z M188.95,25.53c-0.31,0.39-0.52,1.03-0.63,1.91
+                    c-0.11,0.88-0.16,2.23-0.16,4.02v1.98h4.54v-1.98c0-1.77-0.06-3.11-0.18-4.02c-0.12-0.91-0.34-1.56-0.65-1.93
+                    c-0.31-0.37-0.8-0.56-1.46-0.56C189.75,24.94,189.26,25.14,188.95,25.53z">
+                </path>
+                <path fill="#fff" d="M77.59,36.61l-7.06-25.49h6.16l2.47,11.55c0.63,2.85,1.09,5.27,1.39,7.28h0.18
+                    c0.21-1.44,0.67-3.85,1.39-7.24l2.56-11.6h6.16L83.7,36.61v12.23h-6.11V36.61z">
+                </path>
+                <path fill="#fff" d="M126.45,21.28v27.55h-4.85l-0.54-3.37h-0.13c-1.32,2.55-3.3,3.82-5.93,3.82c-1.83,0-3.18-0.6-4.05-1.8
+                    c-0.87-1.2-1.3-3.07-1.3-5.62V21.28h6.2v20.23c0,1.23,0.13,2.11,0.4,2.63c0.27,0.52,0.72,0.79,1.35,0.79
+                    c0.54,0,1.06-0.16,1.55-0.49c0.49-0.33,0.86-0.75,1.1-1.26V21.28H126.45z">
+                </path>
+                <path fill="#fff" d="M158.27,21.28v27.55h-4.85l-0.54-3.37h-0.13c-1.32,2.55-3.3,3.82-5.93,3.82c-1.83,0-3.18-0.6-4.05-1.8
+                    c-0.87-1.2-1.3-3.07-1.3-5.62V21.28h6.2v20.23c0,1.23,0.13,2.11,0.4,2.63c0.27,0.52,0.72,0.79,1.35,0.79
+                    c0.54,0,1.06-0.16,1.55-0.49c0.49-0.33,0.86-0.75,1.1-1.26V21.28H158.27z">
+                </path>
+                <path fill="#fff" d="M143.31,16.11h-6.16v32.72h-6.07V16.11h-6.16v-4.99h18.38V16.11z"></path>
+                <path fill="#fff" d="M178.8,25.69c-0.38-1.74-0.98-3-1.82-3.78c-0.84-0.78-1.99-1.17-3.46-1.17c-1.14,0-2.2,0.32-3.19,0.97
+                    c-0.99,0.64-1.75,1.49-2.29,2.54h-0.05l0-14.52h-5.98v39.11h5.12l0.63-2.61h0.13c0.48,0.93,1.2,1.66,2.16,2.2
+                    c0.96,0.54,2.02,0.81,3.19,0.81c2.1,0,3.64-0.97,4.63-2.9c0.99-1.93,1.48-4.95,1.48-9.06v-4.36
+                    C179.36,29.84,179.17,27.43,178.8,25.69z M173.11,36.93c0,2.01-0.08,3.58-0.25,4.72c-0.16,1.14-0.44,1.95-0.83,2.43
+                    c-0.39,0.48-0.91,0.72-1.57,0.72c-0.51,0-0.98-0.12-1.42-0.36c-0.43-0.24-0.79-0.6-1.06-1.08V27.71
+                    c0.21-0.75,0.57-1.36,1.08-1.84c0.51-0.48,1.06-0.72,1.66-0.72c0.63,0,1.12,0.25,1.46,0.74c0.34,0.49,0.58,1.33,0.72,2.49
+                    c0.13,1.17,0.2,2.83,0.2,4.99V36.93z">
+                </path>
+            </svg>
+        </a>
+    </div>
+    <div id="sidebar">
+        <a class="sidebar-button sidebar-button-top" href="website.html">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8"/>
+            </svg>
+            Home
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/feed/trending">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" d="M17.53 11.2c-.23-.3-.5-.56-.76-.82-.65-.6-1.4-1.03-2.03-1.66-1.46-1.46-1.78-3.87-.85-5.72-.9.23-1.75.75-2.45 1.32C8.9 6.4 7.9 10.07 9.1 13.22c.04.1.08.2.08.33 0 
+                .22-.15.42-.35.5-.22.1-.46.04-.64-.12-.06-.05-.1-.1-.15-.17-1.1-1.43-1.28-3.48-.53-5.12C5.87 10 5 12.3 5.12 14.47c.04.5.1 1 .27 1.5.14.6.4 1.2.72 1.73 1.04 1.73 2.87 2.97 
+                4.84 3.22 2.1.27 4.35-.12 5.96-1.6 1.8-1.66 2.45-4.3 1.5-6.6l-.13-.26c-.2-.45-.47-.87-.78-1.25zm-3.1 6.3c-.28.24-.73.5-1.08.6-1.1.38-2.2-.16-2.88-.82 
+                1.2-.28 1.9-1.16 2.1-2.05.17-.8-.14-1.46-.27-2.23-.12-.74-.1-1.37.2-2.06.15.38.35.76.58 1.06.76 1 1.95 1.44 2.2 2.8.04.14.06.28.06.43.03.82-.32 1.72-.92 2.26z"/>
+            </svg>
+            Trending
+        </a>
+        <a class="sidebar-button sidebar-button-bottom" href="https://www.youtube.com/feed/subscriptions">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" d="M18.7 8.7H5.3V7h13.4v1.7zm-1.7-5H7v1.6h10V3.7zm3.3 8.3v6.7c0 1-.7 1.6-1.6 1.6H5.3c-1 0-1.6-.7-1.6-1.6V12c0-1 .7-1.7 1.6-1.7h13.4c1 0 1.6.8 1.6 1.7zm-5 3.3l-5-2.7V18l5-2.7z"/>
+            </svg>
+            Subscriptions
+        </a>
+        <!-------------> <div style="height: 0.05vw; background-color: #383838;"></div>
+        <a class="sidebar-button sidebar-button-top" href="https://www.youtube.com/feed/library">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="none" d="M0 0h24v24H0z"/>
+                <path fill="#909090" d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+            Library
+        </a>
+        <a class="sidebar-button sidebar-button-bottom" href="https://www.youtube.com/feed/history">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" d="M11.9 3.75c-4.55 0-8.23 3.7-8.23 8.25H.92l3.57 3.57.04.13 3.7-3.7H5.5c0-3.54 2.87-6.42 6.42-6.42 3.54 0 6.4 2.88 6.4 6.42s-2.86 6.42-6.4 6.42c-1.78 
+                0-3.38-.73-4.54-1.9l-1.3 1.3c1.5 1.5 3.55 2.43 5.83 2.43 4.58 0 8.28-3.7 8.28-8.25 0-4.56-3.7-8.25-8.26-8.25zM11 8.33v4.6l3.92 2.3.66-1.1-3.2-1.9v-3.9H11z"/>
+            </svg>
+            History
+        </a>
+        <!-------------> <div style="height: 0.05vw; background-color: #383838;"></div>
+        <div class="sidebar-text">
+            SUBSCRIPTIONS
+        </div>
+        <a class="sidebar-button sidebar-button-bottom" href="website.html">
+            <img id="subscribed-profile-picture" src="pictures/design/Logo.png" onerror="this.src='https://i.imgur.com/tnpnSI8.png'" alt="Profile Picture">
+            Unus Annus
+        </a>
+        <!-------------> <div style="height: 0.05vw; background-color: #383838;"></div>
+        <div class="sidebar-text">
+            BEST OF YOUTUBE
+        </div>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/Music.png" onerror="this.src='https://i.imgur.com/8uTdwRT.png'" alt="Music">
+            Music
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UCEgdi0XIXXZ-qJOFPf4JSKw">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/Sports.png" onerror="this.src='https://i.imgur.com/I9sR5Bo.png'" alt="Music">
+            Sports
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/gaming">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/Gaming.png" onerror="this.src='https://i.imgur.com/UMlv33I.png'" alt="Music">
+            Gaming
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UClgRkhTL3_hImCAmdLfDE4g">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/MoviesAndShows.png" onerror="this.src='https://i.imgur.com/Mu6f3p0.png'" alt="Music">
+            Movies & Shows
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UCYfdidRxbB8Qhf0Nx7ioOYw">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/News.png" onerror="this.src='https://i.imgur.com/jkl7fIM.png'" alt="Music">
+            News
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UC4R8DWoMoI7CAwX8_LjQHig">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/Live.png" onerror="this.src='https://i.imgur.com/E7fL2Pr.png'" alt="Music">
+            Live
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UCrpQ4p1Ql_hG8rKXIKM1MOQ">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/FashionAndBeauty.png" onerror="this.src='https://i.imgur.com/5n72ydf.png'" alt="Music">
+            Fashion & Beauty
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UCtFRv9O2AHqOZjjynzrv-xg">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/Learning.png" onerror="this.src='https://i.imgur.com/uoR9fUQ.png'" alt="Music">
+            Learning
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/channel/UCBR8-60-B28hp2BmDPdntcQ">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/Spotlight.png" onerror="this.src='https://i.imgur.com/sfIPr8K.png'" alt="Music">
+            Spotlight
+        </a>
+        <a class="sidebar-button sidebar-button-bottom" href="https://www.youtube.com/channel/UCzuqhhs6NWbgTzMuM09WKDQ">
+            <img class="sidebar-channel-picture" src="pictures/sidebar/icons/360Video.png" onerror="this.src='https://i.imgur.com/du1eVAe.png'" alt="Music">
+            360° Video
+        </a>
+        <!-------------> <div style="height: 0.05vw; background-color: #383838;"></div>
+        <div class="sidebar-text">
+            MORE FROM YOUTUBE
+        </div>
+        <a class="sidebar-button sidebar-button-bottom" href="https://www.youtube.com/premium">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" fill-rule="nonzero" d="M21.78 8s-.2-1.37-.8-1.97c-.75-.8-1.6-.8-2-.85C16.2 4.98 12 5 12 5s-4.18-.02-6.97.18c-.4.05-1.24.05-2 .85-.6.6-.8 1.97-.8 1.97s-.2 
+                1.63-.23 3.23v1.7c.03 1.6.23 3.2.23 3.2s.2 1.4.8 2c.76.8 1.75.76 2.2.85 1.57.15 6.6.18 6.77.18 0 0 4.2 0 7-.2.38-.04 
+                1.23-.04 2-.84.6-.6.8-1.98.8-1.98s.2-1.6.2-3.22v-1.7c-.02-1.6-.22-3.22-.22-3.22zm-11.8 7V9.16l5.35 3.03L9.97 15z"/>
+            </svg>
+            YouTube Premium
+        </a>
+        <!-------------> <div style="height: 0.05vw; background-color: #383838;"></div>
+        <a class="sidebar-button sidebar-button-top" href="https://www.youtube.com/account">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.1-1.65c.2-.15.25-.42.13-.64l-2-3.46c-.12-.22-.4-.3-.6-.22l-2.5 1c-.52-.4-1.08-.73-1.7-.98l-.37-2.65c-.06-.24-.27-.42-.5-.42h-4c-.27 
+                0-.48.18-.5.42l-.4 2.65c-.6.25-1.17.6-1.7.98l-2.48-1c-.23-.1-.5 0-.6.22l-2 3.46c-.14.22-.08.5.1.64l2.12 1.65c-.04.32-.07.65-.07.98s.02.66.06.98l-2.1 
+                1.65c-.2.15-.25.42-.13.64l2 3.46c.12.22.4.3.6.22l2.5-1c.52.4 1.08.73 1.7.98l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.6-.25 1.17-.6 
+                1.7-.98l2.48 1c.23.1.5 0 .6-.22l2-3.46c.13-.22.08-.5-.1-.64l-2.12-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+            </svg>
+            Settings
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/reporthistory">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+            </svg>
+            Report history
+        </a>
+        <a class="sidebar-button" href="https://www.youtube.com/reporthistory">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path fill="#909090" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 
+                1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+            </svg>
+            Help
+        </a>
+        <a class="sidebar-button sidebar-button-bottom" href="https://www.youtube.com/reporthistory">
+            <svg viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px; margin: 0 24px 0 24px;">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path fill="#909090" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+            </svg>
+            Send feedback
+        </a>
+        <!-------------> <div style="height: 0.05vw; background-color: #383838;"></div>
+        <div id="sidebar-link-group-one">
+            <a class="sidebar-link-group" href="https://www.youtube.com/about/">About</a>
+            <a class="sidebar-link-group" href="https://www.youtube.com/about/press/">Press</a>
+            <a class="sidebar-link-group" href="https://www.youtube.com/about/copyright/">Copyright</a>
+            <a class="sidebar-link-group" href="https://www.youtube.com/t/contact_us/">Contact us</a>
+            <a class="sidebar-link-group" href="https://www.youtube.com/creators/">Creators</a>
+            <a class="sidebar-link-group" href="https://www.youtube.com/ads/">Advertise</a>
+            <a class="sidebar-link-group" href="https://developers.google.com/youtube/">Developers</a>
+        </div>
+        <div id="sidebar-link-group-two">
+            <a class="sidebar-link-group" href="https://www.youtube.com/t/terms/">Terms</a>
+            <a class="sidebar-link-group" href="https://policies.google.com/privacy?hl=en">Privacy</a>
+            <a class="sidebar-link-group" href="https://www.youtube.com/howyoutubeworks/policies/community-guidelines/">Policy & Safety</a>
+            <a class="sidebar-link-group" href="https://www.youtube.com/howyoutubeworks/">How YouTube Works</a>
+            <a style="display: flex; padding-top: 1px;" class="sidebar-link-group" href="https://www.youtube.com/new">Test new features</a>
+        </div>
+        <div id="copyright-text">
+            © 2020 CTVs Co
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="video-id-display" style="color: #fff;"></div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var searchButton = document.querySelector("#search-button");
+            var searchIcon = searchButton.querySelector(".search-icon");
+
+            searchButton.addEventListener("mouseenter", function() {
+                searchIcon.style.fill = "#989898";
+            });
+
+            searchButton.addEventListener("mouseleave", function() {
+                searchIcon.style.fill = "";
+            });
+        });
+
+////////Date Calculation////////
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var datesDiv = document.getElementById('dates');
+        var dates = datesDiv.getElementsByTagName('span');
+
+        // Today's date
+        var today = new Date();
+
+        // Function to calculate the difference in years between two dates
+        function calculateYearsDifference(date) {
+            var parts = date.split('/');
+            var targetDate = new Date(parts[0], parts[1] - 1, parts[2]); // Months are zero-based
+            var diff = today.getFullYear() - targetDate.getFullYear();
+            return diff;
+        }
+
+        // Loop through each date and calculate the difference in years
+        for (var i = 0; i < dates.length; i++) {
+            var dateStr = dates[i].textContent;
+            var yearsDifference = calculateYearsDifference(dateStr);
+
+            // Find all elements with the class "notification-video-date-X" where X is the date's index + 1
+            var className = "notification-video-date-" + (i + 1);
+            var elements = document.getElementsByClassName(className);
+
+            // Loop through all elements with this class and update their text content
+            for (var j = 0; j < elements.length; j++) {
+                elements[j].textContent = yearsDifference + " years ago";
+            }
+        }
+    });
+
+////////Date Calculation End////////
+
+////////Ripple Effect Code////////
+    
+        /* Ripple effect funtion */
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const ripple = document.createElement('span');
+            const size = 40;
+            const rect = button.getBoundingClientRect();
+            const xPos = rect.left + (rect.width - size) / 2;
+            const yPos = rect.top + (rect.height - size) / 2;
+    
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${xPos}px`;
+            ripple.style.top = `${yPos}px`;
+    
+            ripple.classList.add('ripple');
+    
+            document.body.appendChild(ripple);
+    
+            ripple.addEventListener('animationend', () => {
+                ripple.remove();
+          });
+        }
+
+        /* Panel ripple effect funtion */
+        function createRipplePanel(event) {
+            const button = event.currentTarget;
+            const ripple = document.createElement('span');
+            const size = 40;
+            const rect = button.getBoundingClientRect();
+            const xPos = rect.left + (rect.width - size) / 2;
+            const yPos = rect.top + (rect.height - size) / 2;
+    
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${xPos}px`;
+            ripple.style.top = `${yPos}px`;
+    
+            ripple.classList.add('ripple-panel');
+    
+            document.body.appendChild(ripple);
+    
+            ripple.addEventListener('animationend', () => {
+                ripple.remove();
+          });
+        }
+
+////////Ripple Effect Code End////////
+
+////////Panel Code////////
+
+    // Function to close all panels except the specified one
+    function closeOtherPanels(exceptPanel) {
+        var panels = document.querySelectorAll('.panel');
+        panels.forEach(function(panel) {
+            if (panel !== exceptPanel) {
+                panel.style.display = 'none';
+            }
+        });
+    }
+
+    // Profile panel toggle code
+    document.getElementById("profile-button").addEventListener("click", function(event) {
+        var panel = document.querySelector('#profile-panel');
+        if (panel.style.display === 'block') {
+            panel.style.display = 'none'; // Close the panel if already open
+        } else {
+            closeOtherPanels(panel); // Close other panels except this one
+            panel.style.display = 'block';
+        }
+
+        // Stop the event from propagating to the document
+        event.stopPropagation();
+    });
+
+    // Notification panel switch
+    document.getElementById("notification-button").addEventListener("click", function(event) {
+        var panel = document.querySelector('#notification-panel');
+        if (panel.style.display === 'block') {
+            panel.style.display = 'none'; // Close the panel if already open
+        } else {
+            closeOtherPanels(panel); // Close other panels except this one
+            panel.style.display = 'block';
+        }
+
+        // Stop the event from propagating to the document
+        event.stopPropagation();
+    });
+
+    // YT Apps panel switch
+    document.getElementById("yt-apps-button").addEventListener("click", function(event) {
+        var panel = document.querySelector('#yt-apps-panel');
+        if (panel.style.display === 'block') {
+            panel.style.display = 'none'; // Close the panel if already open
+        } else {
+            closeOtherPanels(panel); // Close other panels except this one
+            panel.style.display = 'block';
+        }
+
+        // Stop the event from propagating to the document
+        event.stopPropagation();
+    });
+
+    // Upload panel switch
+    document.getElementById("upload-button").addEventListener("click", function(event) {
+        var panel = document.querySelector('#upload-panel');
+        if (panel.style.display === 'block') {
+            panel.style.display = 'none'; // Close the panel if already open
+        } else {
+            closeOtherPanels(panel); // Close other panels except this one
+            panel.style.display = 'block';
+        }
+
+        // Stop the event from propagating to the document
+        event.stopPropagation();
+    });
+
+    // Click event listener on document to close all panels except the one being clicked inside
+    document.addEventListener("click", function(event) {
+        var openPanel = document.querySelector('.panel[style*="display: block;"], .panel[style*="display: flex;"]');
+        if (openPanel && openPanel.contains(event.target)) {
+            event.stopPropagation();
+        } else {
+            closeOtherPanels(null); // Close all panels if click is outside the open panel
+        }
+    });
+
+////////Panel Code End////////
+
+////////Tags////////
+
+        const notificationButton = document.getElementById('notification-button');
+        const notificationTag = document.getElementById('notification-tag');
+        const ytAppsButton = document.getElementById('yt-apps-button');
+        const ytAppTag = document.getElementById('yt-app-tag');
+        const UploadButton = document.getElementById('upload-button');
+        const UploadTag = document.getElementById('upload-tag');
+        const SearchButton = document.getElementById('search-button');
+        const SearchTag = document.getElementById('search-tag');
+
+        notificationButton.addEventListener('mouseenter', () => {
+            notificationTag.style.opacity = '1';
+        });
+
+        notificationButton.addEventListener('mouseleave', () => {
+            notificationTag.style.opacity = '0';
+        });
+
+        ytAppsButton.addEventListener('mouseenter', () => {
+            ytAppTag.style.opacity = '1';
+        });
+
+        ytAppsButton.addEventListener('mouseleave', () => {
+            ytAppTag.style.opacity = '0';
+        });
+
+        UploadButton.addEventListener('mouseenter', () => {
+            UploadTag.style.opacity = '1';
+        });
+
+        UploadButton.addEventListener('mouseleave', () => {
+            UploadTag.style.opacity = '0';
+        });
+
+        SearchButton.addEventListener('mouseenter', () => {
+            SearchTag.style.opacity = '1';
+        });
+
+        SearchButton.addEventListener('mouseleave', () => {
+            SearchTag.style.opacity = '0';
+        });
+
+////////Tags End////////
+
+////////Sidebar Scrollbar Fix////////
+const sidebar = document.getElementById('sidebar');
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var sidebarTextOne = document.getElementById('sidebar-link-group-one');
+            var sidebarTextTwo = document.getElementById('sidebar-link-group-two');
+            
+            function checkSidebarHeight() {
+                if (sidebar.scrollHeight > window.innerHeight) {
+                    sidebar.addEventListener('mouseenter', addPadding);
+                    sidebar.addEventListener('mouseleave', removePadding);
+                } else {
+                    sidebar.removeEventListener('mouseenter', addPadding);
+                    sidebar.removeEventListener('mouseleave', removePadding);
+                }
+            }
+            
+            function addPadding() {
+                sidebarTextOne.style.paddingRight = '7%';
+                sidebarTextTwo.style.paddingRight = '7%';
+            }
+            
+            function removePadding() {
+                sidebarTextOne.style.paddingRight = '';
+                sidebarTextTwo.style.paddingRight = '';
+            }
+            
+            checkSidebarHeight();
+            window.addEventListener('resize', checkSidebarHeight);
+        });
+
+////////Sidebar Scrollbar Fix End////////
+
+////////Video ID////////
+    var videoNumber = null
+    const baseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; 
+
+    function fromBase62(str) {
+      let result = 0;
+      for (let i = 0; i < str.length; i++) {
+        result = result * baseChars.length + baseChars.indexOf(str[i]);
+      }
+      return result;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get("v");
+
+    if (videoId && videoId.length === 11) {
+
+      // find the rightmost "0" that still leaves chars after it
+      let delimiterIndex = -1;
+      for (let i = videoId.length - 2; i >= 0; i--) {
+        if (videoId[i] === "0") {
+          delimiterIndex = i;
+          break;
+        }
+      }
+
+      if (delimiterIndex !== -1) {
+        const actualEncoded = videoId.slice(delimiterIndex + 1);
+        const number = fromBase62(actualEncoded);
+        document.getElementById("video-id-display").innerText = `${number}`;
+        videoNumber = number
+      } else {
+        window.location.replace('videos.html');
+      }
+    } else {
+      window.location.replace('videos.html');
+    }
+
+////////Video ID End////////
+
+////////Sidebar Moving Code////////
+
+    const Darkness = document.getElementById('darkness');
+    const SidebarToggleButton = document.getElementById('sidebar-toggle-button');
+    const SidebarToggleButtonOriginal = document.getElementById('sidebar-toggle-button-original');
+    const sidebartop = document.getElementById('sidebar-top');
+    var SidebarClosed = true;
+
+    SidebarToggleButton.addEventListener('click', () => {
+        if (SidebarClosed) {
+            SidebarClosed = false;
+            sidebar.style.translate = "0";
+            sidebartop.style.translate = "0";
+            Darkness.style.display = "block";
+            document.body.style.overflow = 'hidden';
+        } else {
+            SidebarClosed = true;
+            Darkness.style.display = "none";
+            sidebar.style.translate = "";
+            sidebartop.style.translate = "";
+            document.body.style.overflow = '';
+        }
+    });
+    
+    SidebarToggleButtonOriginal.addEventListener('click', () => {
+        if (SidebarClosed) {
+            SidebarClosed = false;
+            sidebar.style.translate = "0";
+            sidebartop.style.translate = "0";
+            Darkness.style.display = "block";
+            document.body.style.overflow = 'hidden';
+        } else {
+            SidebarClosed = true;
+            Darkness.style.display = "none";
+            sidebar.style.translate = "";
+            sidebartop.style.translate = "";
+            document.body.style.overflow = '';
+        }
+    });
+
+    Darkness.addEventListener('click', () => {
+        SidebarClosed = true;
+        Darkness.style.display = "none";
+        sidebar.style.translate = "";
+        sidebartop.style.translate = "";
+        document.body.style.overflow = '';
+    });
+
+
+////////Sidebar Moving Code End////////
+
+(async () => {
+  const res = await fetch(`${videoNumber}.txt`);
+  if (res.ok) {
+    document.getElementById('desc').textContent = await res.text();
+  } else {
+    document.getElementById('desc').textContent = 'Description not found.';
+  }
+})();
+
+    </script>
+</body>
+</html>
