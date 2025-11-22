@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Game Ranking Editor</title>
+    <link rel="icon" type="image/x-icon" href="gamelist.ico">
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #020617;
+        --bg-elevated: #020617;
+        --panel: #020617;
+        --panel-alt: #020617;
+        --border-subtle: #1e293b;
+        --accent: #6366f1;
+        --accent-soft: rgba(99, 102, 241, 0.14);
+        --accent-strong: rgba(129, 140, 248, 0.25);
+        --text: #e5e7eb;
+        --text-soft: #9ca3af;
+        --danger: #f97373;
+        --danger-soft: rgba(248, 113, 113, 0.18);
+        --radius-lg: 14px;
+        --radius-md: 9px;
+        --radius-pill: 999px;
+        --shadow-lg: 0 18px 45px rgba(15, 23, 42, 0.85);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(
+            circle at top left,
+            rgba(56, 189, 248, 0.15),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(129, 140, 248, 0.2),
+            transparent 60%
+          ),
+          radial-gradient(
+            circle at bottom,
+            rgba(248, 113, 113, 0.16),
+            transparent 55%
+          ),
+          var(--bg);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        padding: 18px;
+      }
+
+      .app {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        backdrop-filter: blur(18px);
+      }
+
+      .app-main {
+        display: grid;
+        grid-template-columns: minmax(0, 2.2fr) minmax(360px, 1.4fr);
+        gap: 14px;
+        height: calc(100vh - 36px);
+      }
+
+      .panel {
+        border-radius: 22px;
+        background: linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(2, 6, 23, 0.96)
+          ),
+          var(--panel);
+        border: 1px solid rgba(148, 163, 184, 0.12);
+        box-shadow: var(--shadow-lg);
+        display: flex;
+        flex-direction: column;
+        padding: 14px 16px;
+        min-height: 0;
+      }
+
+      #right {
+        overflow-y: auto;
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap: 10px;
+      }
+
+      .panel-header h1,
+      .panel-header h2 {
+        margin: 0;
+        font-size: 17px;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .toolbar {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      button {
+        padding: 6px 12px;
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        background: radial-gradient(
+            circle at top left,
+            rgba(148, 163, 184, 0.22),
+            rgba(30, 64, 175, 0.16)
+          ),
+          rgba(15, 23, 42, 0.9);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 12px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          border-color 0.15s ease,
+          background 0.15s ease,
+          transform 0.08s ease,
+          box-shadow 0.15s ease;
+      }
+
+      button.small {
+        padding: 4px 10px;
+        font-size: 11px;
+      }
+
+      button.primary {
+        border-color: rgba(129, 140, 248, 0.8);
+        background: radial-gradient(
+            circle at top left,
+            rgba(129, 140, 248, 0.7),
+            rgba(30, 64, 175, 0.2)
+          ),
+          linear-gradient(135deg, #4f46e5, #0ea5e9);
+        color: #f9fafb;
+        box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.5),
+          0 0 25px rgba(30, 64, 175, 0.55);
+      }
+
+      button.danger {
+        border-color: rgba(248, 113, 113, 0.55);
+        background: radial-gradient(
+            circle at top left,
+            rgba(248, 113, 113, 0.3),
+            rgba(127, 29, 29, 0.33)
+          ),
+          rgba(15, 23, 42, 0.9);
+        color: #fee2e2;
+      }
+
+      button.icon-only {
+        padding: 2px 7px 4px 7px;
+        border-radius: 999px;
+        font-size: 11px;
+      }
+
+      button:hover:not(:disabled) {
+        border-color: rgba(148, 163, 184, 0.9);
+        background: radial-gradient(
+            circle at top left,
+            rgba(148, 163, 184, 0.24),
+            rgba(30, 64, 175, 0.33)
+          ),
+          rgba(15, 23, 42, 0.96);
+        transform: translateY(-0.5px);
+        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.9);
+      }
+
+      button.primary:hover:not(:disabled) {
+        background: radial-gradient(
+            circle at top left,
+            rgba(129, 140, 248, 0.9),
+            rgba(30, 64, 175, 0.5)
+          ),
+          linear-gradient(135deg, #4338ca, #0284c7);
+      }
+
+      button:active:not(:disabled) {
+        transform: translateY(0.5px) scale(0.99);
+        box-shadow: 0 7px 18px rgba(15, 23, 42, 0.9);
+      }
+
+      button:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      /* Left side: columns + trash */
+
+      #left {
+        gap: 8px;
+      }
+
+      .columns-and-trash {
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(230px, 1.4fr);
+        gap: 12px;
+        min-height: 0;
+        height: 100%;
+      }
+
+      #columns {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 10px;
+        padding-right: 4px;
+        overflow: auto;
+        justify-content: center;
+      }
+
+      .column {
+        border-radius: var(--radius-lg);
+        background: radial-gradient(
+            circle at top left,
+            rgba(148, 163, 184, 0.25),
+            rgba(15, 23, 42, 0.85)
+          ),
+          rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.23);
+        padding: 8px 8px 10px;
+        flex: 1 1 260px;
+        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .column-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        gap: 6px;
+      }
+
+      .column-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--text-soft);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-right: 5px;
+      }
+
+      .column-meta {
+        font-size: 11px;
+        color: rgba(209, 213, 219, 0.75);
+        background: rgba(15, 23, 42, 0.8);
+        border-radius: 999px;
+        padding: 2px 7px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+      }
+
+      .tag-remove-btn {
+        border-radius: 999px;
+        border-color: rgba(248, 113, 113, 0.6);
+        background: rgba(127, 29, 29, 0.16);
+        color: #fca5a5;
+        padding: 2px 7px;
+      }
+
+      .tag-remove-btn:hover {
+        background: rgba(127, 29, 29, 0.36);
+      }
+
+      .game-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        overflow-y: auto;
+        min-height: 26px;
+        max-height: 100%;
+      }
+
+      .game-item {
+        background: linear-gradient(
+            140deg,
+            rgba(30, 64, 175, 0.38),
+            rgba(15, 23, 42, 0.94)
+          ),
+          rgba(15, 23, 42, 0.95);
+        border-radius: 10px;
+        padding: 5px 7px;
+        margin-bottom: 5px;
+        border: 1px solid rgba(129, 140, 248, 0.3);
+        font-size: 12px;
+        display: flex;
+        align-items: flex-start;
+        gap: 7px;
+        cursor: grab;
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.8);
+        transition:
+          transform 0.12s ease,
+          box-shadow 0.12s ease,
+          border-color 0.12s ease,
+          background 0.12s ease;
+      }
+
+      .game-item--new {
+        background: linear-gradient(
+            140deg,
+            rgba(34, 197, 94, 0.55),
+            rgba(15, 23, 42, 0.96)
+          ),
+          rgba(15, 23, 42, 0.96);
+        border-color: rgba(34, 197, 94, 0.8);
+      }
+
+      .game-item--edited {
+        background: linear-gradient(
+            140deg,
+            rgba(249, 115, 22, 0.6),
+            rgba(15, 23, 42, 0.96)
+          ),
+          rgba(15, 23, 42, 0.96);
+        border-color: rgba(249, 115, 22, 0.85);
+      }
+
+      .game-item:hover {
+        transform: translateY(-1px);
+        border-color: rgba(129, 140, 248, 0.6);
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.95);
+      }
+
+      .game-item:active {
+        cursor: grabbing;
+        transform: translateY(0) scale(0.995);
+      }
+
+      .rank-badge {
+        min-width: 22px;
+        text-align: right;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: rgba(191, 219, 254, 0.95);
+        font-size: 11px;
+        margin-top: 1px;
+      }
+
+      .game-name {
+        flex: 1;
+        color: #f9fafb;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+      }
+
+      .ghost {
+        opacity: 0.3;
+      }
+
+      /* Trash */
+
+      #trash {
+        border-radius: var(--radius-lg);
+        background: radial-gradient(
+            circle at top,
+            rgba(248, 113, 113, 0.15),
+            rgba(15, 23, 42, 0.98)
+          ),
+          rgba(15, 23, 42, 0.95);
+        border: 1px dashed rgba(248, 113, 113, 0.55);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .trash-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+
+      .trash-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .trash-title span.icon {
+        width: 26px;
+        height: 33px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(248, 113, 113, 0.25);
+        color: #fecaca;
+        border: 1px solid rgba(248, 113, 113, 0.7);
+        font-size: 29px;
+        padding: 0 0 1px 1px;
+        user-select: none;
+      }
+
+      .trash-subtitle {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      #trash-list {
+        flex: 1;
+        border-radius: 10px;
+        border: 1px dashed rgba(248, 113, 113, 0.5);
+        background: rgba(15, 23, 42, 0.7);
+        padding: 6px;
+        overflow-y: auto;
+      }
+
+      .trash-hint {
+        font-size: 11px;
+        color: rgba(248, 250, 252, 0.75);
+        text-align: center;
+        padding: 6px 4px;
+      }
+
+      /* Right side: Add Game + Game Editor */
+
+      #right {
+        gap: 10px;
+      }
+
+      #add-game-form {
+        border-radius: var(--radius-md);
+        background: radial-gradient(
+            circle at top left,
+            rgba(129, 140, 248, 0.25),
+            rgba(15, 23, 42, 0.92)
+          ),
+          rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(129, 140, 248, 0.55);
+        padding: 10px 11px 9px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px 12px;
+        font-size: 12px;
+      }
+
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .form-row.full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: 11px;
+        color: rgba(209, 213, 219, 0.9);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      input[type="text"],
+      input[type="url"],
+      select,
+      textarea {
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text);
+        padding: 5px 7px;
+        font-size: 12px;
+        outline: none;
+        transition:
+          border-color 0.12s ease,
+          box-shadow 0.12s ease,
+          background 0.12s ease;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: rgba(148, 163, 184, 0.85);
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        border-color: rgba(129, 140, 248, 0.85);
+        box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.65);
+        background: rgba(15, 23, 42, 0.96);
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 70px;
+        max-height: 180px;
+      }
+
+      .form-footer {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 4px;
+      }
+
+      .form-hint {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      .pill {
+        border-radius: 999px;
+        padding: 1px 7px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.9);
+        font-size: 11px;
+      }
+
+      .game-editor {
+        border-radius: var(--radius-md);
+        background: radial-gradient(
+            circle at top left,
+            rgba(15, 23, 42, 0.9),
+            rgba(15, 23, 42, 0.98)
+          ),
+          var(--panel-alt);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        padding: 10px 11px 9px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 12px;
+      }
+
+      .editor-select-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      #editor-select {
+        flex: 1;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text);
+        padding: 5px 7px;
+        font-size: 12px;
+      }
+
+      #editor-select:focus {
+        border-color: rgba(129, 140, 248, 0.85);
+        box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.65);
+        background: rgba(15, 23, 42, 0.96);
+      }
+
+      .editor-help {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      .editor-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px 12px;
+      }
+
+      .editor-form-footer {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 4px;
+      }
+
+      .editor-tags-display {
+        font-size: 11px;
+        color: var(--text-soft);
+        border-radius: 8px;
+        background: rgba(15, 23, 42, 0.8);
+        padding: 4px 6px;
+        border: 1px dashed rgba(148, 163, 184, 0.4);
+      }
+
+      /* Editable tags UI in editor */
+
+      .editor-tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 6px;
+      }
+
+      .editor-tag-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.9);
+        font-size: 11px;
+      }
+
+      .editor-tag-remove-btn {
+        border: none;
+        border-radius: 999px;
+        padding: 0 5px;
+        font-size: 11px;
+        line-height: 1.2;
+        cursor: pointer;
+        background: rgba(127, 29, 29, 0.5);
+        color: #fecaca;
+      }
+
+      .editor-tag-remove-btn:hover {
+        background: rgba(127, 29, 29, 0.8);
+      }
+
+      .editor-tag-add-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 4px;
+      }
+
+      .editor-tag-add-row input {
+        flex: 1;
+        font-size: 11px;
+        padding: 3px 6px;
+      }
+
+      .editor-tag-rank-input {
+        width: 42px;
+        padding: 1px 4px;
+        font-size: 11px;
+        border-radius: 6px;
+        border: 1px solid rgba(148, 163, 184, 0.6);
+        background: rgba(15, 23, 42, 0.95);
+        color: var(--text);
+      }
+
+      .editor-tag-rank-input:focus {
+        outline: none;
+        border-color: rgba(129, 140, 248, 0.85);
+        box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.65);
+      }
+
+      @media (max-width: 1100px) {
+        .app-main {
+          grid-template-columns: minmax(0, 1fr);
+          height: auto;
+        }
+
+        #left {
+          min-height: 420px;
+        }
+
+        .columns-and-trash {
+          grid-template-columns: minmax(0, 2.3fr) minmax(260px, 1.2fr);
+        }
+      }
+
+      @media (max-width: 800px) {
+        .columns-and-trash {
+          grid-template-columns: minmax(0, 1fr);
+          grid-template-rows: 1.9fr auto;
+        }
+
+        #add-game-form,
+        .editor-form {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <main class="app-main">
+        <!-- LEFT PANEL: TAG COLUMNS & TRASH -->
+        <section id="left" class="panel">
+          <div class="panel-header">
+            <h1>Game Ranking Editor</h1>
+            <div class="toolbar">
+              <button id="export-btn" class="primary small">
+                Export Updated File
+              </button>
+            </div>
+          </div>
+
+          <div class="columns-and-trash">
+            <div id="columns"></div>
+
+            <div id="trash">
+              <div class="trash-header">
+                <div class="trash-title">
+                  <span class="icon">🗑</span>
+                  <div>
+                    <div style="font-size: 12px; font-weight: 600">
+                      Trash / Remove
+                    </div>
+                    <div class="trash-subtitle">
+                      Drag games here to delete them
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul id="trash-list" class="game-list">
+                <li class="trash-hint">
+                  Nothing here yet. Drop a game to remove it from all tags.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT PANEL: ADD GAME + GAME EDITOR -->
+        <section id="right" class="panel">
+          <div class="panel-header">
+            <h2>Add Game</h2>
+          </div>
+
+          <form id="add-game-form">
+            <div class="form-row full">
+              <label for="new-name">Name</label>
+              <input
+                id="new-name"
+                type="text"
+                placeholder="Game title"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="new-logo">Logo URL</label>
+              <input
+                id="new-logo"
+                type="url"
+                placeholder="https://..."
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="new-store">Store</label>
+              <input
+                id="new-store"
+                type="text"
+                placeholder="steam / epic / nonstore"
+              />
+            </div>
+
+            <div class="form-row full">
+              <label for="new-desc">Description</label>
+              <textarea
+                id="new-desc"
+                placeholder="Short description shown on your site"
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <label for="new-bg">Background URL</label>
+              <input
+                id="new-bg"
+                type="url"
+                placeholder="https://..."
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="new-bg-exp">Expanded Background URL</label>
+              <input
+                id="new-bg-exp"
+                type="url"
+                placeholder="https://..."
+              />
+            </div>
+
+            <div class="form-row full">
+              <label for="new-link">Store / Website Link</label>
+              <input
+                id="new-link"
+                type="url"
+                placeholder="https://store.steampowered.com/..."
+              />
+            </div>
+
+            <div class="form-row full">
+              <label for="new-tags">Tags (optional)</label>
+              <input
+                id="new-tags"
+                type="text"
+                placeholder="Example: Horror, Story"
+                list="tag-list"
+              />
+            </div>
+
+            <div class="form-footer">
+              <div class="form-hint">
+                Leave any fields blank if you prefer to fill them later in
+                code.
+              </div>
+              <button type="submit" class="primary small">
+                + Add Game
+              </button>
+            </div>
+          </form>
+
+          <datalist id="tag-list"></datalist>
+
+          <div class="panel-header" style="margin-top: 8px">
+            <h2>Game Editor</h2>
+            <span class="pill" id="editor-status">No game selected</span>
+          </div>
+
+          <div id="game-editor" class="game-editor">
+            <div class="editor-select-row">
+              <select id="editor-select">
+                <option value="">Select a game…</option>
+              </select>
+              <button type="button" id="editor-load-btn" class="small">
+                Load
+              </button>
+            </div>
+            <div class="editor-help">
+              Double‑click a game in any tag column, or select one above to
+              edit its data.
+            </div>
+
+            <form id="editor-form" class="editor-form">
+              <div class="form-row full">
+                <label for="editor-name">Name</label>
+                <input id="editor-name" type="text" />
+              </div>
+
+              <div class="form-row">
+                <label for="editor-logo">Logo URL</label>
+                <input id="editor-logo" type="url" />
+              </div>
+
+              <div class="form-row">
+                <label for="editor-store">Store</label>
+                <input
+                  id="editor-store"
+                  type="text"
+                  placeholder="steam / epic / nonstore"
+                />
+              </div>
+
+              <div class="form-row full">
+                <label for="editor-desc">Description</label>
+                <textarea id="editor-desc"></textarea>
+              </div>
+
+              <div class="form-row">
+                <label for="editor-bg">Background URL</label>
+                <input id="editor-bg" type="url" />
+              </div>
+
+              <div class="form-row">
+                <label for="editor-bg-exp">Expanded Background URL</label>
+                <input id="editor-bg-exp" type="url" />
+              </div>
+
+              <div class="form-row full">
+                <label for="editor-link">Store / Website Link</label>
+                <input id="editor-link" type="url" />
+              </div>
+
+              <div class="form-row full">
+                <label>Tags &amp; ranks</label>
+                <div id="editor-tags" class="editor-tags-display">
+                  No game selected.
+                </div>
+              </div>
+
+              <div class="editor-form-footer">
+                <div class="form-hint">
+                  Reorder and change tags using the tag columns on the left
+                  or by editing ranks here.
+                </div>
+                <div style="display: flex; gap: 6px">
+                  <button
+                    type="button"
+                    id="editor-reset-btn"
+                    class="small"
+                  >
+                    Reset
+                  </button>
+                  <button type="submit" class="primary small">
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Your data file: must define `const games = [ ... ];` -->
+    <script src="games.js"></script>
+
+    <!-- Drag-and-drop helper -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+    <script>
+      const SORTABLE_GROUP = "games-columns";
+
+      // Mark all initially loaded games as "original" (non-enumerable _status)
+      if (Array.isArray(games)) {
+        games.forEach((g) => {
+          if (!Object.prototype.hasOwnProperty.call(g, "_status")) {
+            Object.defineProperty(g, "_status", {
+              value: "original",
+              writable: true,
+              configurable: true,
+              enumerable: false,
+            });
+          }
+        });
+      }
+
+      function getTag(game, tagName) {
+        return game.tags.find((t) => t.name === tagName);
+      }
+
+      function getAllTagNames() {
+        const set = new Set();
+        for (const g of games || []) {
+          for (const t of g.tags) set.add(t.name);
+        }
+        return Array.from(set).sort();
+      }
+
+      function getNextRankForTag(tagName) {
+        let maxRank = 0;
+        for (const g of games || []) {
+          for (const t of g.tags || []) {
+            if (t.name === tagName && typeof t.rank === "number") {
+              if (t.rank > maxRank) maxRank = t.rank;
+            }
+          }
+        }
+        return maxRank + 1;
+      }
+
+      // Re-number ranks 1..N for a given tag across all games
+      function normalizeTagRanks(tagName) {
+        const taggedGames = (games || [])
+          .filter(
+            (g) => g.tags && g.tags.some((t) => t.name === tagName)
+          )
+          .sort(
+            (a, b) => getTag(a, tagName).rank - getTag(b, tagName).rank
+          );
+
+        taggedGames.forEach((g, idx) => {
+          const tag = getTag(g, tagName);
+          if (tag) tag.rank = idx + 1;
+        });
+      }
+
+      // Change rank of a tag on one game and re-normalize for that tag
+      function updateRankForGameTag(gameIndex, tagName, desiredRank) {
+        if (!games || !games[gameIndex]) return;
+        const game = games[gameIndex];
+
+        let newRank = parseInt(desiredRank, 10);
+        if (!Number.isFinite(newRank) || newRank < 1) newRank = 1;
+
+        const withTag = games.filter((g) =>
+          g.tags.some((t) => t.name === tagName)
+        );
+
+        const others = withTag.filter((g) => g !== game);
+        const insertIndex = Math.min(newRank - 1, others.length);
+        others.splice(insertIndex, 0, game);
+
+        others.forEach((g, idx) => {
+          const tag = g.tags.find((t) => t.name === tagName);
+          if (tag) tag.rank = idx + 1;
+        });
+      }
+
+      function deepClone(obj) {
+        return JSON.parse(JSON.stringify(obj));
+      }
+
+      // ----------------- BUILD COLUMNS -----------------
+
+      function buildColumns() {
+        const columnsEl = document.getElementById("columns");
+        columnsEl.innerHTML = "";
+
+        if (!Array.isArray(games)) {
+          columnsEl.innerHTML =
+            '<div style="font-size:13px;color:rgba(248,113,113,0.9)">games is not defined. Make sure games.js defines <code>const games = [...];</code></div>';
+          return;
+        }
+
+        const tagNames = getAllTagNames();
+
+        const tagList = document.getElementById("tag-list");
+        tagList.innerHTML = "";
+        tagNames.forEach((tag) => {
+          const opt = document.createElement("option");
+          opt.value = tag;
+          tagList.appendChild(opt);
+        });
+
+        if (!tagNames.length) {
+          const msg = document.createElement("div");
+          msg.style.fontSize = "13px";
+          msg.style.color = "rgba(148,163,184,0.9)";
+          msg.textContent =
+            "No tags yet. Add a game with tags, or edit your games array.";
+          columnsEl.appendChild(msg);
+          populateEditorSelect();
+          return;
+        }
+
+        tagNames.forEach((tagName) => {
+          const col = document.createElement("div");
+          col.className = "column";
+          col.dataset.tag = tagName;
+
+          const headerRow = document.createElement("div");
+          headerRow.className = "column-header-row";
+
+          const left = document.createElement("div");
+          const title = document.createElement("div");
+          title.className = "column-title";
+          title.textContent = tagName;
+          left.appendChild(title);
+
+          const meta = document.createElement("span");
+          meta.className = "column-meta";
+          meta.textContent = "";
+          left.appendChild(meta);
+
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "tag-remove-btn icon-only";
+          removeBtn.type = "button";
+          removeBtn.title = `Remove "${tagName}" from all games`;
+          removeBtn.textContent = "×";
+          removeBtn.addEventListener("click", () => {
+            const ok = window.confirm(
+              `Remove tag "${tagName}" from all games?`
+            );
+            if (!ok) return;
+            for (const game of games) {
+              game.tags = game.tags.filter((t) => t.name !== tagName);
+            }
+            buildColumns();
+          });
+
+          headerRow.appendChild(left);
+          headerRow.appendChild(removeBtn);
+          col.appendChild(headerRow);
+
+          const list = document.createElement("ul");
+          list.className = "game-list";
+
+          const tagged = games
+            .filter((g) => getTag(g, tagName))
+            .sort(
+              (a, b) => getTag(a, tagName).rank - getTag(b, tagName).rank
+            );
+
+          tagged.forEach((game) => {
+            const li = document.createElement("li");
+            li.classList.add("game-item");
+            const index = games.indexOf(game);
+            li.dataset.gameIndex = index;
+
+            if (game._status === "new") {
+              li.classList.add("game-item--new");
+            } else if (game._status === "edited") {
+              li.classList.add("game-item--edited");
+            }
+
+            const rankSpan = document.createElement("span");
+            rankSpan.className = "rank-badge";
+            rankSpan.textContent = getTag(game, tagName).rank + ".";
+
+            const nameSpan = document.createElement("span");
+            nameSpan.className = "game-name";
+            nameSpan.textContent = game.name;
+
+            li.appendChild(rankSpan);
+            li.appendChild(nameSpan);
+            list.appendChild(li);
+
+            li.addEventListener("dblclick", (ev) => {
+              ev.stopPropagation();
+              if (index >= 0) openEditorForIndex(index);
+            });
+          });
+
+          col.appendChild(list);
+          columnsEl.appendChild(col);
+
+          Sortable.create(list, {
+            group: SORTABLE_GROUP,
+            animation: 170,
+            ghostClass: "ghost",
+            onEnd: () => {
+              updateRanksForTag(tagName);
+            },
+          });
+
+          meta.textContent = `${tagged.length} item${
+            tagged.length === 1 ? "" : "s"
+          }`;
+        });
+
+        populateEditorSelect();
+      }
+
+      function updateRanksForTag(tagName) {
+        const col = document.querySelector(
+          `.column[data-tag="${tagName}"]`
+        );
+        if (!col) return;
+
+        const items = Array.from(
+          col.querySelectorAll(".game-list .game-item")
+        );
+
+        items.forEach((li, index) => {
+          const gameIndex = parseInt(li.dataset.gameIndex, 10);
+          const game = games[gameIndex];
+          if (!game) return;
+
+          let tag = getTag(game, tagName);
+          if (!tag) {
+            tag = { name: tagName, rank: index + 1 };
+            game.tags.push(tag);
+          } else {
+            tag.rank = index + 1;
+          }
+
+          li.querySelector(".rank-badge").textContent = tag.rank + ".";
+        });
+
+        const meta = col.querySelector(".column-meta");
+        if (meta) {
+          meta.textContent = `${items.length} item${
+            items.length === 1 ? "" : "s"
+          }`;
+        }
+      }
+
+      function syncAllRanksFromUI() {
+        const tagNames = getAllTagNames();
+        tagNames.forEach((tagName) => updateRanksForTag(tagName));
+      }
+
+      // ----------------- TRASH -----------------
+
+      function setupTrash() {
+        const trashList = document.getElementById("trash-list");
+
+        Sortable.create(trashList, {
+          group: SORTABLE_GROUP,
+          animation: 150,
+          ghostClass: "ghost",
+          onAdd: (evt) => {
+            const item = evt.item;
+            const idx = parseInt(item.dataset.gameIndex, 10);
+            if (!Number.isNaN(idx) && games[idx]) {
+              const removedGame = games[idx];
+              games.splice(idx, 1);
+
+              // normalize ranks for all tags that game had
+              if (removedGame.tags) {
+                const tagNames = Array.from(
+                  new Set(removedGame.tags.map((t) => t.name))
+                );
+                tagNames.forEach((name) => normalizeTagRanks(name));
+              }
+            }
+            item.remove();
+            buildColumns();
+
+            trashList.innerHTML =
+              '<li class="trash-hint">Removed. Export to update your data file.</li>';
+          },
+        });
+      }
+
+      // ----------------- EXPORT -----------------
+
+      function exportUpdatedFile() {
+        syncAllRanksFromUI();
+        const cloned = deepClone(games);
+
+        let json = JSON.stringify(cloned, null, 2);
+
+        const body = json.replace(
+          /"([a-zA-Z_][a-zA-Z0-9_]*)":/g,
+          "$1:"
+        );
+
+        const output = "const games = " + body + ";\n";
+
+        const blob = new Blob([output], {
+          type: "text/javascript;charset=utf-8",
+        });
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "games.js";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      // ----------------- ADD GAME FORM -----------------
+
+      function setupAddGameForm() {
+        const form = document.getElementById("add-game-form");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const name = document
+            .getElementById("new-name")
+            .value.trim();
+          if (!name) return;
+
+          const logoUrl = document
+            .getElementById("new-logo")
+            .value.trim();
+          const desc = document
+            .getElementById("new-desc")
+            .value.trim();
+          const bgUrl = document
+            .getElementById("new-bg")
+            .value.trim();
+          const bgExpUrl = document
+            .getElementById("new-bg-exp")
+            .value.trim();
+          const link = document
+            .getElementById("new-link")
+            .value.trim();
+          const store =
+            document.getElementById("new-store").value.trim() ||
+            "steam";
+          const tagString = document
+            .getElementById("new-tags")
+            .value.trim();
+
+          const newGame = {
+            name,
+            logoUrl,
+            description: desc,
+            backgroundUrl: bgUrl,
+            expandedBackgroundUrl: bgExpUrl,
+            link,
+            store,
+            tags: [],
+          };
+
+          Object.defineProperty(newGame, "_status", {
+            value: "new",
+            writable: true,
+            configurable: true,
+            enumerable: false,
+          });
+
+          if (tagString) {
+            const rawTags = tagString.split(",");
+            const tags = rawTags
+              .map((s) => s.trim())
+              .filter(Boolean);
+
+            const existingTagNames = getAllTagNames();
+            const columnsRoot = document.getElementById("columns");
+
+            tags.forEach((tagName) => {
+              let rank = 1;
+              if (existingTagNames.includes(tagName)) {
+                const col = columnsRoot.querySelector(
+                  `.column[data-tag="${tagName}"]`
+                );
+                if (col) {
+                  const count =
+                    col.querySelectorAll(".game-item").length;
+                  rank = count + 1;
+                }
+              }
+              newGame.tags.push({ name: tagName, rank });
+            });
+          }
+
+          games.push(newGame);
+          buildColumns();
+
+          document.getElementById("new-name").value = "";
+          document.getElementById("new-logo").value = "";
+          document.getElementById("new-desc").value = "";
+          document.getElementById("new-bg").value = "";
+          document.getElementById("new-bg-exp").value = "";
+          document.getElementById("new-link").value = "";
+          document.getElementById("new-tags").value = "";
+        });
+      }
+
+      // ----------------- GAME EDITOR -----------------
+
+      function populateEditorSelect() {
+        const select = document.getElementById("editor-select");
+        const current = select.value;
+        select.innerHTML =
+          '<option value="">Select a game…</option>';
+
+        (games || []).forEach((g, i) => {
+          const opt = document.createElement("option");
+          opt.value = String(i);
+          opt.textContent = g.name;
+          select.appendChild(opt);
+        });
+
+        if (current && Number(current) < games.length) {
+          select.value = current;
+        }
+      }
+
+      // Editable tags display (add/remove/edit rank)
+      function updateEditorTagsDisplay(game) {
+        const container = document.getElementById("editor-tags");
+        container.innerHTML = "";
+
+        if (!game) {
+          container.textContent = "No game selected.";
+          return;
+        }
+
+        const gameIndex = games.indexOf(game);
+
+        if (!game.tags || !game.tags.length) {
+          const msg = document.createElement("div");
+          msg.style.fontSize = "11px";
+          msg.style.color = "var(--text-soft)";
+          msg.textContent =
+            "No tags. Add tags below or place the game into columns on the left.";
+          container.appendChild(msg);
+        } else {
+          const list = document.createElement("div");
+          list.className = "editor-tags-list";
+
+          const sortedTags = game.tags
+            .slice()
+            .sort((a, b) => a.rank - b.rank);
+
+          sortedTags.forEach((tag) => {
+            const pill = document.createElement("span");
+            pill.className = "editor-tag-pill";
+            pill.title =
+              "Edit the rank to reorder within this tag. " +
+              "Use × to remove this tag from the game.";
+
+            const nameSpan = document.createElement("span");
+            nameSpan.textContent = tag.name;
+
+            const rankInput = document.createElement("input");
+            rankInput.type = "number";
+            rankInput.className = "editor-tag-rank-input";
+            rankInput.min = "1";
+            rankInput.value = String(tag.rank);
+            rankInput.title =
+              'Rank inside the "' + tag.name + '" tag list';
+
+            const applyRankChange = () => {
+              if (gameIndex < 0) return;
+              updateRankForGameTag(
+                gameIndex,
+                tag.name,
+                rankInput.value
+              );
+              game._status = "edited";
+              buildColumns();
+              if (gameIndex >= 0 && gameIndex < games.length) {
+                openEditorForIndex(gameIndex);
+              }
+            };
+
+            rankInput.addEventListener("change", applyRankChange);
+            rankInput.addEventListener("keydown", (e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                applyRankChange();
+              }
+            });
+
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "editor-tag-remove-btn";
+            removeBtn.textContent = "×";
+            removeBtn.addEventListener("click", () => {
+              game.tags = game.tags.filter(
+                (t) => !(t.name === tag.name && t.rank === tag.rank)
+              );
+              game._status = "edited";
+
+              // Recalculate ranks for this tag across all remaining games
+              normalizeTagRanks(tag.name);
+
+              buildColumns();
+              if (gameIndex >= 0 && gameIndex < games.length) {
+                openEditorForIndex(gameIndex);
+              }
+            });
+
+            pill.appendChild(nameSpan);
+            pill.appendChild(rankInput);
+            pill.appendChild(removeBtn);
+            list.appendChild(pill);
+          });
+
+          container.appendChild(list);
+        }
+
+        const addRow = document.createElement("div");
+        addRow.className = "editor-tag-add-row";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Add tags (comma separated)…";
+
+        const addBtn = document.createElement("button");
+        addBtn.type = "button";
+        addBtn.className = "small";
+        addBtn.textContent = "Add";
+
+        function addTagsFromInput() {
+          const raw = input.value.trim();
+          if (!raw) return;
+
+          const tagNames = raw
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+
+          if (!tagNames.length) return;
+
+          tagNames.forEach((tagName) => {
+            if (game.tags.some((t) => t.name === tagName)) return;
+            const rank = getNextRankForTag(tagName);
+            game.tags.push({ name: tagName, rank });
+          });
+
+          game._status = "edited";
+          input.value = "";
+
+          buildColumns();
+          if (gameIndex >= 0 && gameIndex < games.length) {
+            openEditorForIndex(gameIndex);
+          }
+        }
+
+        addBtn.addEventListener("click", addTagsFromInput);
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            addTagsFromInput();
+          }
+        });
+
+        addRow.appendChild(input);
+        addRow.appendChild(addBtn);
+        container.appendChild(addRow);
+      }
+
+      function openEditorForIndex(index) {
+        if (!games || !games[index]) return;
+        const game = games[index];
+
+        const form = document.getElementById("editor-form");
+        form.dataset.index = String(index);
+
+        document.getElementById("editor-name").value =
+          game.name || "";
+        document.getElementById("editor-logo").value =
+          game.logoUrl || "";
+        document.getElementById("editor-store").value =
+          game.store || "";
+        document.getElementById("editor-desc").value =
+          game.description || "";
+        document.getElementById("editor-bg").value =
+          game.backgroundUrl || "";
+        document.getElementById("editor-bg-exp").value =
+          game.expandedBackgroundUrl || "";
+        document.getElementById("editor-link").value =
+          game.link || "";
+
+        updateEditorTagsDisplay(game);
+
+        const status = document.getElementById("editor-status");
+        status.textContent = "Editing: " + game.name;
+
+        const select = document.getElementById("editor-select");
+        if (index < select.options.length) {
+          select.value = String(index);
+        }
+      }
+
+      function setupEditorForm() {
+        const form = document.getElementById("editor-form");
+        const resetBtn = document.getElementById("editor-reset-btn");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const idx = parseInt(form.dataset.index || "-1", 10);
+          if (!games || Number.isNaN(idx) || !games[idx]) return;
+
+          const game = games[idx];
+
+          const newName = document
+            .getElementById("editor-name")
+            .value.trim();
+          game.name = newName || game.name;
+
+          game.logoUrl = document
+            .getElementById("editor-logo")
+            .value.trim();
+          game.store = document
+            .getElementById("editor-store")
+            .value.trim();
+          game.description = document
+            .getElementById("editor-desc")
+            .value.trim();
+          game.backgroundUrl = document
+            .getElementById("editor-bg")
+            .value.trim();
+          game.expandedBackgroundUrl = document
+            .getElementById("editor-bg-exp")
+            .value.trim();
+          game.link = document
+            .getElementById("editor-link")
+            .value.trim();
+
+          game._status = "edited";
+
+          buildColumns();
+          openEditorForIndex(idx);
+        });
+
+        resetBtn.addEventListener("click", () => {
+          const idx = parseInt(form.dataset.index || "-1", 10);
+          if (!games || Number.isNaN(idx) || !games[idx]) return;
+          openEditorForIndex(idx);
+        });
+
+        const select = document.getElementById("editor-select");
+        const loadBtn = document.getElementById("editor-load-btn");
+
+        function loadSelected() {
+          const idx = parseInt(select.value || "-1", 10);
+          if (!games || Number.isNaN(idx) || !games[idx]) return;
+          openEditorForIndex(idx);
+        }
+
+        select.addEventListener("change", loadSelected);
+        loadBtn.addEventListener("click", loadSelected);
+      }
+
+      // ----------------- INIT -----------------
+
+      function setupButtons() {
+        document
+          .getElementById("export-btn")
+          .addEventListener("click", exportUpdatedFile);
+      }
+
+      setupTrash();
+      setupButtons();
+      setupAddGameForm();
+      setupEditorForm();
+      buildColumns();
+    </script>
+  </body>
+</html>
