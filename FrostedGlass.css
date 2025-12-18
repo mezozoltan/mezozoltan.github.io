@@ -69,7 +69,7 @@
   --elevation-medium: 0 4px 4px rgb(0, 0, 0, 0.16);
   --elevation-high: 0 8px 16px rgb(0, 0, 0, 0.24);
   --logo-primary: #fff;
-  --guild-header-text-shadow: 0 1px 1px rgb(0, 0, 0, 0.4);
+  --guild-header-text-shadow: 0 1px 1px rgb(0, 0, 0, 0);
   --channeltextarea-background: rgb(255, 255, 255, 0.05);
   --activity-card-background: #202225;
   --textbox-markdown-syntax: #8e9297;
@@ -150,7 +150,7 @@ html body #app-mount .d125d22cdfd32cfe-scrollerBase {
   padding: 10px 0;
   box-sizing: border-box;
   background: rgb(var(--discord-blurple), 0.7);
-  text-shadow: 0 2px 3px rgb(0, 0, 0, var(--text-shadow));
+  text-shadow: none;
 }
 
 html:not(.theme-dark) #app-mount ._160d8e55254637e5-app::before,
@@ -757,7 +757,7 @@ textarea {
 }
 #app-mount .f75fb00fb7356cbe-chatContent {
   background-color: transparent;
-  text-shadow: 0 2px 5px rgb(0, 0, 0, var(--text-shadow));
+  text-shadow: none;
 }
 #app-mount ._0f481cbbd7530492-newMessagesBar {
   background: var(--gradient);
@@ -2017,4 +2017,5 @@ html.platform-osx .scroller-2TZvBN {
     transform: translateY(0);
   }
 }
+
 
