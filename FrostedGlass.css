@@ -15,6 +15,7 @@
   --gradient-90: linear-gradient(var(--gradient-direction), rgb(var(--gradient-primary), 0.9), rgb(var(--gradient-secondary), 0.9));
   --text-shadow: 0;
   text-shadow: 0 !important;
+  --background-brand: red !important;
   --chat-embed: var(--background-secondary);
   --discord-green: 67, 181, 129;
   --discord-yellow: 219, 171, 9;
@@ -2018,6 +2019,7 @@ html.platform-osx .scroller-2TZvBN {
     transform: translateY(0);
   }
 }
+
 
 
 
