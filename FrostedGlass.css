@@ -38,6 +38,11 @@
   --fb-overlay-repeat: var(--popout-modal-repeat, var(--overlay-image-repeat));
 }
 
+
+._133bf5eea8e33a34-tabBar ._133bf5eea8e33a34-addFriend._133bf5eea8e33a34-addFriend._133bf5eea8e33a34-addFriend {
+ background: linear-gradient(var(--gradient-direction), rgb(var(--gradient-primary)), rgb(var(--gradient-secondary)));
+}
+
 .visual-refresh .theme-dark, .theme-dark, .visual-refresh.theme-dark, .visual-refresh {
   --header-primary: #fff;
   --header-secondary: #bbb;
@@ -2019,6 +2024,7 @@ html.platform-osx .scroller-2TZvBN {
     transform: translateY(0);
   }
 }
+
 
 
 
