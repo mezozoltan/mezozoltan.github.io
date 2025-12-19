@@ -51,8 +51,8 @@
 @supports (color:color-mix(in lch,red,blue)) {
     .theme-dark {
       --background-base-low: rgb(0, 0, 0, 0.3);
-      --background-base-lower: rgb(0, 0, 0, 0.5);
-      --background-base-lowest: rgb(0, 0, 0, 0.7);
+      --background-base-lower: rgb(0, 0, 0, 0.4);
+      --background-base-lowest: rgb(0, 0, 0, 0.5);
     }
 }
 
@@ -2037,6 +2037,7 @@ html.platform-osx .scroller-2TZvBN {
     transform: translateY(0);
   }
 }
+
 
 
 
