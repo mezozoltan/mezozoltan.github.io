@@ -26,6 +26,7 @@
   --discord-spotify: 29, 185, 84;
   --discord-twitch: 89, 54, 149;
   --discord-xbox: 16, 124, 16;
+  --background-base-low: 
   --fb-popout-image: var(--popout-modal-image, var(--popout-image));
   --fb-popout-blur: var(--popout-modal-blur, var(--popout-image-blur));
   --fb-popout-size: var(--popout-modal-size, var(--popout-image-size));
@@ -45,6 +46,14 @@
 
 ._6e9f8dce4cc18de3-wrapper._6e9f8dce4cc18de3-selected ._6e9f8dce4cc18de3-childWrapper, ._6e9f8dce4cc18de3-wrapper:hover ._6e9f8dce4cc18de3-childWrapper {
  background: linear-gradient(var(--gradient-direction), rgb(var(--gradient-primary)), rgb(var(--gradient-secondary)));
+}
+
+@supports (color:color-mix(in lch,red,blue)) {
+    .theme-dark {
+      --background-base-low: rgb(0, 0, 0, 0.7);
+      --background-base-lower: rgb(0, 0, 0, 0.5);
+      --background-base-lowest: rgb(0, 0, 0, 0.3);
+    }
 }
 
 .visual-refresh .theme-dark, .theme-dark, .visual-refresh.theme-dark, .visual-refresh {
@@ -2028,6 +2037,7 @@ html.platform-osx .scroller-2TZvBN {
     transform: translateY(0);
   }
 }
+
 
 
 
