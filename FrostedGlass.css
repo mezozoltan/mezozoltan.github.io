@@ -43,6 +43,10 @@
  background: linear-gradient(var(--gradient-direction), rgb(var(--gradient-primary)), rgb(var(--gradient-secondary)));
 }
 
+._6e9f8dce4cc18de3-wrapper._6e9f8dce4cc18de3-selected ._6e9f8dce4cc18de3-childWrapper {
+ background: linear-gradient(var(--gradient-direction), rgb(var(--gradient-primary)), rgb(var(--gradient-secondary)));
+}
+
 .visual-refresh .theme-dark, .theme-dark, .visual-refresh.theme-dark, .visual-refresh {
   --header-primary: #fff;
   --header-secondary: #bbb;
@@ -2024,6 +2028,7 @@ html.platform-osx .scroller-2TZvBN {
     transform: translateY(0);
   }
 }
+
 
 
 
