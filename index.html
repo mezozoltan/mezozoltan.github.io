@@ -16,9 +16,10 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
 
-        #game-list {
+        .game-list {
             position: relative;
             display: block;
             text-decoration: underline;
@@ -27,10 +28,20 @@
             font-family: "Century Gothic", "Roboto";
             font-weight: bold;
         }
+
+        #list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <a href="https://mezozoltan.github.io/Game-List/games.html" id="game-list">Game List</a>
+    <div id="list">
+        <a href="https://mezozoltan.github.io/Game-List/games" class="game-list">Game List</a>
+        <a href="https://mezozoltan.github.io/unusannus" class="game-list">YouTube</a>
+    </div>
 
 </body>
 
