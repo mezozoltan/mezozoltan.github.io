@@ -881,6 +881,21 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
+
+            .contact-button.btn {
+                display: block;
+                width: fit-content;
+                max-width: 100%;
+                margin-right: auto;
+                margin-left: auto;
+                text-align: center;
+            }
+
+            .services .section-header h2 {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
             
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1542,7 +1557,7 @@
                 event.preventDefault();
 
                 const oldScale = lightboxScale;
-                const zoomFactor = Math.exp(-event.deltaY * 0.0015);
+                const zoomFactor = Math.max(0.8, Math.min(1.2, 1 - event.deltaY * 0.0015));
                 const newScale = Math.max(1, Math.min(5, oldScale * zoomFactor));
                 if (newScale === oldScale) return;
 
@@ -1572,10 +1587,9 @@
                 const currentMidpointX = (firstPointer.x + secondPointer.x) / 2;
                 const currentMidpointY = (firstPointer.y + secondPointer.y) / 2;
                 const oldScale = lightboxScale;
-                const distanceChange = currentDistance - pinchLastDistance;
                 const newScale = Math.max(
                     1,
-                    Math.min(5, oldScale * Math.exp(distanceChange * 0.008))
+                    Math.min(5, oldScale * currentDistance / Math.max(1, pinchLastDistance))
                 );
                 const lightboxBounds = lightbox.getBoundingClientRect();
                 const lightboxCenterX = lightboxBounds.left + lightboxBounds.width / 2;
