@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gá-Zol Kft. - Műszaki Vizsgáztatás és Autó Szerviz Budapest</title>
+    <title>Gá-Zol Kft. - Műszaki Vizsgáztatás és Autószerviz Budapest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -342,7 +342,7 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
             gap: 2rem;
         }
         
@@ -897,6 +897,24 @@
         }
         
         @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding-right: 20px;
+                padding-left: 20px;
+            }
+
+            .section-header,
+            .services-grid,
+            .service-card {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .services-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
             .nav-links {
                 position: fixed;
                 top: var(--header-height, 67px);
@@ -1628,15 +1646,6 @@
             });
 
             const stopLightboxPanning = event => {
-                if (activeLightboxPointers.has(event.pointerId)) {
-                    activeLightboxPointers.set(event.pointerId, {
-                        x: event.clientX,
-                        y: event.clientY
-                    });
-                    if (activeLightboxPointers.size === 2) {
-                        updatePinchTransform();
-                    }
-                }
                 activeLightboxPointers.delete(event.pointerId);
                 if (lightboxImage.hasPointerCapture(event.pointerId)) {
                     lightboxImage.releasePointerCapture(event.pointerId);
