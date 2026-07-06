@@ -1406,6 +1406,13 @@
             let panOriginX = 0;
             let panOriginY = 0;
             let lightboxLoadRequest = 0;
+            let pinchStartDistance = 0;
+            let pinchStartScale = 1;
+            let pinchStartPanX = 0;
+            let pinchStartPanY = 0;
+            let pinchStartMidpointX = 0;
+            let pinchStartMidpointY = 0;
+            const activeLightboxPointers = new Map();
 
             const clampLightboxPan = () => {
                 const availableWidth = Math.max(0, lightbox.clientWidth - 64);
@@ -1439,6 +1446,7 @@
 
             const closeLightbox = () => {
                 isLightboxPanning = false;
+                activeLightboxPointers.clear();
                 lightboxImage.classList.remove('dragging');
                 lightboxImage.classList.remove('loaded');
                 lightbox.classList.remove('open');
@@ -1501,28 +1509,88 @@
             lightboxImage.addEventListener('pointerdown', event => {
                 if (event.button !== 0) return;
                 event.preventDefault();
-                isLightboxPanning = true;
-                panStartX = event.clientX;
-                panStartY = event.clientY;
-                panOriginX = lightboxPanX;
-                panOriginY = lightboxPanY;
+                activeLightboxPointers.set(event.pointerId, {
+                    x: event.clientX,
+                    y: event.clientY
+                });
                 lightboxImage.classList.add('dragging');
                 lightboxImage.setPointerCapture(event.pointerId);
+
+                if (activeLightboxPointers.size === 1) {
+                    isLightboxPanning = true;
+                    panStartX = event.clientX;
+                    panStartY = event.clientY;
+                    panOriginX = lightboxPanX;
+                    panOriginY = lightboxPanY;
+                } else if (activeLightboxPointers.size === 2) {
+                    const [firstPointer, secondPointer] = Array.from(activeLightboxPointers.values());
+                    pinchStartDistance = Math.hypot(
+                        secondPointer.x - firstPointer.x,
+                        secondPointer.y - firstPointer.y
+                    );
+                    pinchStartMidpointX = (firstPointer.x + secondPointer.x) / 2;
+                    pinchStartMidpointY = (firstPointer.y + secondPointer.y) / 2;
+                    pinchStartScale = lightboxScale;
+                    pinchStartPanX = lightboxPanX;
+                    pinchStartPanY = lightboxPanY;
+                    isLightboxPanning = false;
+                }
             });
 
             lightboxImage.addEventListener('pointermove', event => {
-                if (!isLightboxPanning) return;
-                lightboxPanX = panOriginX + event.clientX - panStartX;
-                lightboxPanY = panOriginY + event.clientY - panStartY;
+                if (!activeLightboxPointers.has(event.pointerId)) return;
+                activeLightboxPointers.set(event.pointerId, {
+                    x: event.clientX,
+                    y: event.clientY
+                });
+
+                if (activeLightboxPointers.size >= 2) {
+                    const [firstPointer, secondPointer] = Array.from(activeLightboxPointers.values());
+                    const currentDistance = Math.hypot(
+                        secondPointer.x - firstPointer.x,
+                        secondPointer.y - firstPointer.y
+                    );
+                    const currentMidpointX = (firstPointer.x + secondPointer.x) / 2;
+                    const currentMidpointY = (firstPointer.y + secondPointer.y) / 2;
+                    const newScale = Math.max(
+                        1,
+                        Math.min(5, pinchStartScale * currentDistance / Math.max(1, pinchStartDistance))
+                    );
+                    const lightboxBounds = lightbox.getBoundingClientRect();
+                    const lightboxCenterX = lightboxBounds.left + lightboxBounds.width / 2;
+                    const lightboxCenterY = lightboxBounds.top + lightboxBounds.height / 2;
+                    const anchoredImageX =
+                        (pinchStartMidpointX - lightboxCenterX - pinchStartPanX) / pinchStartScale;
+                    const anchoredImageY =
+                        (pinchStartMidpointY - lightboxCenterY - pinchStartPanY) / pinchStartScale;
+
+                    lightboxScale = newScale;
+                    lightboxPanX = currentMidpointX - lightboxCenterX - anchoredImageX * newScale;
+                    lightboxPanY = currentMidpointY - lightboxCenterY - anchoredImageY * newScale;
+                } else if (isLightboxPanning) {
+                    lightboxPanX = panOriginX + event.clientX - panStartX;
+                    lightboxPanY = panOriginY + event.clientY - panStartY;
+                }
+
                 renderLightboxTransform();
             });
 
             const stopLightboxPanning = event => {
-                if (!isLightboxPanning) return;
-                isLightboxPanning = false;
-                lightboxImage.classList.remove('dragging');
+                activeLightboxPointers.delete(event.pointerId);
                 if (lightboxImage.hasPointerCapture(event.pointerId)) {
                     lightboxImage.releasePointerCapture(event.pointerId);
+                }
+
+                if (activeLightboxPointers.size === 1) {
+                    const remainingPointer = Array.from(activeLightboxPointers.values())[0];
+                    isLightboxPanning = true;
+                    panStartX = remainingPointer.x;
+                    panStartY = remainingPointer.y;
+                    panOriginX = lightboxPanX;
+                    panOriginY = lightboxPanY;
+                } else if (activeLightboxPointers.size === 0) {
+                    isLightboxPanning = false;
+                    lightboxImage.classList.remove('dragging');
                 }
             };
 
