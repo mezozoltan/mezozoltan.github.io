@@ -13,7 +13,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:30p
 .destinations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#161a17;transition:transform .25s,border-color .25s}.card:hover{transform:translateY(-6px);border-color:var(--accent)}.art{height:220px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}.art:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,#00000008 3px,#00000008 4px)}.card-body{padding:23px 23px 24px}.card h2{font-size:25px;line-height:1.14;letter-spacing:-.8px;margin:0;font-weight:700}.card-end{display:flex;justify-content:space-between;align-items:center;font:11px monospace;color:var(--muted)}.arrow{width:34px;height:34px;display:grid;place-items:center;border:1px solid #3f4841;border-radius:50%;transition:background .2s,color .2s}.arrow svg{width:15px;height:15px}.card:hover .arrow{background:var(--accent);color:#101212;border-color:var(--accent)}
 .tier{--accent:#c9f778}.tier .art{background:#c9f778;color:#253321}
 .youtube{--accent:#ffa18b}.youtube .art{background:#e69a86;color:#38201b}.video-orbit{position:absolute;width:230px;height:230px;border:1px solid #38201b28;border-radius:50%;top:18px;left:calc(50% - 115px)}.video-orbit:before,.video-orbit:after{content:"";position:absolute;border:1px solid #38201b28;border-radius:50%;inset:23px}.video-orbit:after{inset:46px}.play{position:absolute;top:77px;left:calc(50% - 64px);width:128px;height:85px;background:#38201b;border-radius:19px;display:grid;place-items:center;transform:rotate(-8deg);box-shadow:9px 10px 0 #38201b18;transition:transform .3s}.play svg{width:30px;height:34px;fill:#ffbdab}.youtube:hover .play{transform:rotate(0) scale(1.06)}
-.rtx{--accent:#5cf6ff;--compare:50%;border-color:var(--accent)}.rtx .art{background:#191c31;color:#d7d7ff}.scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.scene-path{clip-path:inset(0 0 0 var(--compare));transition:clip-path .15s ease-out}.split{position:absolute;width:1px;height:100%;background:var(--accent);left:var(--compare);z-index:2;box-shadow:0 0 20px #5cf6ff66;transition:left .15s ease-out}
+.rtx{--accent:#5cf6ff;--compare:50%}.rtx .art{background:#191c31;color:#d7d7ff}.scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.scene-path{clip-path:inset(0 0 0 var(--compare));transition:clip-path .15s ease-out}.split{position:absolute;width:1px;height:100%;background:var(--accent);left:var(--compare);z-index:2;box-shadow:0 0 20px #5cf6ff66;transition:left .15s ease-out}
 
 @media(min-width:1600px){.art{height:250px}}
 @media(max-width:1000px){.wrap{width:calc(100% - 48px)}.card-body{padding:20px}.card h2{font-size:22px}.art{height:185px}}
@@ -66,7 +66,8 @@ body{min-height:100svh;background:transparent}
 .rtx-corners{transition:opacity .3s}.rtx:hover .rtx-corners{opacity:.8}
 .rtx.comparison-returning .split{transition:left 1.2s ease-in-out}
 .rtx.comparison-returning .scene-path{transition:clip-path 1.2s ease-in-out}
-h1::selection,h1 span::selection{background:var(--ink);color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke-color:transparent;text-shadow:none}
+h1{mix-blend-mode:screen}
+h1::selection,h1 span::selection{background:#fff;color:#000;-webkit-text-fill-color:#000;-webkit-text-stroke-color:#000;text-shadow:none}
 </style></head>
 <body>
 <svg aria-hidden="true" style="display:none"><defs><symbol id="out-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol></defs></svg>
