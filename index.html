@@ -1,51 +1,106 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Zoli Gateway</title>
-    <link rel="icon" type="image/x-icon" href="gateway.ico">
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101212"><title>Zoli Gateway</title><link rel="icon" href="gateway.ico">
+<style>
+:root{color-scheme:dark;--bg:#101212;--ink:#f1f3ed;--muted:#939b96;--line:#303632;--lime:#c9f778}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;background-image:radial-gradient(ellipse at 80% 0%,#26332966,transparent 55%)}a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}a:focus-visible{outline:2px solid var(--lime);outline-offset:6px}.wrap{width:min(1280px,calc(100% - 96px));margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:30px 0;border-bottom:1px solid var(--line)}
 
-        body {
-            background-color: #25202b;
-            color: rgba(255, 255, 255, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
 
-        .game-list {
-            position: relative;
-            display: block;
-            text-decoration: underline;
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 75px;
-            font-family: "Century Gothic", "Roboto";
-            font-weight: bold;
-        }
 
-        #list {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            text-align: center;
-        }
-    </style>
-</head>
+.destinations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#161a17;transition:transform .25s,border-color .25s}.card:hover{transform:translateY(-6px);border-color:var(--accent)}.art{height:220px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}.art:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,#00000008 3px,#00000008 4px)}.card-body{padding:23px 23px 24px}.card h2{font-size:25px;line-height:1.14;letter-spacing:-.8px;margin:0;font-weight:700}.card-end{display:flex;justify-content:space-between;align-items:center;font:11px monospace;color:var(--muted)}.arrow{width:34px;height:34px;display:grid;place-items:center;border:1px solid #3f4841;border-radius:50%;transition:background .2s,color .2s}.arrow svg{width:15px;height:15px}.card:hover .arrow{background:var(--accent);color:#101212;border-color:var(--accent)}
+.tier{--accent:#c9f778}.tier .art{background:#c9f778;color:#253321}
+.youtube{--accent:#ffa18b}.youtube .art{background:#e69a86;color:#38201b}.video-orbit{position:absolute;width:230px;height:230px;border:1px solid #38201b28;border-radius:50%;top:18px;left:calc(50% - 115px)}.video-orbit:before,.video-orbit:after{content:"";position:absolute;border:1px solid #38201b28;border-radius:50%;inset:23px}.video-orbit:after{inset:46px}.play{position:absolute;top:77px;left:calc(50% - 64px);width:128px;height:85px;background:#38201b;border-radius:19px;display:grid;place-items:center;transform:rotate(-8deg);box-shadow:9px 10px 0 #38201b18;transition:transform .3s}.play svg{width:30px;height:34px;fill:#ffbdab}.youtube:hover .play{transform:rotate(0) scale(1.06)}
+.rtx{--accent:#5cf6ff;--compare:50%;border-color:var(--accent)}.rtx .art{background:#191c31;color:#d7d7ff}.scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.scene-path{clip-path:inset(0 0 0 var(--compare));transition:clip-path .15s ease-out}.split{position:absolute;width:1px;height:100%;background:var(--accent);left:var(--compare);z-index:2;box-shadow:0 0 20px #5cf6ff66;transition:left .15s ease-out}
+
+@media(min-width:1600px){.art{height:250px}}
+@media(max-width:1000px){.wrap{width:calc(100% - 48px)}.card-body{padding:20px}.card h2{font-size:22px}.art{height:185px}}
+@media(max-width:720px){.wrap{width:calc(100% - 36px)}header{padding:22px 0}.destinations{grid-template-columns:1fr;gap:18px}.art{height:210px}.card h2{font-size:26px}.card-body{padding:23px}.card:hover{transform:none}}
+@media(max-width:380px){}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+ .card-body{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px}.card-end{flex:none}.destinations{padding-bottom:40px}
+header{padding:40px 0 32px;margin-bottom:32px}
+h1{margin:0;white-space:nowrap;font-size:clamp(32px,6.2vw,88px);font-weight:900;line-height:1;letter-spacing:-.05em}
+h1 span{color:transparent;-webkit-text-stroke:1px #c2cac1}
+@media(max-width:720px){header{padding:30px 0 24px;margin-bottom:24px}h1{font-size:clamp(28px,8.5vw,60px)}}
+.wrap{min-height:100svh;display:flex;flex-direction:column}
+header{flex:none;margin-bottom:0}
+main{flex:1;display:flex;align-items:center;justify-content:center}
+.destinations{width:100%;padding:32px 0}
+@media(max-width:720px){header{margin-bottom:0}.destinations{padding:24px 0}}
+.destinations{grid-template-columns:repeat(3,minmax(0,1fr))}
+.spyhq{order:0}.youtube{order:1}.tier{order:2}.rtx{order:3;grid-column:2}
+.spyhq{--accent:#42d66b}.spyhq .art{background:#42d66b;color:#103f20;display:grid;place-items:center;background-image:radial-gradient(ellipse at center,#75ee8e,transparent 70%)}
+.spy-mask{width:170px;height:170px;transform:rotate(-8deg);transition:transform .3s}.spyhq:hover .spy-mask{transform:rotate(0)}
+.card h2{font-size:22px}
+@media(max-width:720px){.destinations{grid-template-columns:1fr}.rtx{grid-column:auto}.card h2{font-size:26px}}
+html{min-height:100%;background-color:var(--bg);background-image:radial-gradient(ellipse at 80% 0%,#26332966,transparent 55%);background-attachment:fixed;background-repeat:no-repeat}
+body{min-height:100svh;background:transparent}
+.tier .art{display:grid;place-items:center}.tier-icon{width:150px;height:150px;object-fit:contain;filter:brightness(0);opacity:.82}
+
+.game-frame{position:absolute;width:210px;height:150px;border:1px solid #25332135;border-radius:22px;transform:rotate(12deg)}
+.game-frame:before{content:"";position:absolute;inset:-12px;border:1px solid #25332120;border-radius:26px;transform:rotate(-24deg)}
+.art-sparks{position:absolute;inset:0;width:100%;height:100%;opacity:.35;}
+.tier-icon{position:relative;z-index:1;}
+
+
+
+
+.spy-mask{position:relative;z-index:1;}
+.video-orbit{}.play{}
+.rtx-corners{position:absolute;inset:0;width:100%;height:100%;z-index:2;color:var(--accent);opacity:.5;}
+
+
+
+
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+
+.video-orbit i{position:absolute;width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.5;top:22%;left:8%}
+.tier-icon{transform:rotate(-6deg);transition:transform .35s}.tier:hover .tier-icon{transform:translateY(-4px) rotate(2deg)}
+.game-frame{transition:transform .4s}.tier:hover .game-frame{transform:rotate(4deg)}
+.art-sparks{opacity:.35;transition:opacity .3s}.tier:hover .art-sparks{opacity:.65}
+.spy-flair{position:absolute;inset:0;width:100%;height:100%;opacity:.3;transition:opacity .3s,transform .4s}.spyhq:hover .spy-flair{opacity:.6;transform:scale(1.05)}
+.video-orbit{transition:transform .5s}.youtube:hover .video-orbit{transform:rotate(25deg)}
+.rtx-corners{transition:opacity .3s}.rtx:hover .rtx-corners{opacity:.8}
+.rtx.comparison-returning .split{transition:left 1.2s ease-in-out}
+.rtx.comparison-returning .scene-path{transition:clip-path 1.2s ease-in-out}
+</style></head>
 <body>
-    <div id="list">
-        <a href="https://mezozoltan.github.io/game-ranking" class="game-list">Game Tier List</a>
-        <a href="https://mezozoltan.github.io/unusannus" class="game-list">YouTube</a>
-        <a href="https://mezozoltan.github.io/cyberpunk" class="game-list">Cyberpunk Ray Tracing Viewer</a>
-    </div>
-
-</body>
-
-</html>
+<svg aria-hidden="true" style="display:none"><defs><symbol id="out-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol></defs></svg>
+<div class="wrap">
+<header><h1 id="title">ZOLI <span>GATEWAY</span></h1></header>
+<main>
 
 
+<section class="destinations" aria-label="Destinations">
+<a class="card tier" href="https://mezozoltan.github.io/game-ranking" target="_blank" rel="noopener noreferrer"><div class="art" aria-hidden="true"><div class="game-frame"></div><svg class="art-sparks" viewBox="0 0 400 220" aria-hidden="true"><path d="M60 55h12m-6-6v12M321 154h12m-6-6v12M92 177l6-6 6 6-6 6Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="317" cy="53" r="3" fill="currentColor"/></svg><img class="tier-icon" src="assets/tierlist.png" alt=""></div><div class="card-body"><h2>Game Tier List</h2><div class="card-end"><span class="arrow"><svg aria-hidden="true"><use href="#out-arrow"/></svg></span></div></div></a>
+<a class="card youtube" href="https://spyhq.hu/youtube" target="_blank" rel="noopener noreferrer"><div class="art" aria-hidden="true"><div class="video-orbit"><i></i></div><div class="play"><svg viewBox="0 0 30 34"><path d="M3 2 28 17 3 32Z"/></svg></div></div><div class="card-body"><h2>YouTube</h2><div class="card-end"><span class="arrow"><svg aria-hidden="true"><use href="#out-arrow"/></svg></span></div></div></a>
+<a class="card rtx" href="https://mezozoltan.github.io/cyberpunk" target="_blank" rel="noopener noreferrer"><div class="art" aria-hidden="true"><img class="scene" src="assets/rtx-max-thumb.webp" alt=""><img class="scene scene-path" src="assets/rtx-path-thumb.webp" alt=""><div class="split"></div><svg class="rtx-corners" viewBox="0 0 400 220" preserveAspectRatio="none" aria-hidden="true"><path d="M32 14H14v18M368 14h18v18M14 188v18h18M386 188v18h-18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="card-body"><h2>Cyberpunk RTX Viewer</h2><div class="card-end"><span class="arrow"><svg aria-hidden="true"><use href="#out-arrow"/></svg></span></div></div></a>
+<a class="card spyhq" href="https://spyhq.hu" target="_blank" rel="noopener noreferrer"><div class="art" aria-hidden="true"><svg class="spy-flair" viewBox="0 0 400 220" aria-hidden="true"><path d="M115 48h-35v35M285 48h35v35M80 137v35h35M320 137v35h-35M111 187h60m9 0h9m-77-155h45" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m52 110 7-7 7 7-7 7Zm282-40 5-5 5 5-5 5Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><svg class="spy-mask" viewBox="0 0 500 500"><path d="M346.439 367.167c-28.537 4.126-77.077-1.514-97.012-2.157-19.935.643-68.475 6.283-97.012 2.157-31.735-4.59-139.166-8.527-145.369-232.343 122.013-21.507 241.039 23.607 241.039 23.607h2.684s119.026-45.114 241.04-23.607c-6.204 223.816-113.635 227.753-145.37 232.343ZM74.567 236.449c28.662 53.74 62.369 47.5 79.7 49.815 9.246.231 39.554-5.168 51.061-1.245-6.748-93.388-130.761-48.57-130.761-48.57Zm218.954 48.57c11.508-3.923 41.816 1.476 51.061 1.245 17.336-2.311 51.044 3.925 79.7-49.815.005 0-124.008-44.818-130.761 48.57Z" fill="currentColor" fill-rule="evenodd"/></svg></div><div class="card-body"><h2>SpyHQ</h2><div class="card-end"><span class="arrow"><svg aria-hidden="true"><use href="#out-arrow"/></svg></span></div></div></a>
+</section></main>
+
+</div><script>
+const comparisonCard = document.querySelector(".rtx");
+const comparisonArt = comparisonCard.querySelector(".art");
+let comparisonResetTimer;
+function scheduleComparisonReset() {
+  clearTimeout(comparisonResetTimer);
+  comparisonResetTimer = setTimeout(() => {
+    comparisonCard.classList.add("comparison-returning");
+    comparisonCard.style.removeProperty("--compare");
+  }, 2000);
+}
+function moveComparison(event) {
+  if (event.pointerType === "touch") return;
+  comparisonCard.classList.remove("comparison-returning");
+  const rect = comparisonArt.getBoundingClientRect();
+  const percent = Math.max(10, Math.min(90, (event.clientX - rect.left) / rect.width * 100));
+  comparisonCard.style.setProperty("--compare", percent + "%");
+  scheduleComparisonReset();
+}
+comparisonCard.addEventListener("pointerenter", moveComparison);
+comparisonCard.addEventListener("pointermove", moveComparison);
+</script>
+</body></html>
